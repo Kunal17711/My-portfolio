@@ -18,11 +18,11 @@ const Hero = () => {
       className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-[#140304] via-[#1e0405] to-[#080b10] flex flex-col"
     >
       {/* ── Background glow blobs ── */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#b41e1e] blur-[200px] opacity-20 rounded-full pointer-events-none will-change-transform transform-gpu" />
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#3b0708] blur-[180px] opacity-30 rounded-full pointer-events-none will-change-transform transform-gpu" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#b41e1e] blur-[200px] opacity-20 rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#3b0708] blur-[180px] opacity-30 rounded-full pointer-events-none" />
 
       {/* ── Vignette ── */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.65)_100%)] pointer-events-none z-10 will-change-transform transform-gpu" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.65)_100%)] pointer-events-none z-10" />
 
       {/* ── Watermark ── */}
       <div className="absolute top-16 md:top-10 left-0 right-0 flex justify-center pointer-events-none select-none z-0 overflow-hidden">

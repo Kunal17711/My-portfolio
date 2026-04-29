@@ -12,18 +12,27 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+    let ticking = false;
 
-      const sections = ["home", "about", "projects", "skills", "contact"];
-      let current = "home";
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el && el.getBoundingClientRect().top <= 120) {
-          current = section;
-        }
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 20);
+
+          const sections = ["home", "about", "projects", "skills", "contact"];
+          let current = "home";
+          for (const section of sections) {
+            const el = document.getElementById(section);
+            if (el && el.getBoundingClientRect().top <= 120) {
+              current = section;
+            }
+          }
+          
+          setActiveSection((prev) => (prev !== current ? current : prev));
+          ticking = false;
+        });
+        ticking = true;
       }
-      setActiveSection(current);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });

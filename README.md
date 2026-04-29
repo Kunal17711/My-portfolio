@@ -46,7 +46,7 @@ For any permission requests: **kkunaall10@gmail.com**
 
 - **Email:** kkunaall10@gmail.com  
 - **Instagram:** [@iiblamekunal](https://instagram.com/iiblamekunal)  
-- **LinkedIn:** [kkunaall](https://www.linkedin.com/in/kkunaall)
+- **LinkedIn:** [kunalldev](https://www.linkedin.com/in/kunalldev)
 
 ---
 

@@ -3,6 +3,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
+import Footer from "@/components/Footer";
+import CustomCursor from "@/components/CustomCursor";
 
 const projects = [
   {
@@ -88,12 +92,10 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.05 }}
       className="group relative bg-white/5 border border-white/10 rounded-2xl overflow-hidden backdrop-blur-md"
     >
-      {/* Project Image */}
       <div className="relative h-64 w-full overflow-hidden">
         <Image 
           src={project.image} 
@@ -101,7 +103,6 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
           fill 
           className="object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        {/* Hover Overlay */}
         <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
           <a 
             href={project.liveUrl}
@@ -109,12 +110,10 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
             rel="noopener noreferrer"
             className="px-8 py-3 bg-[#fff1c7] text-[#140304] font-black text-[10px] uppercase tracking-[0.2em] rounded-sm transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 hover:bg-white"
           >
-            View Project
+            Visit Live
           </a>
         </div>
       </div>
-
-      {/* Content */}
       <div className="p-6">
         <div className="flex justify-between items-start mb-2">
           <h3 className="text-xl font-black text-[#fff1c7] uppercase tracking-tighter">{project.name}</h3>
@@ -134,54 +133,45 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
   );
 };
 
-const Projects = () => {
+export default function AllProjectsPage() {
   return (
-    <section id="projects" className="relative py-24 bg-[#080b10] overflow-hidden">
+    <main className="min-h-screen bg-[#080b10] flex flex-col">
+      <CustomCursor />
       
-      {/* Background Decor */}
-      <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[500px] h-[500px] bg-[#b41e1e] blur-[200px] opacity-10 rounded-full pointer-events-none" />
-
-      <div className="container mx-auto px-6 lg:px-16 relative z-10">
-        
-        {/* Header */}
-        <div className="flex flex-col mb-16 text-center md:text-left">
-          <span className="text-[10px] tracking-[0.4em] font-black text-[#b41e1e] uppercase mb-4">
-            Projects
-          </span>
-          <h2 className="text-6xl md:text-8xl font-black text-[#fff1c7] leading-[0.9] tracking-tighter uppercase mb-6">
-            Selected Work
-          </h2>
-          <p className="text-[#fff1c7]/50 text-lg lg:text-xl font-bold uppercase tracking-[0.1em]">
-            Some of the products I’ve built.
-          </p>
+      {/* Simple Header */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0608]/90 backdrop-blur-xl border-b border-white/[0.06]">
+        <div className="container mx-auto px-6 lg:px-16 h-[72px] flex items-center">
+          <Link href="/" className="flex items-center text-[#fff1c7]/50 hover:text-[#fff1c7] transition-colors text-[10px] font-black uppercase tracking-[0.25em]">
+            <ChevronLeft className="w-4 h-4 mr-1" />
+            Back to Home
+          </Link>
         </div>
+      </nav>
 
-        {/* Carousel */}
-        <div className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-10 scrollbar-hide -mx-6 px-6 lg:-mx-16 lg:px-16" style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}>
-          <style dangerouslySetInnerHTML={{__html: `
-            .scrollbar-hide::-webkit-scrollbar {
-                display: none;
-            }
-          `}} />
-          {projects.slice(0, 5).map((project, idx) => (
-            <div key={idx} className="min-w-[85vw] md:min-w-[450px] snap-center shrink-0">
-              <ProjectCard project={project} index={idx} />
-            </div>
-          ))}
-        </div>
+      {/* Content */}
+      <section className="pt-40 pb-24 flex-1">
+        <div className="container mx-auto px-6 lg:px-16 relative z-10">
+          <div className="flex flex-col mb-16 text-center md:text-left">
+            <span className="text-[10px] tracking-[0.4em] font-black text-[#b41e1e] uppercase mb-4">
+              Archive
+            </span>
+            <h1 className="text-6xl md:text-8xl font-black text-[#fff1c7] leading-[0.9] tracking-tighter uppercase mb-6">
+              All Projects
+            </h1>
+            <p className="text-[#fff1c7]/50 text-lg lg:text-xl font-bold uppercase tracking-[0.1em]">
+              A complete list of everything I've built.
+            </p>
+          </div>
 
-        {/* View All Button */}
-        <div className="flex justify-center mt-12">
-          <a 
-            href="/projects"
-            className="px-8 py-4 bg-[#fff1c7] text-[#140304] font-black text-[10px] uppercase tracking-[0.25em] rounded-full hover:bg-white hover:scale-105 hover:shadow-[0_0_20px_rgba(255,241,199,0.2)] transition-all duration-300"
-          >
-            View All Projects
-          </a>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project, idx) => (
+              <ProjectCard key={idx} project={project} index={idx} />
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <Footer />
+    </main>
   );
-};
-
-export default Projects;
+}

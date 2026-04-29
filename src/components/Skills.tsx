@@ -191,6 +191,24 @@ const Capabilities = () => {
           </motion.p>
         </div>
 
+        {/* Infinite Tech Marquee */}
+        <div className="relative flex overflow-hidden whitespace-nowrap mb-20 border-y border-white/[0.03] py-6 md:py-10 w-screen left-1/2 -translate-x-1/2 bg-white/[0.01]">
+          <div className="flex animate-marquee w-max">
+            {[...Array(2)].map((_, i) => (
+              <div key={i} className="flex items-center space-x-12 md:space-x-20 px-6 md:px-10">
+                {["REACT", "NEXT.JS", "TAILWIND CSS", "FRAMER MOTION", "TYPESCRIPT", "REACT NATIVE", "NODE.JS", "SUPABASE", "FIGMA"].map((tech) => (
+                  <div key={tech} className="flex items-center space-x-12 md:space-x-20">
+                    <span className="text-3xl md:text-6xl font-black text-transparent hover:text-[#fff1c7] uppercase tracking-tight transition-colors duration-500 cursor-default" style={{ WebkitTextStroke: "1px rgba(255, 241, 199, 0.2)" }}>
+                      {tech}
+                    </span>
+                    <span className="text-[#b41e1e] text-3xl md:text-5xl font-black">•</span>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {capabilities.map((cap, idx) => (
@@ -206,6 +224,16 @@ const Capabilities = () => {
         }
         .animate-border-flow {
           animation: border-flow 4s ease-in-out infinite;
+        }
+        @keyframes marquee {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          animation: marquee 30s linear infinite;
+        }
+        .animate-marquee:hover {
+          animation-play-state: paused;
         }
       `}</style>
 

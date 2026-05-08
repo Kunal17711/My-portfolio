@@ -1,12 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  --background: #140304;
-  --foreground: #fff1c7;
+  --background: #000000;
+  --surface: #171717;
+  --foreground: #ffffff;
+  --muted-foreground: rgba(255, 255, 255, 0.72);
+  --border-subtle: rgba(255, 255, 255, 0.1);
   --burgundy-dark: #140304;
   --burgundy-mid: #3b0708;
   --burgundy-light: #b41e1e;
   --cream: #fff1c7;
+}
+
+html,
+body,
+#root,
+#__next {
+  height: 100%;
 }
 
 html {
@@ -16,8 +26,10 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), sans-serif;
+  font-family: "Readex Pro", system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 @layer utilities {
@@ -26,6 +38,22 @@ body {
   }
   .font-sans {
     font-family: var(--font-sans), sans-serif;
+  }
+
+  .hero-title {
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+  }
+
+  @keyframes hero-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
@@ -70,5 +98,29 @@ body {
     background: rgba(255, 77, 77, 0.3);
     border-radius: 50%;
     pointer-events: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
   }
 }

@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
-import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
 
 const projects = [
@@ -13,77 +12,77 @@ const projects = [
     name: "Vidora",
     description: "High-end video processing platform.",
     tech: ["Next.js", "Cloudinary", "Tailwind"],
-    image: "/assets/vidora.png",
+    image: "/assets/vidora.webp",
     liveUrl: "https://vidora.co.in/"
   },
   {
     name: "Raksha Web",
     description: "Emergency response dashboard.",
     tech: ["React", "Supabase", "Node.js"],
-    image: "/assets/raksha-web.png",
+    image: "/assets/raksha-web.webp",
     liveUrl: "https://get-raksha.web.app/"
   },
   {
     name: "Raksha App",
     description: "Personal safety mobile application.",
     tech: ["React Native", "Firebase", "Maps"],
-    image: "/assets/raksha-app.png",
+    image: "/assets/raksha-app.webp",
     liveUrl: "https://get-raksha-app.web.app/"
   },
   {
     name: "Solvare",
     description: "AI-powered problem solving tool.",
     tech: ["Python", "OpenAI", "Next.js"],
-    image: "/assets/solvare.png",
+    image: "/assets/solvare.webp",
     liveUrl: "https://solvare.art/"
   },
   {
     name: "WishWrap",
     description: "Digital gifting and wishlist platform.",
     tech: ["Next.js", "Stripe", "Prisma"],
-    image: "/assets/wishwrap.png",
+    image: "/assets/wishwrap.webp",
     liveUrl: "https://wishwrap.in/"
   },
   {
     name: "ClashZone Arena",
     description: "Competitive gaming platform for enthusiasts.",
     tech: ["React", "Firebase", "WebSockets"],
-    image: "/assets/vidora.png", // Fallback image
+    image: "/assets/vidora.webp", // Fallback image
     liveUrl: "https://clashzone-arena.web.app/"
   },
   {
     name: "EduSync",
     description: "Collaborative learning management system.",
     tech: ["WebSockets", "React", "Express"],
-    image: "/assets/edusync.png",
+    image: "/assets/edusync.webp",
     liveUrl: "https://edusync-frontend-beta.vercel.app/"
   },
   {
     name: "PicPrompt",
     description: "AI image generation prompt builder.",
     tech: ["React", "Stable Diffusion", "Vercel"],
-    image: "/assets/picprompt.png",
+    image: "/assets/picprompt.webp",
     liveUrl: "https://www.picprompt.shop/"
   },
   {
     name: "Paradox Verse",
     description: "Immersive metaverse exploration site.",
     tech: ["Three.js", "React", "GSAP"],
-    image: "/assets/paradox.png",
+    image: "/assets/paradox.webp",
     liveUrl: "https://paradox-verse.web.app/"
   },
   {
     name: "Beyond Reality",
     description: "Future of web exploration and interaction.",
     tech: ["Next.js", "Three.js", "GSAP"],
-    image: "/assets/beyond-reality.png",
+    image: "/assets/beyond-reality.webp",
     liveUrl: "http://beyond-reality-six.vercel.app/"
   },
   {
     name: "Fashion Landing",
     description: "Premium luxury fashion experience.",
     tech: ["Next.js", "Tailwind", "Framer"],
-    image: "/assets/fashion-website.png",
+    image: "/assets/fashion-website.webp",
     liveUrl: "https://fashion-landing-page-kappa-ten.vercel.app/"
   }
 ];
@@ -91,41 +90,48 @@ const projects = [
 const ProjectCard = ({ project, index }: { project: any, index: number }) => {
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.05 }}
-      className="group relative bg-white/5 border border-white/10 rounded-2xl overflow-hidden backdrop-blur-md"
+      initial={{ opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+      className="group relative flex flex-col space-y-6"
     >
-      <div className="relative h-64 w-full overflow-hidden">
+      <a 
+        href={project.liveUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block relative aspect-video w-full overflow-hidden rounded-2xl bg-neutral-900 border border-white/10"
+      >
         <Image 
           src={project.image} 
           alt={project.name} 
           fill 
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
+          className="object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80 group-hover:opacity-100"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement;
+            target.style.display = 'none';
+          }}
         />
-        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-          <a 
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-8 py-3 bg-[#fff1c7] text-[#140304] font-black text-[10px] uppercase tracking-[0.2em] rounded-sm transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 hover:bg-white"
-          >
-            Visit Live
-          </a>
+        <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+        <div className="absolute top-4 right-4 text-white/50 group-hover:text-white transition-colors">
+          <span className="text-xl">↗</span>
         </div>
-      </div>
-      <div className="p-6">
-        <div className="flex justify-between items-start mb-2">
-          <h3 className="text-xl font-black text-[#fff1c7] uppercase tracking-tighter">{project.name}</h3>
-          <div className="flex flex-wrap gap-2 justify-end max-w-[150px]">
-            {project.tech.map((t: string) => (
-              <span key={t} className="text-[8px] font-bold text-[#b41e1e] uppercase tracking-widest bg-[#b41e1e]/10 px-2 py-1 rounded-full">
+      </a>
+      
+      <div className="flex flex-col space-y-3">
+        <div className="flex items-center justify-between">
+          <h3 className="text-2xl font-medium tracking-tight text-white group-hover:text-white/70 transition-colors">
+            {project.name}
+          </h3>
+          <div className="flex gap-2">
+            {project.tech.slice(0, 2).map((t: string) => (
+              <span key={t} className="text-[10px] font-medium text-white/30 uppercase tracking-widest">
                 {t}
               </span>
             ))}
           </div>
         </div>
-        <p className="text-[#fff1c7]/50 text-sm font-medium leading-relaxed">
+        <p className="text-white/50 text-sm leading-relaxed max-w-sm">
           {project.description}
         </p>
       </div>
@@ -135,43 +141,70 @@ const ProjectCard = ({ project, index }: { project: any, index: number }) => {
 
 export default function AllProjectsPage() {
   return (
-    <main className="min-h-screen bg-[#080b10] flex flex-col">
+    <main className="min-h-screen bg-black text-white selection:bg-white selection:text-black">
       <CustomCursor />
       
-      {/* Simple Header */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0608]/90 backdrop-blur-xl border-b border-white/[0.06]">
-        <div className="container mx-auto px-6 lg:px-16 h-[72px] flex items-center">
-          <Link href="/" className="flex items-center text-[#fff1c7]/50 hover:text-[#fff1c7] transition-colors text-[10px] font-black uppercase tracking-[0.25em]">
-            <ChevronLeft className="w-4 h-4 mr-1" />
-            Back to Home
+      {/* Background Depth Blurs */}
+      <div className="fixed top-0 left-0 h-[500px] w-[500px] rounded-full bg-white/[0.03] blur-3xl pointer-events-none" />
+      <div className="fixed bottom-0 right-0 h-[600px] w-[600px] rounded-full bg-white/[0.02] blur-3xl pointer-events-none" />
+
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 mix-blend-difference">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-10 h-24 flex items-center">
+          <Link href="/" className="flex items-center text-white/50 hover:text-white transition-colors text-xs font-medium uppercase tracking-[0.2em]">
+            <ChevronLeft className="w-4 h-4 mr-2" />
+            back to home
           </Link>
         </div>
       </nav>
 
       {/* Content */}
-      <section className="pt-40 pb-24 flex-1">
-        <div className="container mx-auto px-6 lg:px-16 relative z-10">
-          <div className="flex flex-col mb-16 text-center md:text-left">
-            <span className="text-[10px] tracking-[0.4em] font-black text-[#b41e1e] uppercase mb-4">
-              Archive
-            </span>
-            <h1 className="text-6xl md:text-8xl font-black text-[#fff1c7] leading-[0.9] tracking-tighter uppercase mb-6">
-              All Projects
-            </h1>
-            <p className="text-[#fff1c7]/50 text-lg lg:text-xl font-bold uppercase tracking-[0.1em]">
-              A complete list of everything I've built.
-            </p>
-          </div>
+      <div className="max-w-[1440px] mx-auto px-6 md:px-10 pt-40 pb-32 relative z-10">
+        
+        {/* Header Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 32 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="mb-24 lg:mb-32"
+        >
+          <span className="text-sm text-white/50 tracking-[0.28em] uppercase">
+            archive
+          </span>
+          <h1 className="mt-8 text-6xl md:text-8xl lg:text-9xl font-medium tracking-[-0.08em] leading-[0.85] text-white">
+            all projects.
+          </h1>
+          <p className="mt-8 max-w-3xl text-xl md:text-3xl leading-[1.25] tracking-[-0.035em] text-white/65">
+            a complete list of everything i’ve built, from startup mvps and dashboards to premium websites and mobile apps.
+          </p>
+        </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, idx) => (
-              <ProjectCard key={idx} project={project} index={idx} />
-            ))}
-          </div>
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 lg:gap-y-24">
+          {projects.map((project, idx) => (
+            <ProjectCard key={project.name} project={project} index={idx} />
+          ))}
         </div>
-      </section>
 
-      <Footer />
+        {/* Footer Link */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mt-40 border-t border-white/10 pt-10 flex flex-col md:flex-row justify-between items-center gap-6"
+        >
+          <p className="text-sm text-white/40 italic">
+            curated with taste and real execution.
+          </p>
+          <Link 
+            href="#contact" 
+            className="text-sm text-white/50 hover:text-white transition-colors uppercase tracking-widest"
+          >
+            start a project ↗
+          </Link>
+        </motion.div>
+
+      </div>
     </main>
   );
 }

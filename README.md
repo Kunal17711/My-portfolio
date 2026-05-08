@@ -8,7 +8,7 @@
 
 ## ⚠️ Copyright Notice
 
-**© 2026 Kunal. All Rights Reserved.**
+**© 2024 Kunal. All Rights Reserved.**
 
 This repository is **publicly visible for showcase purposes only.**
 
@@ -27,6 +27,15 @@ For any permission requests: **kkunaall10@gmail.com**
 - **Tailwind CSS v4** — Styling
 - **Framer Motion** — Animations
 - **Turbopack** — Build tool
+
+---
+
+## 🚀 Deployment & SEO
+
+- **Live URL:** [heyitskunal.vercel.app](https://heyitskunal.vercel.app)
+- **Production Ready:** Includes full SEO optimization (Metadata, Open Graph, Twitter Cards).
+- **Technical SEO:** robots.txt, sitemap.xml, and JSON-LD structured data.
+- **Security:** Secure HTTP headers and external link safety.
 
 ---
 

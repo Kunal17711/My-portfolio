@@ -1,124 +1,147 @@
 "use client";
 
-import React from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 
-const About = () => {
+const aboutRows = [
+  { label: "focus", value: "websites, apps, dashboards, landing pages" },
+  { label: "stack", value: "next.js, react, react native, expo, tailwind, supabase" },
+  { label: "style", value: "clean ui, premium layouts, fast execution" },
+  { label: "available for", value: "freelance projects, startup mvps, business websites" },
+];
+
+export default function About() {
+  const revealAnimation = {
+    initial: { opacity: 0, y: 32 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as any },
+  };
+
+  const placeholderGradient = "bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.10),rgba(0,0,0,1)_55%)]";
+
   return (
-    <section id="about" className="relative min-h-screen w-full py-24 overflow-hidden bg-[#080b10]">
-      
-      {/* Background with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <Image 
-          src="/assets/about-bg.png" 
-          alt="About Background" 
-          fill 
-          className="object-cover opacity-20"
+    <section id="about" className="relative w-full overflow-hidden border-t border-white/10 bg-black text-white">
+      {/* Background Ambient Depth */}
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <img 
+          src="/assets/about-bg.webp" 
+          alt="" 
+          className="h-full w-full object-cover opacity-[0.07] grayscale"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#140304] via-transparent to-[#140304] z-10" />
       </div>
+      <div className="pointer-events-none absolute top-20 right-0 h-[500px] w-[500px] rounded-full bg-white/[0.03] blur-[120px]" />
+      <div className="pointer-events-none absolute bottom-0 left-0 h-[420px] w-[420px] rounded-full bg-white/[0.025] blur-[120px]" />
 
-      <div className="container mx-auto px-6 lg:px-16 relative z-20">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-24 items-end">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-10 py-24 md:py-32">
+        
+        {/* Top Editorial Header */}
+        <motion.div {...revealAnimation}>
+          <p className="text-sm text-white/50 tracking-[0.28em] uppercase">
+            about
+          </p>
+          <h2 className="mt-8 text-5xl md:text-8xl font-medium tracking-[-0.07em] leading-[0.86] max-w-6xl text-white">
+            building with speed, taste, and real execution.
+          </h2>
+          <p className="mt-8 max-w-5xl text-xl md:text-3xl leading-[1.25] tracking-[-0.035em] text-white/70">
+            i’m kunal, a web and app developer focused on building clean digital products, from landing pages and websites to mobile apps, dashboards, and working backend flows.
+          </p>
+        </motion.div>
+
+        {/* Main About Split */}
+        <div className="mt-20 lg:mt-32 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           
-          {/* LEFT: Character Image */}
+          {/* Left Column Image */}
           <motion.div 
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            className="flex justify-center lg:justify-start"
+            {...revealAnimation}
+            className="lg:col-span-5 relative h-[520px] md:h-[720px] overflow-hidden rounded-[2rem] border border-white/10 bg-neutral-950"
           >
-            <div className="relative w-full max-w-[450px] aspect-[4/5]">
-              <Image 
-                src="/assets/about-character.png" 
-                alt="About Kunal" 
-                fill 
-                className="object-contain"
-              />
+            <div className={`absolute inset-0 w-full h-full ${placeholderGradient}`} />
+            <img 
+              src="/assets/about-character.webp" 
+              alt="Kunal"
+              className="relative h-full w-full object-cover opacity-90 object-center transition-transform duration-1000 hover:scale-105"
+              onError={(e) => (e.currentTarget.style.display = 'none')}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
+            <div className="absolute bottom-6 left-6 text-xs uppercase tracking-[0.24em] text-white/55">
+              developer / builder / 2024
             </div>
           </motion.div>
 
-          {/* CENTER: Content */}
-          <div className="flex flex-col space-y-8 text-center lg:text-left">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <span className="text-[10px] tracking-[0.4em] font-black text-[#b41e1e] uppercase mb-4 block">
-                About Me
-              </span>
-              <h2 className="text-6xl md:text-8xl font-serif italic text-[#fff1c7] leading-[0.9] mb-8">
-                Who is<br />Kunal?
-              </h2>
-              <p className="text-[#fff1c7]/70 text-lg leading-relaxed max-w-md mx-auto lg:mx-0">
-                I’m a 15-year-old commerce student from India who builds real web and app products. 
-                I design interfaces, write code, connect backends, and turn ideas into working digital experiences.
+          {/* Right Column Text Area */}
+          <div className="lg:col-span-7">
+            <motion.div {...revealAnimation} transition={{ ...revealAnimation.transition, delay: 0.1 }}>
+              <p className="text-sm text-white/45 tracking-[0.28em] uppercase">
+                what i care about
+              </p>
+              <h3 className="mt-6 text-2xl md:text-4xl leading-[1.18] tracking-[-0.05em] text-white">
+                i care about making digital products feel sharp, fast, and useful. a website should not just look nice, it should explain the offer clearly, load fast, work on every screen, and make people trust the business behind it.
+              </h3>
+              <p className="mt-8 max-w-2xl text-base md:text-lg leading-relaxed text-white/60">
+                my work usually sits between design and development: i think about layout, spacing, user flow, responsiveness, backend structure, and the final launch experience. the goal is always simple: build something that looks premium and actually works.
+              </p>
+              <p className="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-white/50">
+                based in Haryana, India — i use tools like next.js, react, react native, expo, tailwind css, supabase, and modern ai-assisted workflows to turn ideas into clean digital products faster for businesses, creators, and startups.
               </p>
             </motion.div>
 
-            <motion.div 
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1, delay: 0.4 }}
-              className="grid grid-cols-2 gap-8 pt-4"
-            >
-              <div className="flex flex-col">
-                <span className="text-4xl font-black text-[#fff1c7]">15+</span>
-                <span className="text-[10px] tracking-[0.2em] font-bold text-[#b41e1e] uppercase">Projects Built</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-4xl font-black text-[#fff1c7]">2+</span>
-                <span className="text-[10px] tracking-[0.2em] font-bold text-[#b41e1e] uppercase">Years Learning</span>
-              </div>
-            </motion.div>
+            {/* Inline Detail Rows */}
+            <div className="mt-12 md:mt-16 border-t border-white/10">
+              {aboutRows.map((row, index) => (
+                <motion.div
+                  key={row.label}
+                  {...revealAnimation}
+                  transition={{ ...revealAnimation.transition, delay: 0.2 + (index * 0.05) }}
+                  className="grid grid-cols-1 sm:grid-cols-12 gap-3 border-b border-white/10 py-6 md:py-8"
+                >
+                  <div className="sm:col-span-4">
+                    <span className="text-xs uppercase tracking-[0.22em] text-white/35 font-medium">
+                      {row.label}
+                    </span>
+                  </div>
+                  <div className="sm:col-span-8">
+                    <span className="text-base md:text-lg text-white/70">
+                      {row.value}
+                    </span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
-
-          {/* RIGHT: Glass Cards */}
-          <div className="flex flex-col space-y-6">
-            {[
-              {
-                title: "Young Builder",
-                desc: "Started early, learning fast, and shipping real projects."
-              },
-              {
-                title: "Web & App Developer",
-                desc: "Building responsive websites, dashboards, landing pages, and mobile apps."
-              },
-              {
-                title: "Product Mindset",
-                desc: "Focused on clean UI, practical features, and real-world usability."
-              }
-            ].map((card, idx) => (
-              <motion.div 
-                key={idx}
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 241, 199, 0.08)" }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.2 }}
-                className="p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl group transition-all duration-300"
-              >
-                <h3 className="text-xl font-black text-[#fff1c7] uppercase mb-3 tracking-tighter">
-                  {card.title}
-                </h3>
-                <p className="text-sm text-[#fff1c7]/60 leading-relaxed font-bold">
-                  {card.desc}
-                </p>
-                <div className="mt-4 w-10 h-[2px] bg-[#b41e1e] group-hover:w-full transition-all duration-500" />
-              </motion.div>
-            ))}
-          </div>
-
         </div>
-      </div>
 
+        {/* Second Editorial Image Row */}
+        <motion.div 
+          {...revealAnimation}
+          className="mt-24 md:mt-40 relative h-[360px] md:h-[560px] overflow-hidden rounded-[2rem] border border-white/10 bg-neutral-950"
+        >
+          <div className={`absolute inset-0 w-full h-full ${placeholderGradient}`} />
+          <img 
+            src="/assets/about-workflow.webp" 
+            alt="Workflow"
+            className="relative h-full w-full object-cover opacity-85 transition-transform duration-1000 hover:scale-105"
+            onError={(e) => (e.currentTarget.style.display = 'none')}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+          <div className="absolute bottom-6 left-6 text-xs uppercase tracking-[0.24em] text-white/55">
+            workspace / design / development
+          </div>
+        </motion.div>
+
+        {/* Closing Belief Line */}
+        <motion.div 
+          {...revealAnimation}
+          className="mt-24 md:mt-40 border-t border-white/10 pt-14"
+        >
+          <h2 className="max-w-5xl text-4xl md:text-7xl lg:text-8xl font-medium tracking-[-0.07em] leading-[0.9] text-white">
+            good design gets attention. <br className="hidden md:block" />
+            clean execution builds trust.
+          </h2>
+          <p className="mt-8 max-w-xl text-base md:text-xl text-white/55 leading-relaxed">
+            that’s the standard i try to bring into every project.
+          </p>
+        </motion.div>
+      </div>
     </section>
   );
-};
-
-export default About;
+}

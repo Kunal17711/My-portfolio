@@ -206,6 +206,7 @@ export default function Projects() {
 
   // When activeIndex changes, trigger the animating state
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsAnimating(true);
   }, [activeIndex]);
 
@@ -240,6 +241,7 @@ export default function Projects() {
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as any }}
               className="space-y-8"
             >
@@ -315,7 +317,7 @@ export default function Projects() {
                             {activeProject.number}
                           </span>
                           <div className="text-[10px] uppercase tracking-[0.2em] text-white/40">
-                            {activeProject.type} // {activeProject.year}
+                            {activeProject.type} / {activeProject.year}
                           </div>
                         </div>
 

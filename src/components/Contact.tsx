@@ -22,6 +22,7 @@ const revealVariants = {
 
 const transition = {
   duration: 0.7,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ease: [0.22, 1, 0.36, 1] as any,
 };
 

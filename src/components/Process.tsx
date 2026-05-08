@@ -47,6 +47,7 @@ export default function Process() {
     initial: { opacity: 0, y: 32 },
     whileInView: { opacity: 1, y: 0 },
     viewport: { once: true },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as any },
   };
 

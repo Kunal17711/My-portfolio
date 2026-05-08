@@ -87,6 +87,7 @@ const projects = [
   }
 ];
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ProjectCard = ({ project, index }: { project: any, index: number }) => {
   return (
     <motion.div 

@@ -68,7 +68,9 @@ export default function ContactPage() {
             {socialProfiles.map((profile) => (
               <p key={profile.label}>
                 {profile.label}:{" "}
-                <TextLink href={profile.href}>{profile.href}</TextLink>
+                <span className="break-all">
+                  <TextLink href={profile.href}>{profile.href}</TextLink>
+                </span>
               </p>
             ))}
           </div>

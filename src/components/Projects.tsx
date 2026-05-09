@@ -21,6 +21,19 @@ type Project = {
 const projects: Project[] = [
   {
     number: "01",
+    title: "ProfileOS",
+    type: "Digital Product",
+    year: "2024",
+    description:
+      "a playful digital product landing page for profile glow-ups, bios, photo ideas, DM starters, Canva templates, and AI prompts.",
+    tags: ["next.js", "tailwind", "product"],
+    image: "/assets/profileos.webp",
+    objectPosition: "object-center",
+    slug: "profileos",
+    imageAlt: "ProfileOS digital product landing page preview by Kunal Builds",
+  },
+  {
+    number: "02",
     title: "Vidora",
     type: "Website / Platform",
     year: "2024",
@@ -33,7 +46,7 @@ const projects: Project[] = [
     imageAlt: "Vidora website landing page project by Kunal Builds",
   },
   {
-    number: "02",
+    number: "03",
     title: "Raksha Web",
     type: "Safety Product Website",
     year: "2024",
@@ -46,7 +59,7 @@ const projects: Project[] = [
     imageAlt: "Raksha Web product website project by Kunal Builds",
   },
   {
-    number: "03",
+    number: "04",
     title: "Raksha App",
     type: "Mobile App",
     year: "2024",
@@ -59,7 +72,7 @@ const projects: Project[] = [
     imageAlt: "Raksha mobile app interface project by Kunal Builds",
   },
   {
-    number: "04",
+    number: "05",
     title: "EduSync",
     type: "Education Dashboard",
     year: "2024",
@@ -72,7 +85,7 @@ const projects: Project[] = [
     imageAlt: "EduSync education dashboard project by Kunal Builds",
   },
   {
-    number: "05",
+    number: "06",
     title: "Fashion Website",
     type: "E-commerce Landing Page",
     year: "2024",
@@ -85,7 +98,7 @@ const projects: Project[] = [
     imageAlt: "Fashion website landing page project by Kunal Builds",
   },
   {
-    number: "06",
+    number: "07",
     title: "Solvare",
     type: "Website Concept",
     year: "2024",
@@ -98,7 +111,7 @@ const projects: Project[] = [
     imageAlt: "Solvare web interface project by Kunal Builds",
   },
   {
-    number: "07",
+    number: "08",
     title: "WishWrap",
     type: "Web Experience",
     year: "2024",
@@ -111,7 +124,7 @@ const projects: Project[] = [
     imageAlt: "WishWrap product interface project by Kunal Builds",
   },
   {
-    number: "08",
+    number: "09",
     title: "Paradox",
     type: "Creative Web Concept",
     year: "2024",
@@ -124,7 +137,7 @@ const projects: Project[] = [
     imageAlt: "Paradox creative web interface project by Kunal Builds",
   },
   {
-    number: "09",
+    number: "10",
     title: "PicPrompt",
     type: "AI Tool Interface",
     year: "2024",
@@ -137,7 +150,7 @@ const projects: Project[] = [
     imageAlt: "PicPrompt AI product interface project by Kunal Builds",
   },
   {
-    number: "10",
+    number: "11",
     title: "Beyond Reality",
     type: "Experimental Website",
     year: "2024",
@@ -329,15 +342,16 @@ export default function Projects() {
                     transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
                     className="absolute inset-0 w-full h-full z-30"
                   >
-                    <div className="relative w-full h-full overflow-hidden rounded-[2rem] border border-white/10 bg-black shadow-[0_0_80px_rgba(0,0,0,0.8)]">
+                    <div className="group relative w-full h-full overflow-hidden rounded-[2.5rem] border border-white/10 bg-black shadow-[0_40px_100px_-20px_rgba(0,0,0,0.9)] transition-all duration-500 hover:border-white/20">
                       {/* Project Image */}
-                      <ProjectImage project={activeProject} priority={true} className="opacity-80" />
+                      <ProjectImage project={activeProject} priority={true} className="opacity-80 transition-transform duration-700 group-hover:scale-[1.03]" />
                       
                       {/* Gradient Overlay for Readability */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-transparent" />
                       
                       {/* Content Panel */}
-                      <div className="absolute inset-x-0 bottom-0 z-20 p-10 lg:p-12">
+                      <div className="absolute inset-x-0 bottom-0 z-20 p-12 lg:p-14">
                         <div className="flex items-center justify-between mb-6">
                           <span className="text-xs tracking-[0.3em] text-white/55 font-bold">
                             {activeProject.number}
@@ -348,24 +362,24 @@ export default function Projects() {
                         </div>
 
                         <div className="space-y-6">
-                          <h3 className="text-6xl font-medium tracking-[-0.05em] leading-none text-white">
+                          <h3 className="text-6xl font-bold tracking-[-0.05em] leading-[0.9] text-white">
                             {activeProject.title}
                           </h3>
-                          <p className="max-w-xl text-base leading-relaxed text-white/60 md:text-lg line-clamp-2">
+                          <p className="max-w-xl text-base leading-relaxed text-white/70 md:text-lg line-clamp-2 font-medium">
                             {activeProject.description}
                           </p>
-                          <div className="flex flex-wrap gap-2 pt-2">
+                          <div className="flex flex-wrap gap-3 pt-2">
                             {activeProject.tags.map((tag) => (
                               <ProjectTag key={tag}>{tag}</ProjectTag>
                             ))}
                           </div>
-                          <div className="pt-4">
+                          <div className="pt-6">
                             <Link
                               href={`/projects/${activeProject.slug}`}
-                              className="group relative inline-flex overflow-hidden rounded-full bg-white px-8 py-4 text-sm font-bold text-black transition-all hover:pr-12"
+                              className="group relative inline-flex overflow-hidden rounded-full bg-white px-10 py-4 text-sm font-bold text-black transition-all hover:bg-neutral-200"
                             >
                               <span className="relative z-10">view case study</span>
-                              <span className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 transition-all group-hover:opacity-100" aria-hidden="true">→</span>
+                              <span className="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
                             </Link>
                           </div>
                         </div>
@@ -403,20 +417,31 @@ export default function Projects() {
                 </div>
 
                 {/* Vertical Progress Indicators (Right Side) */}
-                <div className="absolute -right-8 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-4">
-                  {projects.map((_, i) => (
+                <div className="absolute -right-16 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col gap-3">
+                  {projects.map((p, i) => (
                     <button
                       key={i}
                       onClick={() => handleDotClick(i)}
-                      className="flex min-h-11 min-w-11 items-center justify-center rounded-full cursor-pointer"
-                      aria-label={`Go to project slide ${i + 1}`}
+                      className="group flex min-h-8 min-w-8 items-center justify-center rounded-full cursor-pointer transition-all"
+                      aria-label={`Go to ${p.title} project slide`}
                       aria-current={i === activeIndex ? "true" : undefined}
                     >
-                      <span
-                        className={`rounded-full bg-white transition-all duration-700 ${
-                          i === activeIndex ? "h-10 w-1.5 opacity-100" : "h-1.5 w-1.5 opacity-35 hover:opacity-60"
-                        }`}
-                      />
+                      <div className="relative flex items-center justify-center">
+                        <span
+                          className={`rounded-full bg-white transition-all duration-700 ease-[0.22,1,0.36,1] ${
+                            i === activeIndex 
+                              ? "h-8 w-1.5 opacity-100 shadow-[0_0_15px_rgba(255,255,255,0.5)]" 
+                              : "h-1.5 w-1.5 opacity-20 group-hover:opacity-50"
+                          }`}
+                        />
+                        {i === activeIndex && (
+                          <motion.span 
+                            layoutId="activeDot"
+                            className="absolute -inset-1.5 rounded-full border border-white/10"
+                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                          />
+                        )}
+                      </div>
                     </button>
                   ))}
                 </div>

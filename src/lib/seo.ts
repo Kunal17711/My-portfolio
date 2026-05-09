@@ -36,6 +36,7 @@ type CreateMetadataInput = {
   path?: string;
   image?: string;
   type?: "website" | "article" | "profile";
+  keywords?: string[];
 };
 
 export function absoluteUrl(path = "/") {
@@ -52,8 +53,10 @@ export function createMetadata({
   path = "/",
   image = DEFAULT_OG_IMAGE,
   type = "website",
+  keywords = DEFAULT_KEYWORDS,
 }: CreateMetadataInput): Metadata {
   const url = absoluteUrl(path);
+  const ogImage = absoluteUrl(image);
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -61,7 +64,7 @@ export function createMetadata({
       absolute: title,
     },
     description,
-    keywords: DEFAULT_KEYWORDS,
+    keywords: keywords || DEFAULT_KEYWORDS,
     alternates: {
       canonical: url,
     },
@@ -74,10 +77,10 @@ export function createMetadata({
       description,
       images: [
         {
-          url: image,
+          url: ogImage,
           width: 1200,
           height: 630,
-          alt: "Kunal Builds - Web and App Developer Portfolio",
+          alt: title,
         },
       ],
     },
@@ -86,7 +89,7 @@ export function createMetadata({
       creator: TWITTER_CREATOR,
       title,
       description,
-      images: [image],
+      images: [ogImage],
     },
     robots: {
       index: true,

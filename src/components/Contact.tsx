@@ -61,7 +61,7 @@ const Contact = () => {
             whileInView="whileInView"
             viewport={{ once: true }}
             transition={{ ...transition, delay: 0.1 }}
-            className="mt-8 max-w-6xl text-5xl md:text-8xl lg:text-9xl font-medium tracking-[-0.08em] leading-[0.85]"
+            className="mt-8 max-w-6xl text-4xl md:text-8xl lg:text-9xl font-medium tracking-[-0.08em] leading-[0.95]"
           >
             have an idea? let’s turn it into something real.
           </motion.h2>
@@ -72,7 +72,7 @@ const Contact = () => {
             whileInView="whileInView"
             viewport={{ once: true }}
             transition={{ ...transition, delay: 0.2 }}
-            className="mt-8 max-w-3xl text-xl md:text-3xl leading-[1.25] tracking-[-0.035em] text-white/72"
+            className="mt-8 max-w-3xl text-xl md:text-3xl leading-[1.25] tracking-[-0.035em] text-white/72 break-words"
           >
             whether you need a website, mobile app, dashboard, landing page, redesign, or startup mvp, i can help you shape it, build it, and launch it with a clean premium finish.
           </motion.p>
@@ -94,7 +94,7 @@ const Contact = () => {
                     {link.label}
                   </div>
                   <div className="md:col-span-9 flex items-center justify-between">
-                    <span className="text-xl md:text-3xl tracking-[-0.04em] text-white group-hover:text-white/70 transition-colors break-words overflow-hidden">
+                    <span className="text-xl md:text-3xl tracking-[-0.04em] text-white group-hover:text-white/70 transition-colors break-all overflow-hidden">
                       {link.value}
                     </span>
                     {link.href && (
@@ -131,17 +131,17 @@ const Contact = () => {
             whileInView="whileInView"
             viewport={{ once: true }}
             transition={{ ...transition, delay: 0.8 }}
-            className="mt-12 flex flex-col sm:flex-row gap-4"
+            className="mt-12 flex flex-col sm:flex-row gap-4 w-full"
           >
             <a 
               href="mailto:kkunaall10@gmail.com"
-              className="inline-flex w-fit items-center justify-center rounded-full bg-white px-7 py-4 text-sm font-medium text-black hover:bg-neutral-200 transition-colors"
+              className="inline-flex w-full sm:w-fit items-center justify-center rounded-full bg-white px-7 py-4 text-sm font-bold text-black hover:bg-neutral-200 transition-colors"
             >
               text me / email me
             </a>
             <Link 
               href="/projects"
-              className="inline-flex w-fit items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-7 py-4 text-sm font-medium text-white hover:bg-white/[0.08] transition-colors"
+              className="inline-flex w-full sm:w-fit items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-7 py-4 text-sm font-medium text-white hover:bg-white/[0.08] transition-colors"
             >
               view projects
             </Link>
@@ -149,7 +149,7 @@ const Contact = () => {
               href="https://github.com/Kunal17711"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex w-fit items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-7 py-4 text-sm font-medium text-white hover:bg-white/[0.08] transition-colors"
+              className="inline-flex w-full sm:w-fit items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-7 py-4 text-sm font-medium text-white hover:bg-white/[0.08] transition-colors"
             >
               open github
             </a>

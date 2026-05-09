@@ -27,11 +27,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return {};
   }
 
+  // Support for custom SEO fields from data
+  const title = (project as any).seoTitle || `${project.name} Project | Kunal Builds`;
+  const description = (project as any).seoDescription || `Explore ${project.name}, a ${project.type} project by Kunal Builds focused on clean UI, responsive design, practical functionality, and premium digital product execution.`;
+  const keywords = (project as any).keywords || undefined;
+
   return createMetadata({
-    title: `${project.name} Project | Kunal Builds`,
-    description: `Explore ${project.name}, a ${project.type} project by Kunal Builds focused on clean UI, responsive design, practical functionality, and premium digital product execution.`,
+    title,
+    description,
     path: project.path,
-  });
+    image: project.image, // Use project image for OG
+    keywords,
+  } as any);
 }
 
 export default async function ProjectDetailPage({ params }: PageProps) {
@@ -93,7 +100,18 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         ]}
         eyebrow={project.type}
         title={`${project.name} by Kunal Builds`}
-        intro={<p>{detailDescription}</p>}
+        intro={
+          <div className="space-y-6">
+            <p>{detailDescription}</p>
+            {project.liveUrl && (
+              <p>
+                <TextLink href={project.liveUrl}>
+                  Visit Live Project →
+                </TextLink>
+              </p>
+            )}
+          </div>
+        }
       >
         <div className="relative mb-12 aspect-[16/9] overflow-hidden rounded-[1.5rem] border border-white/10 bg-neutral-950">
           <Image

@@ -53,10 +53,10 @@ export function SeoPageShell({
         <header className="border-b border-white/10 pb-16 md:pb-24">
           <Breadcrumbs items={breadcrumbs} />
           <p className="text-sm uppercase tracking-[0.28em] text-white/60">{eyebrow}</p>
-          <h1 className="mt-8 max-w-5xl text-5xl font-medium leading-[0.9] tracking-[-0.06em] text-white md:text-7xl lg:text-8xl">
+          <h1 className="mt-8 max-w-5xl text-4xl font-medium leading-[0.95] tracking-[-0.06em] text-white md:text-7xl lg:text-8xl">
             {title}
           </h1>
-          <div className="mt-8 max-w-4xl text-lg leading-relaxed text-white/72 md:text-2xl md:leading-relaxed">
+          <div className="mt-8 max-w-4xl text-lg leading-relaxed text-white/72 md:text-2xl md:leading-relaxed break-words">
             {intro}
           </div>
         </header>
@@ -79,7 +79,7 @@ export function EditorialSection({
       <h2 className="text-sm font-medium uppercase tracking-[0.24em] text-white/60">
         {title}
       </h2>
-      <div className="max-w-3xl space-y-5 text-base leading-relaxed text-white/72 md:text-xl md:leading-relaxed">
+      <div className="max-w-3xl space-y-5 text-base leading-relaxed text-white/72 md:text-xl md:leading-relaxed break-words">
         {children}
       </div>
     </section>

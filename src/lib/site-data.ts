@@ -122,6 +122,69 @@ export const homepageJsonLd = {
 
 export const projects = [
   {
+    slug: "profileos",
+    name: "ProfileOS",
+    path: "/projects/profileos",
+    image: "/assets/profileos.webp",
+    imageAlt: "ProfileOS digital product landing page preview by Kunal Builds",
+    type: "Digital Product / Landing Page",
+    tech: [
+      "Next.js",
+      "Tailwind CSS",
+      "Product Design",
+      "Landing Page",
+      "Digital Product",
+      "Personal Branding",
+    ],
+    liveUrl: "https://profile-os-lilac.vercel.app/",
+    description:
+      "ProfileOS is a playful, conversion-focused digital product landing page built around the idea of upgrading a user’s online profile. It presents ready-made bios, photo ideas, DM starters, profile checklists, Canva templates, and AI prompts in a clean, friendly, and visually memorable interface.",
+    overview:
+      "ProfileOS is a digital product landing page designed to turn a simple profile-improvement kit into a polished, trust-building product experience. The page communicates the value of profile glow-ups through playful visuals, clear messaging, strong CTAs, and a friendly conversion-focused layout.",
+    problem:
+      "Many personal-branding and profile-help products look generic or unclear. The goal was to create a landing page that immediately feels useful, fun, and trustworthy while clearly explaining what users get: bios, photo ideas, DM starters, profile checklists, Canva templates, and AI prompts.",
+    solution:
+      "I designed ProfileOS as a clean, bright, product-led landing page with strong hero messaging, soft visual hierarchy, playful elements, clear benefit-driven copy, and direct CTAs. The experience focuses on making the product feel easy to understand, easy to buy, and memorable.",
+    features: [
+      "Conversion-focused hero section",
+      "Clear product positioning for profile upgrades",
+      "Ready-made bios and profile checklist messaging",
+      "Photo ideas, DM starters, Canva templates, and AI prompts",
+      "Friendly playful visual style",
+      "Strong CTA flow",
+      "Responsive layout",
+      "Clean product storytelling",
+    ],
+    designApproach:
+      "The visual direction uses a soft, playful, creator-focused style with light backgrounds, purple accents, rounded UI elements, sticker-like details, and a confident “glow-up” product feeling. The design is meant to feel approachable, modern, and useful rather than overly corporate.",
+    shows:
+      "ProfileOS presents a small digital product with a strong brand feel, clear messaging, and a polished landing-page experience suitable for selling profile-improvement resources online.",
+    relevantServices: [
+      "landing-page-development",
+      "website-development",
+      "ui-ux-design",
+    ],
+    seoTitle: "ProfileOS Case Study | Digital Product Landing Page by Kunal Builds",
+    seoDescription:
+      "ProfileOS is a digital product landing page by Kunal Builds for profile glow-ups, ready-made bios, photo ideas, DM starters, Canva templates, AI prompts, and personal branding resources.",
+    keywords: [
+      "ProfileOS",
+      "ProfileOS landing page",
+      "digital product landing page",
+      "profile glow up kit",
+      "Instagram bio ideas",
+      "dating profile ideas",
+      "Canva templates",
+      "AI prompts",
+      "personal branding website",
+      "Kunal Builds project",
+      "Kunal Dev portfolio",
+      "web app developer portfolio",
+      "landing page designer India",
+      "product website designer",
+    ],
+  },
+  {
     slug: "vidora",
     name: "Vidora",
     path: "/projects/vidora",

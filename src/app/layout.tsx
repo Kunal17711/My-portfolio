@@ -5,8 +5,9 @@ import { DEFAULT_OG_IMAGE, SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "@/lib/
 
 const readexPro = Readex_Pro({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "700"],
   variable: "--font-sans",
+  display: "swap",
 });
 
 export const viewport = {

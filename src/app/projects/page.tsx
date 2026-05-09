@@ -106,13 +106,13 @@ export default function ProjectsPage() {
                   </span>
                 </TextLink>
                 <div>
-                  <p className="text-sm uppercase tracking-[0.2em] text-white/42">
+                  <p className="text-sm uppercase tracking-[0.2em] text-white/60">
                     {project.type}
                   </p>
-                  <p className="mt-4 text-base leading-relaxed text-white/68 md:text-lg">
+                  <p className="mt-4 text-base leading-relaxed text-white/72 md:text-lg">
                     {project.description}
                   </p>
-                  <p className="mt-4 text-sm text-white/45">
+                  <p className="mt-4 text-sm text-white/60">
                     Tech stack: {project.tech.join(", ")}
                   </p>
                   <p className="mt-5 text-sm">

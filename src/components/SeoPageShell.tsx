@@ -8,7 +8,7 @@ type BreadcrumbItem = {
 
 export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
   return (
-    <nav aria-label="Breadcrumb" className="mb-10 text-xs uppercase tracking-[0.22em] text-white/40">
+    <nav aria-label="Breadcrumb" className="mb-10 text-xs uppercase tracking-[0.22em] text-white/60">
       <ol className="flex flex-wrap items-center gap-3">
         {items.map((item, index) => {
           const isLast = index === items.length - 1;
@@ -18,7 +18,7 @@ export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
               {isLast ? (
                 <span className="text-white/65">{item.name}</span>
               ) : (
-                <Link href={item.href} className="transition-colors hover:text-white">
+                <Link href={item.href} className="inline-flex min-h-11 items-center transition-colors hover:text-white">
                   {item.name}
                 </Link>
               )}
@@ -52,11 +52,11 @@ export function SeoPageShell({
       <div className="relative z-10 mx-auto max-w-[1120px] px-6 py-10 md:px-10 md:py-14">
         <header className="border-b border-white/10 pb-16 md:pb-24">
           <Breadcrumbs items={breadcrumbs} />
-          <p className="text-sm uppercase tracking-[0.28em] text-white/45">{eyebrow}</p>
+          <p className="text-sm uppercase tracking-[0.28em] text-white/60">{eyebrow}</p>
           <h1 className="mt-8 max-w-5xl text-5xl font-medium leading-[0.9] tracking-[-0.06em] text-white md:text-7xl lg:text-8xl">
             {title}
           </h1>
-          <div className="mt-8 max-w-4xl text-lg leading-relaxed text-white/68 md:text-2xl md:leading-relaxed">
+          <div className="mt-8 max-w-4xl text-lg leading-relaxed text-white/72 md:text-2xl md:leading-relaxed">
             {intro}
           </div>
         </header>
@@ -76,10 +76,10 @@ export function EditorialSection({
 }) {
   return (
     <section className="grid gap-6 border-b border-white/10 py-12 md:grid-cols-[280px_1fr] md:gap-12 md:py-16">
-      <h2 className="text-sm font-medium uppercase tracking-[0.24em] text-white/45">
+      <h2 className="text-sm font-medium uppercase tracking-[0.24em] text-white/60">
         {title}
       </h2>
-      <div className="max-w-3xl space-y-5 text-base leading-relaxed text-white/68 md:text-xl md:leading-relaxed">
+      <div className="max-w-3xl space-y-5 text-base leading-relaxed text-white/72 md:text-xl md:leading-relaxed">
         {children}
       </div>
     </section>
@@ -130,19 +130,19 @@ export function CtaBand({
       <h2 className="text-3xl font-medium tracking-[-0.04em] text-white md:text-5xl">
         {title}
       </h2>
-      <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/62 md:text-lg">
+      <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/72 md:text-lg">
         {text}
       </p>
       <div className="mt-8 flex flex-wrap gap-4">
         <Link
           href="/contact"
-          className="rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-neutral-200"
+          className="inline-flex min-h-11 items-center rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-neutral-200"
         >
           Contact Kunal Builds
         </Link>
         <Link
           href="/services"
-          className="rounded-full border border-white/15 bg-white/[0.03] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-white/[0.08]"
+          className="inline-flex min-h-11 items-center rounded-full border border-white/15 bg-white/[0.03] px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-white/[0.08]"
         >
           View services
         </Link>

@@ -42,7 +42,7 @@ export default function About() {
         
         {/* Top Editorial Header */}
         <motion.div {...revealAnimation}>
-          <p className="text-sm text-white/50 tracking-[0.28em] uppercase">
+          <p className="text-sm text-white/60 tracking-[0.28em] uppercase">
             about
           </p>
           <h2 className="mt-8 text-5xl md:text-8xl font-medium tracking-[-0.07em] leading-[0.86] max-w-6xl text-white">
@@ -70,7 +70,7 @@ export default function About() {
               className="relative object-cover opacity-90 object-center transition-transform duration-1000 hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
-            <div className="absolute bottom-6 left-6 text-xs uppercase tracking-[0.24em] text-white/55">
+            <div className="absolute bottom-6 left-6 text-xs uppercase tracking-[0.24em] text-white/70">
               developer / builder / 2024
             </div>
           </motion.div>
@@ -78,16 +78,16 @@ export default function About() {
           {/* Right Column Text Area */}
           <div className="lg:col-span-7">
             <motion.div {...revealAnimation} transition={{ ...revealAnimation.transition, delay: 0.1 }}>
-              <p className="text-sm text-white/45 tracking-[0.28em] uppercase">
+              <p className="text-sm text-white/60 tracking-[0.28em] uppercase">
                 what i care about
               </p>
               <h3 className="mt-6 text-2xl md:text-4xl leading-[1.18] tracking-[-0.05em] text-white">
                 i care about making digital products feel sharp, fast, and useful. a website should not just look nice, it should explain the offer clearly, load fast, work on every screen, and make people trust the business behind it.
               </h3>
-              <p className="mt-8 max-w-2xl text-base md:text-lg leading-relaxed text-white/60">
+              <p className="mt-8 max-w-2xl text-base md:text-lg leading-relaxed text-white/70">
                 my work usually sits between design and development: i think about layout, spacing, user flow, responsiveness, backend structure, and the final launch experience. the goal is always simple: build something that looks premium and actually works.
               </p>
-              <p className="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-white/50">
+              <p className="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-white/65">
                 based in Haryana, India — i use tools like next.js, react, react native, expo, tailwind css, supabase, and modern ai-assisted workflows to turn ideas into clean digital products faster for businesses, creators, and startups.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
@@ -116,7 +116,7 @@ export default function About() {
                   className="grid grid-cols-1 sm:grid-cols-12 gap-3 border-b border-white/10 py-6 md:py-8"
                 >
                   <div className="sm:col-span-4">
-                    <span className="text-xs uppercase tracking-[0.22em] text-white/35 font-medium">
+                    <span className="text-xs uppercase tracking-[0.22em] text-white/60 font-medium">
                       {row.label}
                     </span>
                   </div>
@@ -145,7 +145,7 @@ export default function About() {
             className="relative object-cover opacity-85 transition-transform duration-1000 hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-          <div className="absolute bottom-6 left-6 text-xs uppercase tracking-[0.24em] text-white/55">
+            <div className="absolute bottom-6 left-6 text-xs uppercase tracking-[0.24em] text-white/70">
             workspace / design / development
           </div>
         </motion.div>
@@ -159,7 +159,7 @@ export default function About() {
             good design gets attention. <br className="hidden md:block" />
             clean execution builds trust.
           </h2>
-          <p className="mt-8 max-w-xl text-base md:text-xl text-white/55 leading-relaxed">
+          <p className="mt-8 max-w-xl text-base md:text-xl text-white/70 leading-relaxed">
             that’s the standard i try to bring into every project.
           </p>
         </motion.div>

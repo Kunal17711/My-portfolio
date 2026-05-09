@@ -67,14 +67,15 @@ export default function Capabilities() {
     const section = sectionRef.current;
     const track = trackRef.current;
     const progressLine = progressLineRef.current;
+    let scrollAmount = 0;
+
+    const updateScrollAmount = () => {
+      scrollAmount = -(track.scrollWidth - window.innerWidth + (window.innerWidth * 0.1));
+    };
+
+    updateScrollAmount();
 
     const ctx = gsap.context(() => {
-      // Amount to move horizontal
-      const getScrollAmount = () => {
-        const trackWidth = track.scrollWidth;
-        return -(trackWidth - window.innerWidth + (window.innerWidth * 0.1));
-      };
-
       // Create a dedicated ScrollTrigger for pinning and horizontal scroll
       ScrollTrigger.create({
         trigger: section,
@@ -88,7 +89,7 @@ export default function Capabilities() {
         onUpdate: (self) => {
           // Sync horizontal track with the pin progress
           gsap.set(track, {
-            x: self.progress * getScrollAmount()
+            x: self.progress * scrollAmount
           });
 
           // Sync progress line
@@ -107,7 +108,10 @@ export default function Capabilities() {
 
     }, section);
 
+    ScrollTrigger.addEventListener("refreshInit", updateScrollAmount);
+
     return () => {
+      ScrollTrigger.removeEventListener("refreshInit", updateScrollAmount);
       ctx.revert();
     };
   }, []);
@@ -134,21 +138,21 @@ export default function Capabilities() {
             className="relative z-20 flex flex-col md:flex-row justify-between items-end gap-3"
           >
             <div className="space-y-1.5 md:space-y-2">
-              <p className="text-[10px] md:text-xs text-white/40 tracking-[0.3em] uppercase">
+              <p className="text-[10px] md:text-xs text-white/60 tracking-[0.3em] uppercase">
                 capabilities
               </p>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-medium tracking-[-0.06em] leading-[0.9] text-white">
                 from idea to <br className="hidden md:block" />
                 working product.
               </h2>
-              <p className="max-w-xl text-[10px] md:text-[11px] lg:text-xs leading-relaxed text-white/50">
+              <p className="max-w-xl text-[10px] md:text-[11px] lg:text-xs leading-relaxed text-white/65">
                 i help businesses, creators, and startups turn rough ideas into clean websites, apps, dashboards, and digital products that actually work.
               </p>
             </div>
 
             <a
               href="/contact"
-              className="rounded-full bg-white px-5 py-2 text-[10px] md:text-xs font-bold text-black hover:bg-neutral-200 transition-all active:scale-95 whitespace-nowrap mb-1"
+              className="inline-flex min-h-11 items-center rounded-full bg-white px-5 py-2 text-[10px] md:text-xs font-bold text-black hover:bg-neutral-200 transition-all active:scale-95 whitespace-nowrap mb-1"
             >
               start a project
             </a>
@@ -171,17 +175,18 @@ export default function Capabilities() {
                   className={`relative w-[240px] sm:w-[280px] md:w-[320px] shrink-0 rounded-[1.2rem] border border-white/10 bg-neutral-950/95 p-4 sm:p-6 md:p-7 min-h-[240px] sm:min-h-[280px] md:min-h-[300px] flex flex-col transition-all duration-700 ease-out shadow-2xl ${
                     isActive ? "scale-100 border-white/20" : "scale-[0.95] opacity-20 blur-[1px]"
                   }`}
+                  aria-hidden={!isActive}
                 >
                   {/* Background Large Faded Word */}
-                  <div className="absolute bottom-0 right-5 text-[4.5rem] sm:text-[6rem] md:text-[8rem] font-medium tracking-[-0.08em] text-white/[0.03] pointer-events-none select-none uppercase">
+                  <div className="absolute bottom-0 right-5 text-[4.5rem] sm:text-[6rem] md:text-[8rem] font-medium tracking-[-0.08em] text-white/[0.03] pointer-events-none select-none uppercase" aria-hidden="true">
                     {item.word}
                   </div>
 
-                  <div className={`absolute top-4 sm:top-6 right-4 sm:right-6 transition-colors duration-500 ${isActive ? "text-white/60" : "text-white/10"}`}>
+                  <div className={`absolute top-4 sm:top-6 right-4 sm:right-6 transition-colors duration-500 ${isActive ? "text-white/70" : "text-white/10"}`} aria-hidden="true">
                     <span className="text-lg sm:text-xl font-light">↗</span>
                   </div>
 
-                  <span className={`text-[8px] md:text-[10px] tracking-[0.28em] transition-colors duration-500 ${isActive ? "text-white/50" : "text-white/20"}`}>
+                  <span className={`text-[8px] md:text-[10px] tracking-[0.28em] transition-colors duration-500 ${isActive ? "text-white/65" : "text-white/20"}`}>
                     {item.number}
                   </span>
 
@@ -189,7 +194,7 @@ export default function Capabilities() {
                     {item.title}
                   </h3>
 
-                  <p className={`mt-2 sm:mt-3 text-[10px] sm:text-[11px] md:text-xs leading-relaxed transition-colors duration-500 ${isActive ? "text-white/60" : "text-white/30"}`}>
+                  <p className={`mt-2 sm:mt-3 text-[10px] sm:text-[11px] md:text-xs leading-relaxed transition-colors duration-500 ${isActive ? "text-white/70" : "text-white/30"}`}>
                     {item.description}
                   </p>
 
@@ -198,7 +203,7 @@ export default function Capabilities() {
                       <span
                         key={tag}
                         className={`rounded-full border border-white/10 bg-white/[0.04] px-2 py-1 text-[8px] sm:text-[9px] transition-colors duration-500 ${
-                          isActive ? "text-white/60 border-white/20" : "text-white/30"
+                          isActive ? "text-white/70 border-white/20" : "text-white/30"
                         }`}
                       >
                         {tag}

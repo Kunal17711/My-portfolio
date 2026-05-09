@@ -153,7 +153,7 @@ const projects: Project[] = [
 
 function ProjectTag({ children }: { children: string }) {
   return (
-    <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1.5 text-[11px] text-white/70 backdrop-blur">
+    <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1.5 text-[11px] text-white/75 backdrop-blur">
       {children}
     </span>
   );
@@ -211,10 +211,13 @@ export default function Projects() {
   useEffect(() => {
     if (window.innerWidth < 1024 && scrollRef.current) {
       const cardWidth = scrollRef.current.offsetWidth * 0.85 + 24; // 85vw + gap
-      scrollRef.current.scrollTo({
-        left: activeIndex * cardWidth,
-        behavior: "smooth"
+      const frame = window.requestAnimationFrame(() => {
+        scrollRef.current?.scrollTo({
+          left: activeIndex * cardWidth,
+          behavior: "smooth"
+        });
       });
+      return () => window.cancelAnimationFrame(frame);
     }
   }, [activeIndex]);
 
@@ -269,7 +272,7 @@ export default function Projects() {
               className="space-y-8"
             >
               <div className="space-y-4">
-                <span className="inline-block text-xs uppercase tracking-[0.3em] text-white/40 border-l border-white/20 pl-4 py-1">
+                <span className="inline-block text-xs uppercase tracking-[0.3em] text-white/55 border-l border-white/20 pl-4 py-1">
                   selected work
                 </span>
                 <h2 className="text-5xl font-medium leading-[0.95] tracking-[-0.06em] text-white md:text-7xl lg:text-8xl">
@@ -279,7 +282,7 @@ export default function Projects() {
                 </h2>
               </div>
 
-              <p className="max-w-md text-base leading-relaxed text-white/50 md:text-lg">
+              <p className="max-w-md text-base leading-relaxed text-white/65 md:text-lg">
                 a collection of high-end builds across websites, mobile apps, and product interfaces built for real-world impact.
               </p>
 
@@ -287,7 +290,7 @@ export default function Projects() {
                 {["websites", "mobile apps", "dashboards", "ui/ux"].map((item) => (
                   <span
                     key={item}
-                    className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-[10px] uppercase tracking-widest text-white/40"
+                    className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-[10px] uppercase tracking-widest text-white/60"
                   >
                     {item}
                   </span>
@@ -296,7 +299,7 @@ export default function Projects() {
 
               <Link
                 href="/projects"
-                className="group inline-flex items-center gap-3 text-sm font-medium text-white/80 transition-all hover:text-white"
+                className="group inline-flex min-h-11 items-center gap-3 text-sm font-medium text-white/80 transition-all hover:text-white"
               >
                 view all projects 
                 <span className="h-px w-8 bg-white/20 transition-all group-hover:w-12 group-hover:bg-white" />
@@ -336,10 +339,10 @@ export default function Projects() {
                       {/* Content Panel */}
                       <div className="absolute inset-x-0 bottom-0 z-20 p-10 lg:p-12">
                         <div className="flex items-center justify-between mb-6">
-                          <span className="text-xs tracking-[0.3em] text-white/30 font-bold">
+                          <span className="text-xs tracking-[0.3em] text-white/55 font-bold">
                             {activeProject.number}
                           </span>
-                          <div className="text-[10px] uppercase tracking-[0.2em] text-white/40">
+                          <div className="text-[10px] uppercase tracking-[0.2em] text-white/60">
                             {activeProject.type} / {activeProject.year}
                           </div>
                         </div>
@@ -405,10 +408,16 @@ export default function Projects() {
                     <button
                       key={i}
                       onClick={() => handleDotClick(i)}
-                      className={`transition-all duration-700 rounded-full bg-white cursor-pointer ${
-                        i === activeIndex ? "h-10 w-1.5 opacity-100" : "h-1.5 w-1.5 opacity-20 hover:opacity-50"
-                      }`}
-                    />
+                      className="flex min-h-11 min-w-11 items-center justify-center rounded-full cursor-pointer"
+                      aria-label={`Go to project slide ${i + 1}`}
+                      aria-current={i === activeIndex ? "true" : undefined}
+                    >
+                      <span
+                        className={`rounded-full bg-white transition-all duration-700 ${
+                          i === activeIndex ? "h-10 w-1.5 opacity-100" : "h-1.5 w-1.5 opacity-35 hover:opacity-60"
+                        }`}
+                      />
+                    </button>
                   ))}
                 </div>
                 
@@ -418,9 +427,11 @@ export default function Projects() {
                     <button 
                       key={p.title}
                       onClick={() => handleDotClick(i)}
-                      className={`text-[10px] uppercase tracking-[0.2em] transition-all duration-500 whitespace-nowrap cursor-pointer pointer-events-auto ${
-                        i === activeIndex ? "text-white opacity-100 scale-110" : "text-white/25 opacity-25 hover:opacity-50"
+                      className={`min-h-11 px-2 text-[10px] uppercase tracking-[0.2em] transition-all duration-500 whitespace-nowrap cursor-pointer pointer-events-auto ${
+                        i === activeIndex ? "text-white opacity-100 scale-110" : "text-white/60 opacity-65 hover:opacity-85"
                       }`}
+                      aria-label={`Go to ${p.title} project slide`}
+                      aria-current={i === activeIndex ? "true" : undefined}
                     >
                       {p.title}
                     </button>
@@ -452,14 +463,14 @@ export default function Projects() {
                   
                   {/* Content Bottom */}
                   <div className="p-7 space-y-5">
-                    <div className="flex items-center justify-between text-[9px] uppercase tracking-widest text-white/40 font-bold">
+                    <div className="flex items-center justify-between text-[9px] uppercase tracking-widest text-white/60 font-bold">
                       <span>{project.number} / {project.type}</span>
                       <span>{project.year}</span>
                     </div>
                     <h3 className="text-2xl font-medium tracking-tight text-white">
                       {project.title}
                     </h3>
-                    <p className="text-sm leading-relaxed text-white/50 line-clamp-3">
+                    <p className="text-sm leading-relaxed text-white/65 line-clamp-3">
                       {project.description}
                     </p>
                     <div className="flex flex-wrap gap-2 pt-1">

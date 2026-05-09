@@ -93,10 +93,10 @@ export default function ServicesPage() {
                 <TextLink href={service.path}>{service.name}</TextLink>
               </h2>
               <div>
-                <p className="text-base leading-relaxed text-white/68 md:text-lg">
+                <p className="text-base leading-relaxed text-white/72 md:text-lg">
                   {service.short}
                 </p>
-                <p className="mt-4 text-sm text-white/45">
+                <p className="mt-4 text-sm text-white/60">
                   Focus: {service.focus}
                 </p>
                 <p className="mt-5 text-sm">

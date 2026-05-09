@@ -16,8 +16,8 @@ export default function HeroNavbar() {
       <nav className="flex items-center justify-between gap-4" aria-label="Primary navigation">
         <Link
           href="/"
-          className="flex items-center gap-2 rounded-full bg-neutral-900/90 py-3 pl-4 pr-6 backdrop-blur"
-          aria-label="kunal.dev home"
+          className="flex min-h-11 items-center gap-2 rounded-full bg-neutral-900/90 py-3 pl-4 pr-6 backdrop-blur"
+          aria-label="Go to Kunal Builds homepage"
         >
           <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white text-xs font-medium text-black">
             k
@@ -32,7 +32,7 @@ export default function HeroNavbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-full px-5 py-2 text-sm text-neutral-300 transition-colors hover:text-white"
+              className="inline-flex min-h-11 items-center rounded-full px-5 py-2 text-sm text-neutral-300 transition-colors hover:text-white"
             >
               {link.label}
             </Link>
@@ -41,7 +41,8 @@ export default function HeroNavbar() {
 
         <Link
           href="/contact"
-          className="rounded-full bg-white px-6 py-3 text-sm font-normal text-black transition-colors hover:bg-neutral-200"
+          className="inline-flex min-h-11 items-center rounded-full bg-white px-6 py-3 text-sm font-normal text-black transition-colors hover:bg-neutral-200"
+          aria-label="Contact Kunal Builds"
         >
           let&apos;s talk
         </Link>

@@ -71,7 +71,7 @@ export default function HeroSection() {
               <p className="text-right text-4xl font-medium tracking-tight md:text-5xl">
                 +15
               </p>
-              <p className="mt-1 text-right text-xs text-white/70 md:text-sm">
+              <p className="mt-1 text-right text-xs text-white/75 md:text-sm">
                 projects built
               </p>
             </div>
@@ -84,7 +84,7 @@ export default function HeroSection() {
               <p className="text-4xl font-medium tracking-tight md:text-5xl">
                 2+
               </p>
-              <p className="mt-1 text-xs text-white/70 md:text-sm">
+              <p className="mt-1 text-xs text-white/75 md:text-sm">
                 years learning
               </p>
             </div>
@@ -99,7 +99,7 @@ export default function HeroSection() {
               <p className="text-right text-4xl font-medium tracking-tight md:text-5xl">
                 fast
               </p>
-              <p className="mt-1 text-right text-xs text-white/70 md:text-sm">
+              <p className="mt-1 text-right text-xs text-white/75 md:text-sm">
                 idea to launch
               </p>
             </div>

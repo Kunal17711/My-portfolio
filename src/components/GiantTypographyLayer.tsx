@@ -93,6 +93,7 @@ export default function GiantTypographyLayer() {
           data-rotate={word.rotate}
           data-opacity={word.opacity}
           className={`kinetic-word absolute whitespace-nowrap font-black uppercase text-[#6C5CFF] will-change-transform ${word.className}`}
+          aria-hidden="true"
         >
           <span className={`block select-none ${word.textClassName}`}>
             {word.text}

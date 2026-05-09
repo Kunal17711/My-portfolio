@@ -63,7 +63,7 @@ export default function Process() {
         
         {/* Top Editorial Header */}
         <motion.div {...revealAnimation} className="relative z-10">
-          <p className="text-sm text-white/50 tracking-[0.28em] uppercase">
+          <p className="text-sm text-white/60 tracking-[0.28em] uppercase">
             process
           </p>
           <h2 className="mt-8 text-5xl md:text-8xl font-medium tracking-[-0.07em] leading-[0.86] max-w-5xl text-white">
@@ -92,7 +92,7 @@ export default function Process() {
               className="relative object-cover opacity-90 transition-transform duration-1000 hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
-            <div className="absolute bottom-6 left-6 text-xs uppercase tracking-[0.24em] text-white/55">
+            <div className="absolute bottom-6 left-6 text-xs uppercase tracking-[0.24em] text-white/70">
               build process / 2024
             </div>
           </motion.div>
@@ -103,13 +103,13 @@ export default function Process() {
             transition={{ ...revealAnimation.transition, delay: 0.1 }}
             className="lg:col-span-7"
           >
-            <p className="text-sm text-white/45 tracking-[0.28em] uppercase">
+            <p className="text-sm text-white/60 tracking-[0.28em] uppercase">
               how the work moves
             </p>
             <h3 className="mt-8 text-2xl md:text-4xl leading-[1.18] tracking-[-0.05em] text-white">
               every project starts with clarity. before writing code, i understand what the product needs to do, who it is for, and what result it should create.
             </h3>
-            <p className="mt-10 max-w-2xl text-base md:text-lg leading-relaxed text-white/60">
+            <p className="mt-10 max-w-2xl text-base md:text-lg leading-relaxed text-white/70">
               then i turn that into a clean structure, a strong interface, and a working build that can be tested, improved, and launched. the goal is not to make something that only looks good in screenshots; the goal is to build something usable, responsive, fast, and ready for real people.
             </p>
           </motion.div>
@@ -125,7 +125,7 @@ export default function Process() {
               className="grid grid-cols-1 md:grid-cols-12 gap-6 border-b border-white/10 py-10 md:py-14"
             >
               <div className="md:col-span-3">
-                <span className="text-xs tracking-[0.28em] text-white/35 uppercase">
+                <span className="text-xs tracking-[0.28em] text-white/60 uppercase">
                   step {row.number}
                 </span>
               </div>
@@ -133,10 +133,10 @@ export default function Process() {
                 <h4 className="text-3xl md:text-5xl font-medium tracking-[-0.06em] leading-none text-white uppercase">
                   {row.title}
                 </h4>
-                <p className="mt-6 max-w-4xl text-base md:text-xl leading-relaxed text-white/65">
+                <p className="mt-6 max-w-4xl text-base md:text-xl leading-relaxed text-white/70">
                   {row.paragraph}
                 </p>
-                <div className="mt-6 text-xs md:text-sm uppercase tracking-[0.18em] text-white/35 font-medium">
+                <div className="mt-6 text-xs md:text-sm uppercase tracking-[0.18em] text-white/60 font-medium">
                   {row.deliverables}
                 </div>
               </div>
@@ -209,9 +209,9 @@ export default function Process() {
                     }
                   }
                 }}
-                aria-label="Previous"
+                aria-label="View previous process image"
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M19 12H5M12 19l-7-7 7-7"/>
                 </svg>
               </button>
@@ -228,9 +228,9 @@ export default function Process() {
                     }
                   }
                 }}
-                aria-label="Next"
+                aria-label="View next process image"
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
               </button>

@@ -45,10 +45,10 @@ export default function About() {
           <p className="text-sm text-white/60 tracking-[0.28em] uppercase">
             about
           </p>
-          <h2 className="mt-8 text-5xl md:text-8xl font-medium tracking-[-0.07em] leading-[0.86] max-w-6xl text-white">
+          <h2 className="mt-8 text-4xl md:text-8xl font-medium tracking-[-0.07em] leading-[0.95] max-w-6xl text-white">
             building with speed, taste, and real execution.
           </h2>
-          <p className="mt-8 max-w-5xl text-xl md:text-3xl leading-[1.25] tracking-[-0.035em] text-white/70">
+          <p className="mt-8 max-w-5xl text-xl md:text-3xl leading-[1.25] tracking-[-0.035em] text-white/70 break-words">
             i’m kunal, the developer behind Kunal Builds. Kunal Builds is a web and app developer identity from Haryana, India, focused on clean websites, landing pages, dashboards, mobile apps, UI/UX interfaces, and real digital products.
           </p>
         </motion.div>
@@ -90,10 +90,10 @@ export default function About() {
               <p className="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-white/65">
                 based in Haryana, India — i use tools like next.js, react, react native, expo, tailwind css, supabase, and modern ai-assisted workflows to turn ideas into clean digital products faster for businesses, creators, and startups.
               </p>
-              <div className="mt-8 flex flex-wrap gap-4">
+              <div className="mt-8 flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/about"
-                  className="inline-flex items-center justify-center rounded-full bg-white px-7 py-4 text-sm font-medium text-black transition-colors hover:bg-neutral-200"
+                  className="inline-flex items-center justify-center rounded-full bg-white px-7 py-4 text-sm font-bold text-black transition-colors hover:bg-neutral-200"
                 >
                   more about me
                 </Link>

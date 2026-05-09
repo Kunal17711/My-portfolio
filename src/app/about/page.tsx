@@ -13,10 +13,31 @@ const description =
   "Learn about Kunal Builds, a web and app developer from Haryana, India building websites, landing pages, dashboards, mobile apps, UI/UX interfaces, and digital products.";
 
 export const metadata: Metadata = createMetadata({
-  title: "About Kunal Builds | Web & App Developer",
-  description,
+  title: "About Kunal Builds | Web & App Developer from Haryana, India",
+  description:
+    "Learn about Kunal Builds, the developer identity of Kunal, a web and app developer from Haryana, India building premium websites, landing pages, dashboards, mobile apps, UI/UX interfaces, and real digital products.",
   path: "/about",
   type: "profile",
+  keywords: [
+    "Kunal Builds",
+    "Kunal Dev",
+    "about Kunal Builds",
+    "web developer Haryana",
+    "app developer India",
+    "React developer",
+    "Next.js developer",
+    "TypeScript developer",
+    "Tailwind CSS developer",
+    "React Native developer",
+    "Expo developer",
+    "Supabase developer",
+    "Firebase developer",
+    "portfolio developer India",
+    "freelance web developer India",
+    "UI UX developer",
+    "landing page developer",
+    "dashboard developer",
+  ],
 });
 
 const breadcrumbs = [
@@ -31,7 +52,8 @@ export default function AboutPage() {
     "@id": `${SITE_URL}/about#profilepage`,
     url: `${SITE_URL}/about`,
     name: "About Kunal Builds",
-    description,
+    description:
+      "Learn about Kunal Builds, the developer identity of Kunal, a web and app developer from Haryana, India building premium websites, landing pages, dashboards, mobile apps, UI/UX interfaces, and real digital products.",
     about: {
       "@id": `${SITE_URL}/#person`,
     },
@@ -59,81 +81,68 @@ export default function AboutPage() {
         intro={
           <p>
             Kunal Builds is the developer identity of Kunal, a web and app
-            developer from Haryana, India. He builds clean, fast, and premium
-            digital products including websites, landing pages, dashboards,
-            mobile apps, and UI/UX interfaces.
+            developer from Haryana, India. I design and build clean, fast, and
+            practical digital products across websites, landing pages,
+            dashboards, and mobile apps. My work focuses on premium UI, strong
+            product structure, responsive layouts, and real-world functionality.
           </p>
         }
       >
         <EditorialSection title="Who is Kunal Builds?">
           <p>
-            Kunal Builds is the public developer identity used by Kunal for his
-            web development, app development, UI/UX, and digital product work.
-            The identity keeps the portfolio focused on what he builds: clean
-            websites, usable interfaces, practical dashboards, mobile app
-            concepts, and product-style pages that can be shared, tested, and
-            launched.
+            Kunal Builds is the developer identity of Kunal, a web and app
+            developer from Haryana, India. I build clean, fast, and practical
+            digital products across websites, landing pages, dashboards, mobile
+            apps, and UI/UX interfaces. My work focuses on premium UI, strong
+            product structure, and real-world functionality using modern tools
+            like React, Next.js, TypeScript, Tailwind CSS, React Native, Expo,
+            Supabase, Firebase, and Vercel.
           </p>
           <p>
-            Kunal is based in Haryana, India and works with an India Remote
-            mindset. That means the work is built to be clear online: readable
-            pages, responsive layouts, useful project explanations, and links
-            that make it easy for someone to understand the work without needing
-            private personal details.
-          </p>
-          <p>
-            The portfolio is not trying to make inflated claims. It is meant to
-            show the real direction of the work: frontend development, product
-            interface thinking, fast execution, and a clean visual standard.
+            Based in Haryana, India, I operate with a digital-first mindset,
+            ensuring that every project is built to be clear, responsive, and
+            effective. The portfolio is not just about screenshots; it is about
+            real execution, practical product thinking, and a clean visual
+            standard that helps early-stage ideas turn into polished products.
           </p>
         </EditorialSection>
 
-        <EditorialSection title="What Kunal Builds">
+        <EditorialSection title="What I Build">
           <p>
-            Kunal builds websites, landing pages, dashboards, mobile apps,
-            UI/UX designs, MVPs, and product interfaces for creators, startups,
-            students, small businesses, and early product ideas. The work often
-            sits between design and development, so the final result is not only
-            a static mockup but a usable digital experience.
+            I specialize in turning startup ideas and business goals into
+            launch-ready digital experiences. This includes high-converting
+            landing pages, data-driven dashboards, mobile app prototypes, and
+            premium business websites. I sit between design and development,
+            meaning I care about both how a product looks and how it actually
+            works in the hands of users.
           </p>
           <p>
-            A typical project can include page structure, visual hierarchy,
-            frontend implementation, responsive behavior, backend connection
-            planning, deployment, and polishing. Kunal focuses on making pages
-            feel premium without losing clarity. The goal is a product that
-            looks clean, loads well, and helps people understand the offer or
-            workflow quickly.
-          </p>
-          <p>
-            Explore the full <TextLink href="/services">services</TextLink> page
-            to see how this work is separated into website development, landing
-            pages, dashboards, mobile apps, UI/UX design, startup MVPs, and
-            redesigns.
+            From visual hierarchy and frontend implementation to responsive
+            layouts and backend connections, I handle the full build cycle. My
+            goal is always to create a product that feels premium, loads fast,
+            and communicates value clearly.
           </p>
         </EditorialSection>
 
-        <EditorialSection title="Skills and Technologies">
+        <EditorialSection title="Stack & Tools">
           <p>
-            Kunal works with React, Next.js, TypeScript, Tailwind CSS, React
-            Native, Expo, Firebase, Supabase, UI/UX design, product design,
-            frontend development, deployment, and performance optimization. The
-            tools are chosen because they fit practical product work: fast
-            interfaces, reusable components, reliable responsive layouts, and
-            clean deployment paths.
+            My technical stack is built around efficiency and performance. I use
+            React and Next.js for web projects, Tailwind CSS for modern
+            responsive styling, and React Native with Expo for mobile app
+            development. When a project needs a backend, I integrate Firebase or
+            Supabase for authentication, real-time databases, and storage.
           </p>
           <p>
-            React and Next.js are used for modern websites and product pages.
-            Tailwind CSS helps keep spacing, typography, and responsive styling
-            consistent. React Native and Expo support mobile app interfaces and
-            MVPs. Firebase and Supabase are useful for authentication, storage,
-            databases, and backend flows when a project needs more than static
-            pages.
+            These tools allow me to build reusable, maintainable, and fast
+            interfaces that scale with your idea. Every build is optimized for
+            performance and follows clean coding standards to ensure a solid
+            foundation for future growth.
           </p>
         </EditorialSection>
 
-        <EditorialSection title="Projects">
+        <EditorialSection title="Project History">
           <p>
-            Projects connected with Kunal Builds include{" "}
+            Some of the work built under the Kunal Builds identity includes{" "}
             {projects.map((project, index) => (
               <span key={project.slug}>
                 <TextLink href={project.path}>{project.name}</TextLink>
@@ -142,22 +151,24 @@ export default function AboutPage() {
             ))}
           </p>
           <p>
-            These projects cover websites, product interfaces, mobile app
-            concepts, dashboards, fashion landing pages, AI interface concepts,
-            and creative digital interfaces. The{" "}
-            <TextLink href="/projects">projects page</TextLink> gives each build
-            more context, including the type of project, the technology stack,
-            and what the project shows about Kunal Builds.
+            These builds cover everything from safety apps and education
+            dashboards to creative web concepts and AI product interfaces. You
+            can explore the full{" "}
+            <TextLink href="/projects">project archive</TextLink> for more
+            details on the stack and design direction of each build.
           </p>
         </EditorialSection>
 
-        <EditorialSection title="Services">
+        <EditorialSection title="Services Offered">
           <p>
-            Kunal Builds offers practical development and interface services
-            across {services.map((service) => service.name).join(", ")}. Each
-            service page explains what is included, who the service is for,
-            relevant project examples, and how to contact Kunal Builds without
-            adding private personal information.
+            I offer specialized development and design services across{" "}
+            {services.map((service) => service.name).join(", ")}. Each service
+            is tailored to help creators, founders, and small teams launch
+            faster and with more polish.
+          </p>
+          <p>
+            Check out the <TextLink href="/services">services</TextLink> page
+            for a detailed breakdown of how I can help you with your next build.
           </p>
         </EditorialSection>
 
@@ -166,7 +177,9 @@ export default function AboutPage() {
             {socialProfiles.map((profile) => (
               <p key={profile.label}>
                 {profile.label}:{" "}
-                <TextLink href={profile.href}>{profile.href}</TextLink>
+                <span className="break-all">
+                  <TextLink href={profile.href}>{profile.href}</TextLink>
+                </span>
               </p>
             ))}
           </div>

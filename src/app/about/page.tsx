@@ -1,244 +1,195 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
+import SeoJsonLd from "@/components/SeoJsonLd";
+import {
+  CtaBand,
+  EditorialSection,
+  SeoPageShell,
+  TextLink,
+} from "@/components/SeoPageShell";
+import { breadcrumbSchema, createMetadata, SITE_URL } from "@/lib/seo";
+import { personSchema, projects, services, socialProfiles } from "@/lib/site-data";
 
-const SITE_URL = "https://heyitskunal.vercel.app";
-const ABOUT_URL = `${SITE_URL}/about`;
+const description =
+  "Learn about Kunal Builds, a web and app developer from Haryana, India building websites, landing pages, dashboards, mobile apps, UI/UX interfaces, and digital products.";
 
-export const metadata: Metadata = {
-  title: {
-    absolute: "About Kunal Builds | Web & App Developer",
-  },
-  description:
-    "Learn about Kunal Builds, a web and app developer from Haryana, India building websites, landing pages, dashboards, mobile apps, UI/UX interfaces, and digital products using React, Next.js, Tailwind CSS, React Native, Expo, Firebase, and Supabase.",
-  alternates: {
-    canonical: ABOUT_URL,
-  },
-  openGraph: {
-    type: "profile",
-    url: ABOUT_URL,
-    siteName: "Kunal Builds",
-    title: "About Kunal Builds | Web & App Developer",
-    description:
-      "Learn about Kunal Builds, a web and app developer from Haryana, India building websites, landing pages, dashboards, mobile apps, UI/UX interfaces, and digital products.",
-    images: [
-      {
-        url: "/og-image.svg",
-        width: 1200,
-        height: 630,
-        alt: "Kunal Builds - Web and App Developer",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "About Kunal Builds | Web & App Developer",
-    description:
-      "Learn about Kunal Builds, a web and app developer from Haryana, India building websites, landing pages, dashboards, mobile apps, UI/UX interfaces, and digital products.",
-    images: ["/og-image.svg"],
-  },
-};
+export const metadata: Metadata = createMetadata({
+  title: "About Kunal Builds | Web & App Developer",
+  description,
+  path: "/about",
+  type: "profile",
+});
 
-const personSchema = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "@id": "https://heyitskunal.vercel.app/#person",
-  name: "Kunal",
-  alternateName: ["Kunal Builds", "Kunal Dev", "Kunal Developer"],
-  url: "https://heyitskunal.vercel.app",
-  image: "https://heyitskunal.vercel.app/og-image.png",
-  jobTitle: "Web and App Developer",
-  description:
-    "Kunal Builds is a web and app developer from Haryana, India building websites, landing pages, dashboards, mobile apps, UI/UX interfaces, and digital products.",
-  email: "mailto:kkunaall10@gmail.com",
-  address: {
-    "@type": "PostalAddress",
-    addressRegion: "Haryana",
-    addressCountry: "IN",
-  },
-  knowsAbout: [
-    "Web Development",
-    "App Development",
-    "React",
-    "Next.js",
-    "TypeScript",
-    "Tailwind CSS",
-    "React Native",
-    "Expo",
-    "Firebase",
-    "Supabase",
-    "UI/UX Design",
-    "Landing Pages",
-    "Dashboards",
-    "Mobile Apps",
-  ],
-  sameAs: [
-    "https://instagram.com/iiblamekunal",
-    "https://www.linkedin.com/in/kunalldev",
-    "https://x.com/kunallbuilds",
-    "https://github.com/Kunal17711",
-    "https://www.fiverr.com/s/yv3DB6z",
-    "https://www.upwork.com/freelancers/~01bb3c4a0ecb285252?mp_source=share",
-  ],
-};
-
-const profilePageSchema = {
-  "@context": "https://schema.org",
-  "@type": "ProfilePage",
-  "@id": "https://heyitskunal.vercel.app/about#profilepage",
-  url: "https://heyitskunal.vercel.app/about",
-  name: "About Kunal Builds",
-  about: {
-    "@id": "https://heyitskunal.vercel.app/#person",
-  },
-  mainEntity: {
-    "@id": "https://heyitskunal.vercel.app/#person",
-  },
-};
-
-const socialProfiles = [
-  ["Instagram", "https://instagram.com/iiblamekunal"],
-  ["LinkedIn", "https://www.linkedin.com/in/kunalldev"],
-  ["X", "https://x.com/kunallbuilds"],
-  ["GitHub", "https://github.com/Kunal17711"],
-  ["Fiverr", "https://www.fiverr.com/s/yv3DB6z"],
-  [
-    "Upwork",
-    "https://www.upwork.com/freelancers/~01bb3c4a0ecb285252?mp_source=share",
-  ],
-] as const;
+const breadcrumbs = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+];
 
 export default function AboutPage() {
+  const pageSchema = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "@id": `${SITE_URL}/about#profilepage`,
+    url: `${SITE_URL}/about`,
+    name: "About Kunal Builds",
+    description,
+    about: {
+      "@id": `${SITE_URL}/#person`,
+    },
+    mainEntity: {
+      "@id": `${SITE_URL}/#person`,
+    },
+  };
+
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-white selection:text-black">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+    <>
+      <SeoJsonLd
+        data={[
+          { "@context": "https://schema.org", ...personSchema },
+          pageSchema,
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "About", path: "/about" },
+          ]),
+        ]}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageSchema) }}
-      />
-
-      <nav className="border-b border-white/10">
-        <div className="mx-auto flex h-20 max-w-[1120px] items-center px-6 md:px-10">
-          <Link
-            href="/"
-            className="inline-flex items-center text-xs font-medium uppercase tracking-[0.2em] text-white/50 transition-colors hover:text-white"
-          >
-            <ChevronLeft className="mr-2 h-4 w-4" aria-hidden="true" />
-            Back to home
-          </Link>
-        </div>
-      </nav>
-
-      <div className="mx-auto max-w-[1120px] px-6 py-20 md:px-10 md:py-28">
-        <header className="max-w-4xl">
-          <p className="text-sm uppercase tracking-[0.28em] text-white/45">
-            Haryana, India
-          </p>
-          <h1 className="mt-8 text-5xl font-medium leading-[0.9] tracking-[-0.06em] text-white md:text-7xl lg:text-8xl">
-            About Kunal Builds
-          </h1>
-          <p className="mt-8 text-lg leading-relaxed text-white/68 md:text-2xl md:leading-relaxed">
+      <SeoPageShell
+        breadcrumbs={breadcrumbs}
+        eyebrow="Haryana, India"
+        title="About Kunal Builds"
+        intro={
+          <p>
             Kunal Builds is the developer identity of Kunal, a web and app
             developer from Haryana, India. He builds clean, fast, and premium
             digital products including websites, landing pages, dashboards,
             mobile apps, and UI/UX interfaces.
           </p>
-        </header>
+        }
+      >
+        <EditorialSection title="Who is Kunal Builds?">
+          <p>
+            Kunal Builds is the public developer identity used by Kunal for his
+            web development, app development, UI/UX, and digital product work.
+            The identity keeps the portfolio focused on what he builds: clean
+            websites, usable interfaces, practical dashboards, mobile app
+            concepts, and product-style pages that can be shared, tested, and
+            launched.
+          </p>
+          <p>
+            Kunal is based in Haryana, India and works with an India Remote
+            mindset. That means the work is built to be clear online: readable
+            pages, responsive layouts, useful project explanations, and links
+            that make it easy for someone to understand the work without needing
+            private personal details.
+          </p>
+          <p>
+            The portfolio is not trying to make inflated claims. It is meant to
+            show the real direction of the work: frontend development, product
+            interface thinking, fast execution, and a clean visual standard.
+          </p>
+        </EditorialSection>
 
-        <div className="mt-20 space-y-16 border-t border-white/10 pt-14 md:mt-28 md:space-y-20 md:pt-20">
-          <section className="grid gap-6 border-b border-white/10 pb-14 md:grid-cols-[280px_1fr] md:gap-12 md:pb-20">
-            <h2 className="text-sm font-medium uppercase tracking-[0.24em] text-white/45">
-              Who is Kunal Builds?
-            </h2>
-            <p className="max-w-3xl text-base leading-relaxed text-white/68 md:text-xl md:leading-relaxed">
-              Kunal focuses on building real digital products with clean user
-              interfaces, practical functionality, and fast execution. His work
-              includes portfolio websites, startup landing pages, admin
-              dashboards, mobile app concepts, and full product interfaces.
-            </p>
-          </section>
+        <EditorialSection title="What Kunal Builds">
+          <p>
+            Kunal builds websites, landing pages, dashboards, mobile apps,
+            UI/UX designs, MVPs, and product interfaces for creators, startups,
+            students, small businesses, and early product ideas. The work often
+            sits between design and development, so the final result is not only
+            a static mockup but a usable digital experience.
+          </p>
+          <p>
+            A typical project can include page structure, visual hierarchy,
+            frontend implementation, responsive behavior, backend connection
+            planning, deployment, and polishing. Kunal focuses on making pages
+            feel premium without losing clarity. The goal is a product that
+            looks clean, loads well, and helps people understand the offer or
+            workflow quickly.
+          </p>
+          <p>
+            Explore the full <TextLink href="/services">services</TextLink> page
+            to see how this work is separated into website development, landing
+            pages, dashboards, mobile apps, UI/UX design, startup MVPs, and
+            redesigns.
+          </p>
+        </EditorialSection>
 
-          <section className="grid gap-6 border-b border-white/10 pb-14 md:grid-cols-[280px_1fr] md:gap-12 md:pb-20">
-            <h2 className="text-sm font-medium uppercase tracking-[0.24em] text-white/45">
-              What Kunal Builds
-            </h2>
-            <p className="max-w-3xl text-base leading-relaxed text-white/68 md:text-xl md:leading-relaxed">
-              Kunal builds websites, landing pages, dashboards, mobile apps,
-              UI/UX designs, MVPs, and product interfaces for creators,
-              startups, and businesses.
-            </p>
-          </section>
+        <EditorialSection title="Skills and Technologies">
+          <p>
+            Kunal works with React, Next.js, TypeScript, Tailwind CSS, React
+            Native, Expo, Firebase, Supabase, UI/UX design, product design,
+            frontend development, deployment, and performance optimization. The
+            tools are chosen because they fit practical product work: fast
+            interfaces, reusable components, reliable responsive layouts, and
+            clean deployment paths.
+          </p>
+          <p>
+            React and Next.js are used for modern websites and product pages.
+            Tailwind CSS helps keep spacing, typography, and responsive styling
+            consistent. React Native and Expo support mobile app interfaces and
+            MVPs. Firebase and Supabase are useful for authentication, storage,
+            databases, and backend flows when a project needs more than static
+            pages.
+          </p>
+        </EditorialSection>
 
-          <section className="grid gap-6 border-b border-white/10 pb-14 md:grid-cols-[280px_1fr] md:gap-12 md:pb-20">
-            <h2 className="text-sm font-medium uppercase tracking-[0.24em] text-white/45">
-              Skills and Technologies
-            </h2>
-            <p className="max-w-3xl text-base leading-relaxed text-white/68 md:text-xl md:leading-relaxed">
-              His work uses React, Next.js, TypeScript, Tailwind CSS, React
-              Native, Expo, Firebase, Supabase, UI/UX design, product design,
-              frontend development, deployment, and performance optimization.
-            </p>
-          </section>
+        <EditorialSection title="Projects">
+          <p>
+            Projects connected with Kunal Builds include{" "}
+            {projects.map((project, index) => (
+              <span key={project.slug}>
+                <TextLink href={project.path}>{project.name}</TextLink>
+                {index < projects.length - 1 ? ", " : "."}
+              </span>
+            ))}
+          </p>
+          <p>
+            These projects cover websites, product interfaces, mobile app
+            concepts, dashboards, fashion landing pages, AI interface concepts,
+            and creative digital interfaces. The{" "}
+            <TextLink href="/projects">projects page</TextLink> gives each build
+            more context, including the type of project, the technology stack,
+            and what the project shows about Kunal Builds.
+          </p>
+        </EditorialSection>
 
-          <section className="grid gap-6 border-b border-white/10 pb-14 md:grid-cols-[280px_1fr] md:gap-12 md:pb-20">
-            <h2 className="text-sm font-medium uppercase tracking-[0.24em] text-white/45">
-              Projects
-            </h2>
-            <p className="max-w-3xl text-base leading-relaxed text-white/68 md:text-xl md:leading-relaxed">
-              Projects connected with Kunal Builds include Vidora, Raksha Web,
-              Raksha App, EduSync, Fashion Website, Solvare, WishWrap, Paradox,
-              PicPrompt, and Beyond Reality.
-            </p>
-          </section>
+        <EditorialSection title="Services">
+          <p>
+            Kunal Builds offers practical development and interface services
+            across {services.map((service) => service.name).join(", ")}. Each
+            service page explains what is included, who the service is for,
+            relevant project examples, and how to contact Kunal Builds without
+            adding private personal information.
+          </p>
+        </EditorialSection>
 
-          <section className="grid gap-6 border-b border-white/10 pb-14 md:grid-cols-[280px_1fr] md:gap-12 md:pb-20">
-            <h2 className="text-sm font-medium uppercase tracking-[0.24em] text-white/45">
-              Social Profiles
-            </h2>
-            <div className="space-y-4">
-              {socialProfiles.map(([label, href]) => (
-                <p
-                  key={label}
-                  className="text-base leading-relaxed text-white/68 md:text-xl md:leading-relaxed"
-                >
-                  {label}:{" "}
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="break-words text-white underline decoration-white/25 underline-offset-4 transition-colors hover:text-white/70"
-                  >
-                    {href}
-                  </a>
-                </p>
-              ))}
-            </div>
-          </section>
-
-          <section className="grid gap-6 md:grid-cols-[280px_1fr] md:gap-12">
-            <h2 className="text-sm font-medium uppercase tracking-[0.24em] text-white/45">
-              Contact
-            </h2>
-            <div className="space-y-4">
-              <p className="text-base leading-relaxed text-white/68 md:text-xl md:leading-relaxed">
-                Email:{" "}
-                <a
-                  href="mailto:kkunaall10@gmail.com"
-                  className="text-white underline decoration-white/25 underline-offset-4 transition-colors hover:text-white/70"
-                >
-                  kkunaall10@gmail.com
-                </a>
+        <EditorialSection title="Social Profiles">
+          <div className="space-y-3">
+            {socialProfiles.map((profile) => (
+              <p key={profile.label}>
+                {profile.label}:{" "}
+                <TextLink href={profile.href}>{profile.href}</TextLink>
               </p>
-              <p className="text-base leading-relaxed text-white/55 md:text-xl md:leading-relaxed">
-                Location: Haryana, India
-              </p>
-            </div>
-          </section>
-        </div>
-      </div>
-    </main>
+            ))}
+          </div>
+        </EditorialSection>
+
+        <EditorialSection title="Contact">
+          <p>
+            Email:{" "}
+            <TextLink href="mailto:kkunaall10@gmail.com">
+              kkunaall10@gmail.com
+            </TextLink>
+          </p>
+          <p>Location: Haryana, India</p>
+          <p>
+            For a website, landing page, dashboard, mobile app, UI/UX interface,
+            redesign, or MVP, use the{" "}
+            <TextLink href="/contact">contact page</TextLink> to reach Kunal
+            Builds.
+          </p>
+        </EditorialSection>
+
+        <CtaBand text="Have a project idea, a page that needs redesigning, or an MVP that needs a clean first version? Contact Kunal Builds with the goal, pages, and features you have in mind." />
+      </SeoPageShell>
+    </>
   );
 }

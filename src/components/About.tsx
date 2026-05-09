@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const aboutRows = [
@@ -24,10 +26,13 @@ export default function About() {
     <section id="about" className="relative w-full overflow-hidden border-t border-white/10 bg-black text-white">
       {/* Background Ambient Depth */}
       <div className="pointer-events-none absolute inset-0 z-0">
-        <img 
-          src="/assets/about-bg.webp" 
-          alt="" 
-          className="h-full w-full object-cover opacity-[0.07] grayscale"
+        <Image
+          src="/assets/about-bg.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-[0.07] grayscale"
+          aria-hidden="true"
         />
       </div>
       <div className="pointer-events-none absolute top-20 right-0 h-[500px] w-[500px] rounded-full bg-white/[0.03] blur-[120px]" />
@@ -44,7 +49,7 @@ export default function About() {
             building with speed, taste, and real execution.
           </h2>
           <p className="mt-8 max-w-5xl text-xl md:text-3xl leading-[1.25] tracking-[-0.035em] text-white/70">
-            i’m kunal, a web and app developer focused on building clean digital products, from landing pages and websites to mobile apps, dashboards, and working backend flows.
+            i’m kunal, the developer behind Kunal Builds. Kunal Builds is a web and app developer identity from Haryana, India, focused on clean websites, landing pages, dashboards, mobile apps, UI/UX interfaces, and real digital products.
           </p>
         </motion.div>
 
@@ -57,11 +62,12 @@ export default function About() {
             className="lg:col-span-5 relative h-[520px] md:h-[720px] overflow-hidden rounded-[2rem] border border-white/10 bg-neutral-950"
           >
             <div className={`absolute inset-0 w-full h-full ${placeholderGradient}`} />
-            <img 
-              src="/assets/about-character.webp" 
-              alt="Kunal"
-              className="relative h-full w-full object-cover opacity-90 object-center transition-transform duration-1000 hover:scale-105"
-              onError={(e) => (e.currentTarget.style.display = 'none')}
+            <Image
+              src="/assets/about-character.webp"
+              alt="Kunal Builds web and app developer portrait"
+              fill
+              sizes="(max-width: 1024px) 100vw, 520px"
+              className="relative object-cover opacity-90 object-center transition-transform duration-1000 hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
             <div className="absolute bottom-6 left-6 text-xs uppercase tracking-[0.24em] text-white/55">
@@ -84,6 +90,20 @@ export default function About() {
               <p className="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-white/50">
                 based in Haryana, India — i use tools like next.js, react, react native, expo, tailwind css, supabase, and modern ai-assisted workflows to turn ideas into clean digital products faster for businesses, creators, and startups.
               </p>
+              <div className="mt-8 flex flex-wrap gap-4">
+                <Link
+                  href="/about"
+                  className="inline-flex items-center justify-center rounded-full bg-white px-7 py-4 text-sm font-medium text-black transition-colors hover:bg-neutral-200"
+                >
+                  more about me
+                </Link>
+                <Link
+                  href="/services"
+                  className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-7 py-4 text-sm font-medium text-white transition-colors hover:bg-white/[0.08]"
+                >
+                  view services
+                </Link>
+              </div>
             </motion.div>
 
             {/* Inline Detail Rows */}
@@ -117,11 +137,12 @@ export default function About() {
           className="mt-24 md:mt-40 relative h-[360px] md:h-[560px] overflow-hidden rounded-[2rem] border border-white/10 bg-neutral-950"
         >
           <div className={`absolute inset-0 w-full h-full ${placeholderGradient}`} />
-          <img 
-            src="/assets/about-workflow.webp" 
-            alt="Workflow"
-            className="relative h-full w-full object-cover opacity-85 transition-transform duration-1000 hover:scale-105"
-            onError={(e) => (e.currentTarget.style.display = 'none')}
+          <Image
+            src="/assets/about-workflow.webp"
+            alt="Kunal Builds web and app development workflow"
+            fill
+            sizes="(max-width: 1440px) 100vw, 1440px"
+            className="relative object-cover opacity-85 transition-transform duration-1000 hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
           <div className="absolute bottom-6 left-6 text-xs uppercase tracking-[0.24em] text-white/55">

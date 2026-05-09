@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef, useCallback } from "react";
 
@@ -13,6 +14,8 @@ type Project = {
   tags: string[];
   image: string;
   objectPosition: string;
+  slug: string;
+  imageAlt: string;
 };
 
 const projects: Project[] = [
@@ -26,6 +29,8 @@ const projects: Project[] = [
     tags: ["next.js", "tailwind", "cloudinary"],
     image: "/assets/vidora.webp",
     objectPosition: "object-top",
+    slug: "vidora",
+    imageAlt: "Vidora website landing page project by Kunal Builds",
   },
   {
     number: "02",
@@ -37,6 +42,8 @@ const projects: Project[] = [
     tags: ["react", "supabase", "product"],
     image: "/assets/raksha-web.webp",
     objectPosition: "object-top",
+    slug: "raksha-web",
+    imageAlt: "Raksha Web product website project by Kunal Builds",
   },
   {
     number: "03",
@@ -48,6 +55,8 @@ const projects: Project[] = [
     tags: ["react native", "expo", "maps"],
     image: "/assets/raksha-app.webp",
     objectPosition: "object-center",
+    slug: "raksha-app",
+    imageAlt: "Raksha mobile app interface project by Kunal Builds",
   },
   {
     number: "04",
@@ -59,6 +68,8 @@ const projects: Project[] = [
     tags: ["dashboard", "education", "react"],
     image: "/assets/edusync.webp",
     objectPosition: "object-top",
+    slug: "edusync",
+    imageAlt: "EduSync education dashboard project by Kunal Builds",
   },
   {
     number: "05",
@@ -70,6 +81,8 @@ const projects: Project[] = [
     tags: ["next.js", "tailwind", "ui/ux"],
     image: "/assets/fashion-website.webp",
     objectPosition: "object-top",
+    slug: "fashion-website",
+    imageAlt: "Fashion website landing page project by Kunal Builds",
   },
   {
     number: "06",
@@ -81,6 +94,8 @@ const projects: Project[] = [
     tags: ["web design", "responsive", "ui"],
     image: "/assets/solvare.webp",
     objectPosition: "object-center",
+    slug: "solvare",
+    imageAlt: "Solvare web interface project by Kunal Builds",
   },
   {
     number: "07",
@@ -92,6 +107,8 @@ const projects: Project[] = [
     tags: ["web app", "ui", "frontend"],
     image: "/assets/wishwrap.webp",
     objectPosition: "object-center",
+    slug: "wishwrap",
+    imageAlt: "WishWrap product interface project by Kunal Builds",
   },
   {
     number: "08",
@@ -103,6 +120,8 @@ const projects: Project[] = [
     tags: ["creative", "frontend", "design"],
     image: "/assets/paradox.webp",
     objectPosition: "object-center",
+    slug: "paradox",
+    imageAlt: "Paradox creative web interface project by Kunal Builds",
   },
   {
     number: "09",
@@ -114,6 +133,8 @@ const projects: Project[] = [
     tags: ["ai", "product", "ui"],
     image: "/assets/picprompt.webp",
     objectPosition: "object-top",
+    slug: "picprompt",
+    imageAlt: "PicPrompt AI product interface project by Kunal Builds",
   },
   {
     number: "10",
@@ -125,6 +146,8 @@ const projects: Project[] = [
     tags: ["experimental", "web", "visual"],
     image: "/assets/beyond-reality.webp",
     objectPosition: "object-center",
+    slug: "beyond-reality",
+    imageAlt: "Beyond Reality creative digital interface project by Kunal Builds",
   },
 ];
 
@@ -156,7 +179,7 @@ function ProjectImage({
   return (
     <Image
       src={project.image}
-      alt={`${project.title} screenshot`}
+      alt={project.imageAlt}
       fill
       sizes="(max-width: 1024px) 100vw, 1200px"
       className={`object-cover ${project.objectPosition} ${className}`}
@@ -271,13 +294,13 @@ export default function Projects() {
                 ))}
               </div>
 
-              <a
+              <Link
                 href="/projects"
                 className="group inline-flex items-center gap-3 text-sm font-medium text-white/80 transition-all hover:text-white"
               >
                 view all projects 
                 <span className="h-px w-8 bg-white/20 transition-all group-hover:w-12 group-hover:bg-white" />
-              </a>
+              </Link>
             </motion.div>
           </div>
 
@@ -334,10 +357,13 @@ export default function Projects() {
                             ))}
                           </div>
                           <div className="pt-4">
-                            <button className="group relative overflow-hidden rounded-full bg-white px-8 py-4 text-sm font-bold text-black transition-all hover:pr-12">
+                            <Link
+                              href={`/projects/${activeProject.slug}`}
+                              className="group relative inline-flex overflow-hidden rounded-full bg-white px-8 py-4 text-sm font-bold text-black transition-all hover:pr-12"
+                            >
                               <span className="relative z-10">view case study</span>
-                              <span className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 transition-all group-hover:opacity-100">→</span>
-                            </button>
+                              <span className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 transition-all group-hover:opacity-100" aria-hidden="true">→</span>
+                            </Link>
                           </div>
                         </div>
                       </div>
@@ -441,9 +467,12 @@ export default function Projects() {
                         <ProjectTag key={tag}>{tag}</ProjectTag>
                       ))}
                     </div>
-                    <button className="w-full rounded-full bg-white py-3.5 text-sm font-bold text-black transition-colors hover:bg-neutral-200">
+                    <Link
+                      href={`/projects/${project.slug}`}
+                      className="block w-full rounded-full bg-white py-3.5 text-center text-sm font-bold text-black transition-colors hover:bg-neutral-200"
+                    >
                       view case study
-                    </button>
+                    </Link>
                   </div>
                 </article>
               ))}

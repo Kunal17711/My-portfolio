@@ -1,211 +1,133 @@
-"use client";
-
-import React from "react";
-import { motion } from "framer-motion";
+import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
-import CustomCursor from "@/components/CustomCursor";
+import SeoJsonLd from "@/components/SeoJsonLd";
+import {
+  CtaBand,
+  EditorialSection,
+  SeoPageShell,
+  TextLink,
+} from "@/components/SeoPageShell";
+import { absoluteUrl, breadcrumbSchema, createMetadata, webPageSchema } from "@/lib/seo";
+import { projects } from "@/lib/site-data";
 
-const projects = [
-  {
-    name: "Vidora",
-    description: "High-end video processing platform.",
-    tech: ["Next.js", "Cloudinary", "Tailwind"],
-    image: "/assets/vidora.webp",
-    liveUrl: "https://vidora.co.in/"
-  },
-  {
-    name: "Raksha Web",
-    description: "Emergency response dashboard.",
-    tech: ["React", "Supabase", "Node.js"],
-    image: "/assets/raksha-web.webp",
-    liveUrl: "https://get-raksha.web.app/"
-  },
-  {
-    name: "Raksha App",
-    description: "Personal safety mobile application.",
-    tech: ["React Native", "Firebase", "Maps"],
-    image: "/assets/raksha-app.webp",
-    liveUrl: "https://get-raksha-app.web.app/"
-  },
-  {
-    name: "Solvare",
-    description: "AI-powered problem solving tool.",
-    tech: ["Python", "OpenAI", "Next.js"],
-    image: "/assets/solvare.webp",
-    liveUrl: "https://solvare.art/"
-  },
-  {
-    name: "WishWrap",
-    description: "Digital gifting and wishlist platform.",
-    tech: ["Next.js", "Stripe", "Prisma"],
-    image: "/assets/wishwrap.webp",
-    liveUrl: "https://wishwrap.in/"
-  },
-  {
-    name: "ClashZone Arena",
-    description: "Competitive gaming platform for enthusiasts.",
-    tech: ["React", "Firebase", "WebSockets"],
-    image: "/assets/vidora.webp", // Fallback image
-    liveUrl: "https://clashzone-arena.web.app/"
-  },
-  {
-    name: "EduSync",
-    description: "Collaborative learning management system.",
-    tech: ["WebSockets", "React", "Express"],
-    image: "/assets/edusync.webp",
-    liveUrl: "https://edusync-frontend-beta.vercel.app/"
-  },
-  {
-    name: "PicPrompt",
-    description: "AI image generation prompt builder.",
-    tech: ["React", "Stable Diffusion", "Vercel"],
-    image: "/assets/picprompt.webp",
-    liveUrl: "https://www.picprompt.shop/"
-  },
-  {
-    name: "Paradox Verse",
-    description: "Immersive metaverse exploration site.",
-    tech: ["Three.js", "React", "GSAP"],
-    image: "/assets/paradox.webp",
-    liveUrl: "https://paradox-verse.web.app/"
-  },
-  {
-    name: "Beyond Reality",
-    description: "Future of web exploration and interaction.",
-    tech: ["Next.js", "Three.js", "GSAP"],
-    image: "/assets/beyond-reality.webp",
-    liveUrl: "http://beyond-reality-six.vercel.app/"
-  },
-  {
-    name: "Fashion Landing",
-    description: "Premium luxury fashion experience.",
-    tech: ["Next.js", "Tailwind", "Framer"],
-    image: "/assets/fashion-website.webp",
-    liveUrl: "https://fashion-landing-page-kappa-ten.vercel.app/"
-  }
-];
+const description =
+  "Explore projects by Kunal Builds including websites, landing pages, dashboards, mobile apps, UI/UX interfaces, and digital products built with React, Next.js, Tailwind CSS, React Native, Expo, Firebase, and Supabase.";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const ProjectCard = ({ project, index }: { project: any, index: number }) => {
+export const metadata: Metadata = createMetadata({
+  title: "Projects by Kunal Builds | Websites, Apps & Dashboards",
+  description,
+  path: "/projects",
+});
+
+export default function ProjectsPage() {
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Projects by Kunal Builds",
+    itemListElement: projects.map((project, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: project.name,
+      url: absoluteUrl(project.path),
+    })),
+  };
+
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.7, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative flex flex-col space-y-6"
-    >
-      <a 
-        href={project.liveUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block relative aspect-video w-full overflow-hidden rounded-2xl bg-neutral-900 border border-white/10"
+    <>
+      <SeoJsonLd
+        data={[
+          webPageSchema({
+            path: "/projects",
+            name: "Projects by Kunal Builds",
+            description,
+            pageType: "CollectionPage",
+          }),
+          itemListSchema,
+          breadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Projects", path: "/projects" },
+          ]),
+        ]}
+      />
+      <SeoPageShell
+        breadcrumbs={[
+          { name: "Home", href: "/" },
+          { name: "Projects", href: "/projects" },
+        ]}
+        eyebrow="Project archive"
+        title="Projects by Kunal Builds"
+        intro={
+          <p>
+            Explore product-style builds by Kunal Builds across websites,
+            mobile apps, dashboards, landing pages, UI/UX interfaces, and
+            digital products. Each project page explains what was built, the
+            stack used, the design direction, and what the project shows.
+          </p>
+        }
       >
-        <Image 
-          src={project.image} 
-          alt={project.name} 
-          fill 
-          className="object-cover transition-transform duration-1000 group-hover:scale-105 opacity-80 group-hover:opacity-100"
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.style.display = 'none';
-          }}
-        />
-        <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
-        <div className="absolute top-4 right-4 text-white/50 group-hover:text-white transition-colors">
-          <span className="text-xl">↗</span>
-        </div>
-      </a>
-      
-      <div className="flex flex-col space-y-3">
-        <div className="flex items-center justify-between">
-          <h3 className="text-2xl font-medium tracking-tight text-white group-hover:text-white/70 transition-colors">
-            {project.name}
-          </h3>
-          <div className="flex gap-2">
-            {project.tech.slice(0, 2).map((t: string) => (
-              <span key={t} className="text-[10px] font-medium text-white/30 uppercase tracking-widest">
-                {t}
-              </span>
-            ))}
-          </div>
-        </div>
-        <p className="text-white/50 text-sm leading-relaxed max-w-sm">
-          {project.description}
-        </p>
-      </div>
-    </motion.div>
-  );
-};
-
-export default function AllProjectsPage() {
-  return (
-    <main className="min-h-screen bg-black text-white selection:bg-white selection:text-black">
-      <CustomCursor />
-      
-      {/* Background Depth Blurs */}
-      <div className="fixed top-0 left-0 h-[500px] w-[500px] rounded-full bg-white/[0.03] blur-3xl pointer-events-none" />
-      <div className="fixed bottom-0 right-0 h-[600px] w-[600px] rounded-full bg-white/[0.02] blur-3xl pointer-events-none" />
-
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 mix-blend-difference">
-        <div className="max-w-[1440px] mx-auto px-6 md:px-10 h-24 flex items-center">
-          <Link href="/" className="flex items-center text-white/50 hover:text-white transition-colors text-xs font-medium uppercase tracking-[0.2em]">
-            <ChevronLeft className="w-4 h-4 mr-2" />
-            back to home
-          </Link>
-        </div>
-      </nav>
-
-      {/* Content */}
-      <div className="max-w-[1440px] mx-auto px-6 md:px-10 pt-40 pb-32 relative z-10">
-        
-        {/* Header Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 32 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-24 lg:mb-32"
-        >
-          <span className="text-sm text-white/50 tracking-[0.28em] uppercase">
-            archive
-          </span>
-          <h1 className="mt-8 text-6xl md:text-8xl lg:text-9xl font-medium tracking-[-0.08em] leading-[0.85] text-white">
-            all projects.
-          </h1>
-          <p className="mt-8 max-w-3xl text-xl md:text-3xl leading-[1.25] tracking-[-0.035em] text-white/65">
-            a complete list of everything i’ve built, from startup mvps and dashboards to premium websites and mobile apps.
+        <EditorialSection title="Project list">
+          <p>
+            This project archive is built for people who want to understand the
+            actual work behind Kunal Builds, not just scroll screenshots. The
+            list includes web interfaces, mobile app concepts, dashboard-style
+            products, creative interfaces, and landing pages built with tools
+            such as React, Next.js, Tailwind CSS, React Native, Expo, Firebase,
+            and Supabase.
           </p>
-        </motion.div>
+          <p>
+            If you are comparing project types before starting your own build,
+            also see the <TextLink href="/services">services page</TextLink> or
+            contact Kunal Builds through the{" "}
+            <TextLink href="/contact">contact page</TextLink>.
+          </p>
+        </EditorialSection>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16 lg:gap-y-24">
-          {projects.map((project, idx) => (
-            <ProjectCard key={project.name} project={project} index={idx} />
+        <section className="divide-y divide-white/10 border-y border-white/10">
+          {projects.map((project) => (
+            <article
+              key={project.slug}
+              className="grid gap-8 py-12 md:grid-cols-[280px_1fr] md:gap-12 md:py-14"
+            >
+              <TextLink href={project.path}>
+                <span className="text-2xl font-medium tracking-[-0.04em] md:text-4xl">
+                  {project.name}
+                </span>
+              </TextLink>
+              <div className="grid gap-6 lg:grid-cols-[240px_1fr]">
+                <TextLink href={project.path}>
+                  <span className="relative block aspect-[16/10] overflow-hidden rounded-[1rem] border border-white/10 bg-neutral-950">
+                    <Image
+                      src={project.image}
+                      alt={project.imageAlt}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 240px"
+                      className="object-cover"
+                    />
+                  </span>
+                </TextLink>
+                <div>
+                  <p className="text-sm uppercase tracking-[0.2em] text-white/42">
+                    {project.type}
+                  </p>
+                  <p className="mt-4 text-base leading-relaxed text-white/68 md:text-lg">
+                    {project.description}
+                  </p>
+                  <p className="mt-4 text-sm text-white/45">
+                    Tech stack: {project.tech.join(", ")}
+                  </p>
+                  <p className="mt-5 text-sm">
+                    <TextLink href={project.path}>
+                      Read the {project.name} case study
+                    </TextLink>
+                  </p>
+                </div>
+              </div>
+            </article>
           ))}
-        </div>
+        </section>
 
-        {/* Footer Link */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="mt-40 border-t border-white/10 pt-10 flex flex-col md:flex-row justify-between items-center gap-6"
-        >
-          <p className="text-sm text-white/40 italic">
-            curated with taste and real execution.
-          </p>
-          <Link 
-            href="#contact" 
-            className="text-sm text-white/50 hover:text-white transition-colors uppercase tracking-widest"
-          >
-            start a project ↗
-          </Link>
-        </motion.div>
-
-      </div>
-    </main>
+        <CtaBand text="If one of these project directions is close to what you want to build, share your idea with Kunal Builds and include the pages, screens, or features you need." />
+      </SeoPageShell>
+    </>
   );
 }

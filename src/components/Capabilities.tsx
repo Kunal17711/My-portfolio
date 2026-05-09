@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -147,7 +147,7 @@ export default function Capabilities() {
             </div>
 
             <a
-              href="#contact"
+              href="/contact"
               className="rounded-full bg-white px-5 py-2 text-[10px] md:text-xs font-bold text-black hover:bg-neutral-200 transition-all active:scale-95 whitespace-nowrap mb-1"
             >
               start a project

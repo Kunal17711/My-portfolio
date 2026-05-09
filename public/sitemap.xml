@@ -2,10 +2,90 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://heyitskunal.vercel.app/</loc>
-    <lastmod>2026-05-08</lastmod>
+    <lastmod>2026-05-09</lastmod>
   </url>
   <url>
     <loc>https://heyitskunal.vercel.app/about</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://heyitskunal.vercel.app/projects</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://heyitskunal.vercel.app/projects/vidora</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://heyitskunal.vercel.app/projects/raksha-web</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://heyitskunal.vercel.app/projects/raksha-app</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://heyitskunal.vercel.app/projects/edusync</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://heyitskunal.vercel.app/projects/fashion-website</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://heyitskunal.vercel.app/projects/solvare</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://heyitskunal.vercel.app/projects/wishwrap</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://heyitskunal.vercel.app/projects/paradox</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://heyitskunal.vercel.app/projects/picprompt</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://heyitskunal.vercel.app/projects/beyond-reality</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://heyitskunal.vercel.app/services</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://heyitskunal.vercel.app/services/website-development</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://heyitskunal.vercel.app/services/landing-page-development</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://heyitskunal.vercel.app/services/dashboard-development</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://heyitskunal.vercel.app/services/mobile-app-development</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://heyitskunal.vercel.app/services/ui-ux-design</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://heyitskunal.vercel.app/services/startup-mvp-development</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://heyitskunal.vercel.app/services/website-redesign</loc>
+    <lastmod>2026-05-09</lastmod>
+  </url>
+  <url>
+    <loc>https://heyitskunal.vercel.app/contact</loc>
     <lastmod>2026-05-09</lastmod>
   </url>
 </urlset>

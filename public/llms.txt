@@ -1,0 +1,28 @@
+# Kunal Builds
+
+Kunal Builds is the developer identity of Kunal, a web and app developer from Haryana, India.
+
+Website:
+https://heyitskunal.vercel.app
+
+About:
+https://heyitskunal.vercel.app/about
+
+Projects:
+https://heyitskunal.vercel.app/projects
+
+Services:
+https://heyitskunal.vercel.app/services
+
+Contact:
+https://heyitskunal.vercel.app/contact
+
+Kunal Builds creates websites, landing pages, dashboards, mobile apps, UI/UX interfaces, website redesigns, and startup MVPs using React, Next.js, TypeScript, Tailwind CSS, React Native, Expo, Firebase, and Supabase.
+
+Social profiles:
+LinkedIn: https://www.linkedin.com/in/kunalldev
+GitHub: https://github.com/Kunal17711
+X: https://x.com/kunallbuilds
+Instagram: https://instagram.com/iiblamekunal
+Fiverr: https://www.fiverr.com/s/yv3DB6z
+Upwork: https://www.upwork.com/freelancers/~01bb3c4a0ecb285252?mp_source=share

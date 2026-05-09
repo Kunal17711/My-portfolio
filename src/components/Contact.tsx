@@ -35,9 +35,9 @@ const Contact = () => {
       
       {/* Big Faded Background Typography */}
       <div className="absolute bottom-[-0.25em] left-1/2 -translate-x-1/2 w-full flex justify-center pointer-events-none select-none overflow-hidden z-0">
-        <h1 className="text-[32vw] font-medium tracking-[-0.1em] leading-none text-white/[0.03]">
+        <div className="text-[32vw] font-medium tracking-[-0.1em] leading-none text-white/[0.03]">
           Kunal
-        </h1>
+        </div>
       </div>
 
       <div className="max-w-[1440px] mx-auto px-6 md:px-10 py-24 md:py-32 min-h-screen flex flex-col justify-between relative z-10">
@@ -140,7 +140,7 @@ const Contact = () => {
               text me / email me
             </a>
             <Link 
-              href="#projects"
+              href="/projects"
               className="inline-flex w-fit items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-7 py-4 text-sm font-medium text-white hover:bg-white/[0.08] transition-colors"
             >
               view projects
@@ -175,9 +175,12 @@ const Contact = () => {
 
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             {[
-              { label: "home", href: "#home" },
-              { label: "projects", href: "#projects" },
-              { label: "contact", href: "#contact" },
+              { label: "home", href: "/" },
+              { label: "about", href: "/about" },
+              { label: "projects", href: "/projects" },
+              { label: "services", href: "/services" },
+              { label: "contact", href: "/contact" },
+              { label: "linkedin", href: "https://www.linkedin.com/in/kunalldev", external: true },
               { label: "github", href: "https://github.com/Kunal17711", external: true },
               { label: "x", href: "https://x.com/kunallbuilds", external: true },
             ].map((link) => (

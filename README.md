@@ -1,62 +1,64 @@
-# Kunal's Portfolio
+# Kunal Builds Portfolio
 
-> Personal portfolio of **Kunal** — 15-year-old web & app developer from India.
+Production portfolio website for Kunal Builds, the developer identity of Kunal, a web and app developer from Haryana, India.
 
-🌐 **Live:** [heyitskunal.vercel.app](https://heyitskunal.vercel.app)
+Live URL: https://heyitskunal.vercel.app
 
----
+## Tech Stack
 
-## ⚠️ Copyright Notice
+- Next.js
+- TypeScript
+- Tailwind CSS
+- React
+- Framer Motion
+- GSAP
+- Vercel
 
-**© 2024 Kunal. All Rights Reserved.**
+## SEO Features
 
-This repository is **publicly visible for showcase purposes only.**
+- Central metadata helper in `src/lib/seo.ts`
+- Unique titles, descriptions, canonical URLs, Open Graph, and Twitter cards
+- Homepage entity signals for Kunal Builds
+- About entity page
+- Project index and project case-study pages
+- Services index and service detail pages
+- Contact page with safe public contact details
+- Internal linking between homepage, about, projects, services, and contact
+- Descriptive alt text for meaningful project imagery
 
-❌ You may **NOT** copy, clone, fork, or reuse this code.  
-❌ You may **NOT** use this design or code in your own projects.  
-❌ Derivative works are strictly prohibited.  
+## Structured Data
 
-Unauthorized use is a **violation of copyright law.**  
-For any permission requests: **kkunaall10@gmail.com**
+The site includes JSON-LD for:
 
----
+- Person
+- WebSite
+- ProfessionalService
+- Brand
+- SiteNavigationElement
+- WebPage
+- ProfilePage
+- CollectionPage
+- ItemList
+- CreativeWork
+- SoftwareApplication
+- Service
+- FAQPage
+- BreadcrumbList
+- ContactPage
 
-## 🛠️ Built With
+## Technical SEO Files
 
-- **Next.js 16** — React framework
-- **Tailwind CSS v4** — Styling
-- **Framer Motion** — Animations
-- **Turbopack** — Build tool
+- `public/sitemap.xml`
+- `public/robots.txt`
+- `public/llms.txt`
+- `public/humans.txt`
+- `public/google3d850b3790bc6e81.html`
+- `public/og-image.png`
 
----
+## Deployment Note
 
-## 🚀 Deployment & SEO
+The site is deployed on Vercel. After publishing SEO route updates, resubmit the sitemap in Google Search Console and inspect the main canonical URLs.
 
-- **Live URL:** [heyitskunal.vercel.app](https://heyitskunal.vercel.app)
-- **Production Ready:** Includes full SEO optimization (Metadata, Open Graph, Twitter Cards).
-- **Technical SEO:** robots.txt, sitemap.xml, and JSON-LD structured data.
-- **Security:** Secure HTTP headers and external link safety.
+## Copyright
 
----
-
-## 📂 Sections
-
-| Section | Description |
-|---|---|
-| Hero | Animated intro with character |
-| About | Who I am, stats, skills cards |
-| Projects | 11+ real projects with live links |
-| Skills | Capabilities with 3D hover effects |
-| Contact | Reach me via email / social |
-
----
-
-## 📬 Contact
-
-- **Email:** kkunaall10@gmail.com  
-- **Instagram:** [@iiblamekunal](https://instagram.com/iiblamekunal)  
-- **LinkedIn:** [kunalldev](https://www.linkedin.com/in/kunalldev)
-
----
-
-*Built from scratch. Every pixel, every line of code — mine.*
+Copyright Kunal Builds. This repository is publicly visible for showcase purposes only. Do not copy, clone, fork, reuse, or redistribute the design or source code without permission.

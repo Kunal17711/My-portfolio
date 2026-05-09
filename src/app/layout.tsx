@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Readex_Pro } from "next/font/google";
 import "./globals.css";
-import SeoJsonLd from "@/components/SeoJsonLd";
+import { DEFAULT_OG_IMAGE, SITE_DESCRIPTION, SITE_TITLE, SITE_URL } from "@/lib/seo";
 
 const readexPro = Readex_Pro({
   subsets: ["latin"],
@@ -13,16 +13,13 @@ export const viewport = {
   themeColor: "#000000",
 };
 
-const SITE_URL = "https://heyitskunal.vercel.app";
-
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Kunal Builds | Web & App Developer",
+    default: SITE_TITLE,
     template: "%s | Kunal Builds",
   },
-  description:
-    "Kunal Builds is a web and app developer portfolio showcasing premium websites, landing pages, dashboards, mobile apps, UI/UX work, and real digital products built with React, Next.js, Tailwind, React Native, Expo, and Supabase.",
+  description: SITE_DESCRIPTION,
   keywords: [
     "Kunal Builds",
     "kunal.dev",
@@ -55,12 +52,11 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: SITE_URL,
     siteName: "Kunal Builds",
-    title: "Kunal Builds | Web & App Developer",
-    description:
-      "Web & app developer portfolio showcasing premium websites, landing pages, dashboards, mobile apps, and real digital products.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: [
       {
-        url: "/og-image.svg",
+        url: DEFAULT_OG_IMAGE,
         width: 1200,
         height: 630,
         alt: "Kunal Builds — Web and App Developer Portfolio",
@@ -69,11 +65,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kunal Builds | Web & App Developer",
-    description:
-      "Web & app developer portfolio showcasing premium websites, landing pages, dashboards, mobile apps, and real digital products.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     creator: "@kunallbuilds",
-    images: ["/og-image.svg"],
+    images: [DEFAULT_OG_IMAGE],
   },
   robots: {
     index: true,
@@ -86,11 +81,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
-  },
 };
 
 export default function RootLayout({
@@ -101,7 +91,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={readexPro.className}>
-        <SeoJsonLd />
         {children}
       </body>
     </html>

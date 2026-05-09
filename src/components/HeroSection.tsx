@@ -39,9 +39,6 @@ export default function HeroSection() {
       <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-black" />
 
       <div className="relative z-10 h-full w-full">
-        {/* Visually Hidden H1 for SEO */}
-        <h1 className="sr-only">Kunal Builds — Web & App Developer Portfolio</h1>
-        
         {heroWords.map((word) => (
           <div
             key={word.text}
@@ -52,10 +49,20 @@ export default function HeroSection() {
           </div>
         ))}
 
-        <p className="absolute left-6 top-[46%] max-w-[260px] text-[15px] leading-snug text-white/90 md:left-10">
-          i build websites, landing pages, dashboards, and mobile apps that look
-          premium, load fast, and work in the real world.
-        </p>
+        <div className="absolute left-6 top-[43%] max-w-[330px] text-white md:left-10">
+          <h1 className="text-2xl font-medium leading-none tracking-[-0.04em] md:text-3xl">
+            Kunal Builds
+          </h1>
+          <p className="mt-3 text-[15px] leading-snug text-white/90">
+            Kunal Builds is a web and app developer from Haryana, India. He
+            builds websites, landing pages, dashboards, mobile apps, UI/UX
+            interfaces, and real digital products.
+          </p>
+          <p className="mt-3 text-xs leading-relaxed text-white/70">
+            Technologies include React, Next.js, TypeScript, Tailwind CSS, React
+            Native, Expo, Firebase, and Supabase.
+          </p>
+        </div>
 
         <div className="absolute right-6 top-[14%] md:right-24">
           <div className="flex items-center justify-end gap-3">

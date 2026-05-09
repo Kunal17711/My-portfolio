@@ -84,11 +84,12 @@ export default function Process() {
             className="lg:col-span-5 relative h-[520px] md:h-[680px] overflow-hidden rounded-[2rem] border border-white/10 bg-neutral-950"
           >
             <div className={`absolute inset-0 w-full h-full ${placeholderGradient}`} />
-            <img 
-              src="/assets/process-workspace.webp" 
-              alt="Workspace"
-              className="relative h-full w-full object-cover opacity-90 transition-transform duration-1000 hover:scale-105"
-              onError={(e) => (e.currentTarget.style.display = 'none')}
+            <Image
+              src="/assets/process-workspace.webp"
+              alt="Kunal Builds project planning and development workspace"
+              fill
+              sizes="(max-width: 1024px) 100vw, 520px"
+              className="relative object-cover opacity-90 transition-transform duration-1000 hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
             <div className="absolute bottom-6 left-6 text-xs uppercase tracking-[0.24em] text-white/55">
@@ -155,11 +156,12 @@ export default function Process() {
                 className="relative h-[420px] overflow-hidden rounded-[1.5rem] border border-white/10 bg-neutral-950 group"
               >
                 <div className={`absolute inset-0 w-full h-full ${placeholderGradient}`} />
-                <img 
-                  src={img.path} 
-                  alt={img.label}
-                  className="relative h-full w-full object-cover opacity-85 transition-transform duration-700 ease-out group-hover:scale-110"
-                  onError={(e) => (e.currentTarget.style.display = 'none')}
+                <Image
+                  src={img.path}
+                  alt={`Kunal Builds ${img.label} process`}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  className="relative object-cover opacity-85 transition-transform duration-700 ease-out group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                 <div className="absolute bottom-6 left-6 text-sm uppercase tracking-[0.22em] text-white/70">
@@ -178,11 +180,12 @@ export default function Process() {
                   className="relative min-w-[85vw] h-[400px] snap-center overflow-hidden rounded-[1.5rem] border border-white/10 bg-neutral-950"
                 >
                   <div className={`absolute inset-0 w-full h-full ${placeholderGradient}`} />
-                  <img 
-                    src={img.path} 
-                    alt={img.label}
-                    className="relative h-full w-full object-cover opacity-85"
-                    onError={(e) => (e.currentTarget.style.display = 'none')}
+                  <Image
+                    src={img.path}
+                    alt={`Kunal Builds ${img.label} process`}
+                    fill
+                    sizes="85vw"
+                    className="relative object-cover opacity-85"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                   <div className="absolute bottom-6 left-6 text-sm uppercase tracking-[0.22em] text-white/70">
@@ -245,7 +248,7 @@ export default function Process() {
             to become real?
           </h2>
           <a
-            href="#contact"
+            href="/contact"
             className="inline-flex items-center justify-center w-fit rounded-full bg-white px-10 py-5 text-sm md:text-base font-bold text-black hover:bg-neutral-200 transition-all active:scale-95 whitespace-nowrap mb-2"
           >
             let’s build it

@@ -61,7 +61,10 @@ export default async function ProjectDetailPage({ params }: PageProps) {
     creator: {
       "@id": "https://heyitskunal.vercel.app/#person",
     },
-    applicationCategory: creativeType === "SoftwareApplication" ? project.type : undefined,
+    applicationCategory:
+      creativeType === "SoftwareApplication" ? "WebApplication" : undefined,
+    operatingSystem:
+      creativeType === "SoftwareApplication" ? "Web browser" : undefined,
     programmingLanguage: project.tech,
   };
 

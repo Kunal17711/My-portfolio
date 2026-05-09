@@ -14,7 +14,6 @@ const SeoJsonLd = () => {
     "email": "mailto:kkunaall10@gmail.com",
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Sampla",
       "addressRegion": "Haryana",
       "addressCountry": "IN"
     },

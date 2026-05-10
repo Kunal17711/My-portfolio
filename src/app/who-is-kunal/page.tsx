@@ -124,6 +124,25 @@ const techStack = [
   "deployment",
 ];
 
+const entityFacts = [
+  { label: "Primary identity", value: "Kunal Builds" },
+  { label: "Person name", value: "Kunal" },
+  { label: "Also known as", value: "Kunal Dev, Kunal Developer, Kunal17711" },
+  { label: "Role", value: "Web & App Developer" },
+  { label: "Based in", value: "Haryana, India" },
+  {
+    label: "Builds",
+    value:
+      "Websites, landing pages, dashboards, mobile apps, UI/UX interfaces, product websites, redesigns, and MVPs",
+  },
+  {
+    label: "Main stack",
+    value:
+      "React, Next.js, TypeScript, Tailwind CSS, React Native, Expo, Supabase, Firebase, and Vercel",
+  },
+  { label: "Portfolio", value: "https://heyitskunal.vercel.app" },
+];
+
 const featuredProjectSlugs = [
   "profileos",
   "vidora",
@@ -175,6 +194,25 @@ export default function WhoIsKunalPage() {
     .map((slug) => projects.find((project) => project.slug === slug))
     .filter(Boolean);
 
+  const enrichedPersonSchema = {
+    ...personSchema,
+    mainEntityOfPage: {
+      "@id": `${pageUrl}#profilepage`,
+    },
+    hasOccupation: {
+      "@type": "Occupation",
+      name: "Web and App Developer",
+      occupationLocation: {
+        "@type": "Country",
+        name: "India",
+      },
+      skills: techStack,
+    },
+    subjectOf: {
+      "@id": `${pageUrl}#webpage`,
+    },
+  };
+
   const profilePageSchema = {
     "@context": "https://schema.org",
     "@type": "ProfilePage",
@@ -183,9 +221,46 @@ export default function WhoIsKunalPage() {
     name: "Who is Kunal Builds?",
     description:
       "A profile page about Kunal Builds, the developer identity of Kunal, a web and app developer from Haryana, India.",
+    inLanguage: "en-IN",
+    dateModified: "2026-05-10",
+    isPartOf: {
+      "@id": `${SITE_URL}/#website`,
+    },
     mainEntity: {
       "@id": `${SITE_URL}/#person`,
     },
+  };
+
+  const projectItemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${pageUrl}#projects`,
+    name: "Projects by Kunal Builds",
+    itemListElement: selectedProjects.map((project, index) => {
+      if (!project) {
+        return null;
+      }
+
+      return {
+        "@type": "ListItem",
+        position: index + 1,
+        name: project.name,
+        url: `${SITE_URL}${project.path}`,
+      };
+    }).filter(Boolean),
+  };
+
+  const sameAsItemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": `${pageUrl}#social-profiles`,
+    name: "Official profiles for Kunal Builds",
+    itemListElement: socialProfiles.map((profile, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: profile.label,
+      url: profile.href,
+    })),
   };
 
   const faqSchema = {
@@ -206,12 +281,14 @@ export default function WhoIsKunalPage() {
       <SeoJsonLd
         data={[
           profilePageSchema,
-          { "@context": "https://schema.org", ...personSchema },
+          { "@context": "https://schema.org", ...enrichedPersonSchema },
           webPageSchema({
             path: pagePath,
             name: "Who is Kunal Builds?",
             description,
           }),
+          projectItemListSchema,
+          sameAsItemListSchema,
           faqSchema,
           breadcrumbSchema([
             { name: "Home", path: "/" },
@@ -265,6 +342,22 @@ export default function WhoIsKunalPage() {
             development skills, and AI-assisted workflows to move from idea to
             execution faster.
           </p>
+        </EditorialSection>
+
+        <EditorialSection title="Entity snapshot">
+          <div className="divide-y divide-white/10 border-y border-white/10">
+            {entityFacts.map((fact) => (
+              <div
+                key={fact.label}
+                className="grid gap-2 py-4 text-sm md:grid-cols-[180px_1fr] md:text-base"
+              >
+                <span className="uppercase tracking-[0.2em] text-white/50">
+                  {fact.label}
+                </span>
+                <span className="text-white/78">{fact.value}</span>
+              </div>
+            ))}
+          </div>
         </EditorialSection>
 
         <EditorialSection title="About Kunal">
@@ -362,6 +455,49 @@ export default function WhoIsKunalPage() {
                 </p>
               );
             })}
+          </div>
+        </EditorialSection>
+
+        <EditorialSection title="Related pages">
+          <p>
+            These pages help explain Kunal Builds from different angles:
+            background, services, project examples, and contact.
+          </p>
+          <div className="space-y-3">
+            <p>
+              <TextLink href="/about">About Kunal Builds</TextLink> - longer
+              background and working style.
+            </p>
+            <p>
+              <TextLink href="/projects">Projects</TextLink> - crawlable
+              archive of portfolio builds and case studies.
+            </p>
+            <p>
+              <TextLink href="/services">Services</TextLink> - development and
+              design services offered by Kunal Builds.
+            </p>
+            <p>
+              <TextLink href="/services/website-development">
+                Website development
+              </TextLink>{" "}
+              - responsive web builds using modern frontend tools.
+            </p>
+            <p>
+              <TextLink href="/services/mobile-app-development">
+                Mobile app development
+              </TextLink>{" "}
+              - React Native and Expo app interface work.
+            </p>
+            <p>
+              <TextLink href="/services/startup-mvp-development">
+                Startup MVP development
+              </TextLink>{" "}
+              - focused early product builds for testing ideas.
+            </p>
+            <p>
+              <TextLink href="/contact">Contact</TextLink> - the safest way to
+              reach Kunal Builds for project work.
+            </p>
           </div>
         </EditorialSection>
 

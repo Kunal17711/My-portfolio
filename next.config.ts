@@ -33,6 +33,35 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/who-is-kunal-builds",
+        destination: "/who-is-kunal",
+        permanent: true,
+      },
+      {
+        source: "/about-kunal",
+        destination: "/who-is-kunal",
+        permanent: true,
+      },
+      {
+        source: "/kunal-builds",
+        destination: "/who-is-kunal",
+        permanent: true,
+      },
+      {
+        source: "/kunal-dev",
+        destination: "/who-is-kunal",
+        permanent: true,
+      },
+      {
+        source: "/kunal17711",
+        destination: "/who-is-kunal",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {

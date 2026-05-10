@@ -11,6 +11,8 @@ https://heyitskunal.vercel.app/about
 Who is Kunal:
 https://heyitskunal.vercel.app/who-is-kunal
 
+This is the canonical entity page for Kunal Builds. It explains that Kunal Builds is the developer identity of Kunal, a young web and app developer from Haryana, India who builds websites, landing pages, dashboards, mobile apps, UI/UX interfaces, digital products, redesigns, and MVPs with React, Next.js, TypeScript, Tailwind CSS, React Native, Expo, Supabase, Firebase, Vercel, and AI-assisted workflows.
+
 Projects:
 https://heyitskunal.vercel.app/projects
 

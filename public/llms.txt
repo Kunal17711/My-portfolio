@@ -8,6 +8,9 @@ https://heyitskunal.vercel.app
 About:
 https://heyitskunal.vercel.app/about
 
+Who is Kunal:
+https://heyitskunal.vercel.app/who-is-kunal
+
 Projects:
 https://heyitskunal.vercel.app/projects
 

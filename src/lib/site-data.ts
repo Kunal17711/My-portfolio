@@ -15,6 +15,7 @@ export const socialProfiles = [
 export const siteNavigation = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
+  { name: "Who is Kunal?", path: "/who-is-kunal" },
   { name: "Projects", path: "/projects" },
   { name: "Services", path: "/services" },
   { name: "Contact", path: "/contact" },
@@ -29,7 +30,7 @@ export const personSchema = {
   image: `${SITE_URL}/og-image.png`,
   jobTitle: "Web and App Developer",
   description:
-    "Kunal Builds is a web and app developer from Haryana, India building websites, landing pages, dashboards, mobile apps, UI/UX interfaces, and digital products.",
+    "Kunal Builds is the developer identity of Kunal, a young web and app developer from Haryana, India building websites, landing pages, dashboards, mobile apps, UI/UX interfaces, and digital products using React, Next.js, TypeScript, Tailwind CSS, React Native, Expo, Supabase, Firebase, and AI-assisted workflows.",
   email: "mailto:kkunaall10@gmail.com",
   address: {
     "@type": "PostalAddress",
@@ -39,14 +40,16 @@ export const personSchema = {
   knowsAbout: [
     "Web Development",
     "App Development",
+    "AI-assisted Web Development",
     "React",
     "Next.js",
     "TypeScript",
     "Tailwind CSS",
     "React Native",
     "Expo",
-    "Firebase",
     "Supabase",
+    "Firebase",
+    "Vercel",
     "UI/UX Design",
     "Landing Pages",
     "Dashboards",
@@ -756,6 +759,7 @@ export function getService(slug: string) {
 export const sitemapPaths = [
   "/",
   "/about",
+  "/who-is-kunal",
   "/projects",
   ...projects.map((project) => project.path),
   "/services",

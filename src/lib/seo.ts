@@ -37,6 +37,10 @@ type CreateMetadataInput = {
   image?: string;
   type?: "website" | "article" | "profile";
   keywords?: string[];
+  openGraphTitle?: string;
+  openGraphDescription?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
 };
 
 export function absoluteUrl(path = "/") {
@@ -54,6 +58,10 @@ export function createMetadata({
   image = DEFAULT_OG_IMAGE,
   type = "website",
   keywords = DEFAULT_KEYWORDS,
+  openGraphTitle,
+  openGraphDescription,
+  twitterTitle,
+  twitterDescription,
 }: CreateMetadataInput): Metadata {
   const url = absoluteUrl(path);
   const ogImage = absoluteUrl(image);
@@ -73,8 +81,8 @@ export function createMetadata({
       locale: "en_IN",
       url,
       siteName: SITE_NAME,
-      title,
-      description,
+      title: openGraphTitle || title,
+      description: openGraphDescription || description,
       images: [
         {
           url: ogImage,
@@ -87,8 +95,8 @@ export function createMetadata({
     twitter: {
       card: "summary_large_image",
       creator: TWITTER_CREATOR,
-      title,
-      description,
+      title: twitterTitle || openGraphTitle || title,
+      description: twitterDescription || openGraphDescription || description,
       images: [ogImage],
     },
     robots: {

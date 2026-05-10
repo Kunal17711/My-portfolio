@@ -177,6 +177,7 @@ const Contact = () => {
             {[
               { label: "home", href: "/" },
               { label: "about", href: "/about" },
+              { label: "who is kunal?", href: "/who-is-kunal" },
               { label: "projects", href: "/projects" },
               { label: "services", href: "/services" },
               { label: "contact", href: "/contact" },

@@ -15,6 +15,12 @@ type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
+type ProjectSeoFields = NonNullable<ReturnType<typeof getProject>> & {
+  seoTitle?: string;
+  seoDescription?: string;
+  keywords?: string[];
+};
+
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
 }
@@ -27,18 +33,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return {};
   }
 
-  // Support for custom SEO fields from data
-  const title = (project as any).seoTitle || `${project.name} Project | Kunal Builds`;
-  const description = (project as any).seoDescription || `Explore ${project.name}, a ${project.type} project by Kunal Builds focused on clean UI, responsive design, practical functionality, and premium digital product execution.`;
-  const keywords = (project as any).keywords || undefined;
+  const projectWithSeo = project as ProjectSeoFields;
+  const title = projectWithSeo.seoTitle || `${project.name} Project | Kunal Builds`;
+  const description = projectWithSeo.seoDescription || `Explore ${project.name}, a ${project.type} project by Kunal Builds focused on clean UI, responsive design, practical functionality, and premium digital product execution.`;
 
   return createMetadata({
     title,
     description,
     path: project.path,
-    image: project.image, // Use project image for OG
-    keywords,
-  } as any);
+    image: project.image,
+    keywords: projectWithSeo.keywords,
+  });
 }
 
 export default async function ProjectDetailPage({ params }: PageProps) {

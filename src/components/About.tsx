@@ -39,7 +39,7 @@ export default function About() {
       <div className="pointer-events-none absolute bottom-0 left-0 h-[420px] w-[420px] rounded-full bg-white/[0.025] blur-[120px]" />
 
       <div className="max-w-[1440px] mx-auto px-6 md:px-10 py-24 md:py-32">
-        
+
         {/* Top Editorial Header */}
         <motion.div {...revealAnimation}>
           <p className="text-sm text-white/60 tracking-[0.28em] uppercase">
@@ -55,9 +55,9 @@ export default function About() {
 
         {/* Main About Split */}
         <div className="mt-20 lg:mt-32 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-          
+
           {/* Left Column Image */}
-          <motion.div 
+          <motion.div
             {...revealAnimation}
             className="lg:col-span-5 relative h-[520px] md:h-[720px] overflow-hidden rounded-[2rem] border border-white/10 bg-neutral-950"
           >
@@ -132,7 +132,7 @@ export default function About() {
         </div>
 
         {/* Second Editorial Image Row */}
-        <motion.div 
+        <motion.div
           {...revealAnimation}
           className="mt-24 md:mt-40 relative h-[360px] md:h-[560px] overflow-hidden rounded-[2rem] border border-white/10 bg-neutral-950"
         >
@@ -145,13 +145,13 @@ export default function About() {
             className="relative object-cover opacity-85 transition-transform duration-1000 hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-            <div className="absolute bottom-6 left-6 text-xs uppercase tracking-[0.24em] text-white/70">
+          <div className="absolute bottom-6 left-6 text-xs uppercase tracking-[0.24em] text-white/70">
             workspace / design / development
           </div>
         </motion.div>
 
         {/* Closing Belief Line */}
-        <motion.div 
+        <motion.div
           {...revealAnimation}
           className="mt-24 md:mt-40 border-t border-white/10 pt-14"
         >

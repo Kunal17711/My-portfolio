@@ -9,9 +9,6 @@ import {
 import { breadcrumbSchema, createMetadata, SITE_URL } from "@/lib/seo";
 import { personSchema, projects, services, socialProfiles } from "@/lib/site-data";
 
-const description =
-  "Learn about Kunal Builds, a web and app developer from Haryana, India building websites, landing pages, dashboards, mobile apps, UI/UX interfaces, and digital products.";
-
 export const metadata: Metadata = createMetadata({
   title: "About Kunal Builds | Web & App Developer from Haryana, India",
   description:
@@ -97,6 +94,10 @@ export default function AboutPage() {
             product structure, and real-world functionality using modern tools
             like React, Next.js, TypeScript, Tailwind CSS, React Native, Expo,
             Supabase, Firebase, and Vercel.
+          </p>
+          <p>
+            For a direct entity summary, read{" "}
+            <TextLink href="/who-is-kunal">Who is Kunal?</TextLink>.
           </p>
           <p>
             Based in Haryana, India, I operate with a digital-first mindset,

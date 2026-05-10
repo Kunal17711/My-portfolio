@@ -2,5 +2,6 @@ Kunal Builds
 Web and App Developer
 Haryana, India
 Website: https://heyitskunal.vercel.app
+Who is Kunal: https://heyitskunal.vercel.app/who-is-kunal
 Email: kkunaall10@gmail.com
 Tech: React, Next.js, TypeScript, Tailwind CSS, React Native, Expo, Firebase, Supabase

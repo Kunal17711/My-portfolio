@@ -129,6 +129,7 @@ const entityFacts = [
   { label: "Person name", value: "Kunal" },
   { label: "Also known as", value: "Kunal Dev, Kunal Developer, Kunal17711" },
   { label: "Role", value: "Web & App Developer" },
+  { label: "Clothing brand", value: "Aldren Row (Founder & HOD)" },
   { label: "Based in", value: "Haryana, India" },
   {
     label: "Builds",
@@ -144,6 +145,10 @@ const entityFacts = [
 ];
 
 const featuredProjectSlugs = [
+  "aldren-row",
+  "focura",
+  "vibekit",
+  "earnstack",
   "profileos",
   "vidora",
   "raksha-web",

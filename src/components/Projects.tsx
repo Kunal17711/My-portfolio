@@ -21,6 +21,58 @@ type Project = {
 const projects: Project[] = [
   {
     number: "01",
+    title: "Aldren Row",
+    type: "Premium Clothing Brand",
+    year: "2024",
+    description:
+      "a premium, minimalist clothing brand digital presence designed with bold editorial layouts, cinematic animations, and high-conversion product storytelling.",
+    tags: ["next.js", "tailwind", "framer motion"],
+    image: "/assets/aldrenrow.webp",
+    objectPosition: "object-center",
+    slug: "aldren-row",
+    imageAlt: "Aldren Row premium minimalist clothing brand website preview by Kunal Builds",
+  },
+  {
+    number: "02",
+    title: "Focura",
+    type: "Productivity Platform",
+    year: "2024",
+    description:
+      "a sleek, conversion-optimized platform interface built for a modern productivity tool, featuring fluid tab transitions and a highly refined dark mode.",
+    tags: ["next.js", "tailwind", "typescript"],
+    image: "/assets/focura.webp",
+    objectPosition: "object-center",
+    slug: "focura",
+    imageAlt: "Focura productivity dashboard and landing page preview by Kunal Builds",
+  },
+  {
+    number: "03",
+    title: "Vibekit",
+    type: "Developer Tool / UI Kit",
+    year: "2024",
+    description:
+      "a premium design system and interactive component showcase designed to help developers build stunning, animated websites with minimal effort.",
+    tags: ["next.js", "tailwind", "framer motion"],
+    image: "/assets/vibekit.webp",
+    objectPosition: "object-center",
+    slug: "vibekit",
+    imageAlt: "Vibekit creative UI kit and design system platform preview by Kunal Builds",
+  },
+  {
+    number: "04",
+    title: "Earnstack",
+    type: "Fintech Platform",
+    year: "2024",
+    description:
+      "a premium fintech landing page and analytical dashboard interface focused on wealth tracking, secure investing, and clean financial data presentation.",
+    tags: ["next.js", "tailwind", "charts"],
+    image: "/assets/earnstack.webp",
+    objectPosition: "object-center",
+    slug: "earnstack",
+    imageAlt: "Earnstack fintech dashboard and wealth platform preview by Kunal Builds",
+  },
+  {
+    number: "05",
     title: "ProfileOS",
     type: "Digital Product",
     year: "2024",
@@ -33,7 +85,7 @@ const projects: Project[] = [
     imageAlt: "ProfileOS digital product landing page preview by Kunal Builds",
   },
   {
-    number: "02",
+    number: "06",
     title: "Vidora",
     type: "Website / Platform",
     year: "2024",
@@ -46,7 +98,7 @@ const projects: Project[] = [
     imageAlt: "Vidora website landing page project by Kunal Builds",
   },
   {
-    number: "03",
+    number: "07",
     title: "Raksha Web",
     type: "Safety Product Website",
     year: "2024",
@@ -59,7 +111,7 @@ const projects: Project[] = [
     imageAlt: "Raksha Web product website project by Kunal Builds",
   },
   {
-    number: "04",
+    number: "08",
     title: "Raksha App",
     type: "Mobile App",
     year: "2024",
@@ -72,7 +124,7 @@ const projects: Project[] = [
     imageAlt: "Raksha mobile app interface project by Kunal Builds",
   },
   {
-    number: "05",
+    number: "09",
     title: "EduSync",
     type: "Education Dashboard",
     year: "2024",
@@ -85,7 +137,7 @@ const projects: Project[] = [
     imageAlt: "EduSync education dashboard project by Kunal Builds",
   },
   {
-    number: "06",
+    number: "10",
     title: "Fashion Website",
     type: "E-commerce Landing Page",
     year: "2024",
@@ -98,7 +150,7 @@ const projects: Project[] = [
     imageAlt: "Fashion website landing page project by Kunal Builds",
   },
   {
-    number: "07",
+    number: "11",
     title: "Solvare",
     type: "Website Concept",
     year: "2024",
@@ -111,7 +163,7 @@ const projects: Project[] = [
     imageAlt: "Solvare web interface project by Kunal Builds",
   },
   {
-    number: "08",
+    number: "12",
     title: "WishWrap",
     type: "Web Experience",
     year: "2024",
@@ -124,7 +176,7 @@ const projects: Project[] = [
     imageAlt: "WishWrap product interface project by Kunal Builds",
   },
   {
-    number: "09",
+    number: "13",
     title: "Paradox",
     type: "Creative Web Concept",
     year: "2024",
@@ -137,7 +189,7 @@ const projects: Project[] = [
     imageAlt: "Paradox creative web interface project by Kunal Builds",
   },
   {
-    number: "10",
+    number: "14",
     title: "PicPrompt",
     type: "AI Tool Interface",
     year: "2024",
@@ -150,7 +202,7 @@ const projects: Project[] = [
     imageAlt: "PicPrompt AI product interface project by Kunal Builds",
   },
   {
-    number: "11",
+    number: "15",
     title: "Beyond Reality",
     type: "Experimental Website",
     year: "2024",

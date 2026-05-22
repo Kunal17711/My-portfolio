@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 
 const aboutRows = [
   { label: "focus", value: "websites, apps, dashboards, landing pages" },
+  { label: "clothing brand", value: "founder & HOD of Aldren Row (premium streetwear)" },
   { label: "stack", value: "next.js, react, react native, expo, tailwind, supabase" },
   { label: "style", value: "clean ui, premium layouts, fast execution" },
   { label: "available for", value: "freelance projects, startup mvps, business websites" },
@@ -88,7 +89,7 @@ export default function About() {
                 my work usually sits between design and development: i think about layout, spacing, user flow, responsiveness, backend structure, and the final launch experience. the goal is always simple: build something that looks premium and actually works.
               </p>
               <p className="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-white/65">
-                based in Haryana, India — i use tools like next.js, react, react native, expo, tailwind css, supabase, and modern ai-assisted workflows to turn ideas into clean digital products faster for businesses, creators, and startups.
+                based in Haryana, India — i use tools like next.js, react, react native, expo, tailwind css, supabase, and modern ai-assisted workflows to turn ideas into clean digital products faster for businesses, creators, and startups. i am also the founder & HOD of <Link href="/aldren-row" className="text-white underline decoration-white/20 underline-offset-4 hover:text-white/80">Aldren Row</Link>, a premium minimalist clothing brand.
               </p>
               <div className="mt-8 flex flex-col sm:flex-row gap-4">
                 <Link

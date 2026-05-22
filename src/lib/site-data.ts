@@ -125,6 +125,181 @@ export const homepageJsonLd = {
 
 export const projects = [
   {
+    slug: "aldren-row",
+    name: "Aldren Row",
+    path: "/projects/aldren-row",
+    image: "/assets/aldrenrow.webp",
+    imageAlt: "Aldren Row premium minimalist clothing brand website preview by Kunal Builds",
+    type: "Premium Clothing Brand Website",
+    tech: ["Next.js", "Tailwind CSS", "Framer Motion", "SEO", "Branding"],
+    liveUrl: "https://aldrenrow.vercel.app/",
+    description:
+      "A premium, minimalist clothing brand digital presence designed with bold editorial layouts, cinematic animations, and high-conversion product storytelling.",
+    overview:
+      "Aldren Row is a high-end clothing brand digital platform built to establish a strong brand identity from day one. The project features an editorial-style landing page with custom layout grids, smooth scroll-triggered reveals, and a focus on premium aesthetics that convey luxury and streetwear fusion. Founded and built by Kunal, the platform showcases how a modern fashion brand can leverage high-end digital design and flawless web engineering to create instant brand authority.",
+    problem:
+      "New clothing brands need to establish instant credibility and trust. Standard e-commerce templates often feel cheap, cluttered, and generic, failing to tell a unique visual story or justify premium positioning. Furthermore, there is a lack of SEO linking the founder's developer identity to the brand directly.",
+    solution:
+      "I designed and built Aldren Row with a custom, typography-driven editorial layout. Using Next.js for high-speed performance and Framer Motion for premium, scroll-triggered interactions, the site acts as an immersive brand experience. Special attention was paid to structured data schema and keyword optimization to connect founder Kunal to the brand identity.",
+    features: [
+      "Editorial-style landing page structure",
+      "High-impact typography and visual grid systems",
+      "Smooth scroll-triggered image animations",
+      "Premium product narrative sections",
+      "Fully responsive layouts styled for mobile-first brand discovery",
+      "SEO foundation mapped to founder identity for direct Google queries",
+      "Structured product schemas ready for inventory synchronization",
+    ],
+    designApproach:
+      "The visual direction borrows from luxury fashion houses: stark black and white contrast, deep spacing, heavy serif headings paired with clean sans-serif body text, and cinematic product image zooms. It feels premium, clean, and exclusive.",
+    shows:
+      "Aldren Row demonstrates how Kunal Builds translates a fashion/streetwear concept into an Awwwards-level digital interface, proving that modern code and elite design choices build exceptional brand value.",
+    relevantServices: ["landing-page-development", "website-development", "ui-ux-design"],
+    seoTitle: "Aldren Row Case Study | Premium Clothing Brand by Kunal Builds",
+    seoDescription:
+      "Explore the design and development of Aldren Row, a premium minimalist clothing brand website founded and built by Kunal. Learn how modern web design establishes instant brand authority.",
+    keywords: [
+      "Aldren Row",
+      "Aldren Row clothing",
+      "Aldren Row brand",
+      "Kunal clothing brand",
+      "founder of Aldren Row",
+      "HOD of Aldren Row",
+      "Kunal Builds Aldren Row",
+      "Kunal Dev clothing brand",
+      "streetwear web design Next.js",
+      "luxury clothing website developer",
+      "minimalist ecommerce UI",
+      "Kunal Builds portfolio",
+    ],
+  },
+  {
+    slug: "focura",
+    name: "Focura",
+    path: "/projects/focura",
+    image: "/assets/focura.webp",
+    imageAlt: "Focura productivity dashboard and landing page preview by Kunal Builds",
+    type: "Productivity Platform Interface",
+    tech: ["Next.js", "Tailwind CSS", "TypeScript", "React Hooks", "Framer Motion"],
+    liveUrl: "https://focura-flax.vercel.app/",
+    description:
+      "A sleek, conversion-optimized platform interface built for a modern productivity tool, featuring fluid tab transitions and a highly refined dark mode.",
+    overview:
+      "Focura is an interactive landing page and interface built for a modern productivity tool. The platform uses Next.js and Tailwind CSS to create a fast, visual-first digital product showcase that explains the software's capabilities through smooth animations, interactive features, and high-fidelity interface mockups.",
+    problem:
+      "Productivity tools often struggle to present their value without confusing or overwhelming the viewer. Standard landing pages are often text-heavy and fail to show the product in action.",
+    solution:
+      "I designed Focura to let the product speak for itself. Through custom-animated dashboard cards, tabbed work state previews, and interactive lists, potential users can feel how smooth and fast the actual productivity tool runs.",
+    features: [
+      "Conversion-focused product story layout",
+      "Interactive feature previews and tabbed workspace transitions",
+      "Modern dark theme with subtle ambient glows and fine borders",
+      "Fluid scroll animations using Framer Motion",
+      "Responsive layout for perfect mobile scanning",
+    ],
+    designApproach:
+      "A sleek, dark theme inspired by tech productivity software, focusing on fine grey borders, high-contrast labels, soft neon color spots for visual anchors, and ample breathing room between sections.",
+    shows:
+      "Focura highlights the ability of Kunal Builds to design and construct conversion-optimized SaaS marketing sites with fluid dynamic frontend elements.",
+    relevantServices: ["landing-page-development", "website-development", "ui-ux-design"],
+    seoTitle: "Focura Case Study | SaaS Productivity Landing Page by Kunal Builds",
+    seoDescription:
+      "Explore Focura, a premium productivity SaaS landing page and interface built by Kunal Builds, featuring interactive previews and a sleek dark layout.",
+    keywords: [
+      "Focura",
+      "Focura productivity",
+      "SaaS landing page",
+      "productivity app website",
+      "dark mode SaaS UI",
+      "Kunal Builds Focura",
+      "Next.js product landing page",
+    ],
+  },
+  {
+    slug: "vibekit",
+    name: "Vibekit",
+    path: "/projects/vibekit",
+    image: "/assets/vibekit.webp",
+    imageAlt: "Vibekit creative UI components platform preview by Kunal Builds",
+    type: "Developer Tool / UI Kit",
+    tech: ["Next.js", "Tailwind CSS", "Framer Motion", "Component Design"],
+    liveUrl: "https://vibekit-kappa.vercel.app/",
+    description:
+      "A premium design system and interactive component showcase designed to help developers build stunning, animated websites with minimal effort.",
+    overview:
+      "Vibekit is an interactive web showcase for high-fidelity UI components, neomorphic blocks, and rich web animations. Built with Next.js and Framer Motion, it lets developers interact with premium design elements, resize preview containers, and copy optimized Tailwind CSS/React code in one click.",
+    problem:
+      "Creating highly polished, Awwwards-style animations and layouts takes excessive hours for web developers. Most available libraries provide standard, static UI elements rather than high-end visual systems.",
+    solution:
+      "I designed and developed Vibekit as a premium developer resource. The site presents neomorphic controls, fluid layout blocks, and staggered typography reveal setups in a fast, searchable component catalog.",
+    features: [
+      "Interactive component playgrounds with responsive preview sizing",
+      "Instant one-click copyable code systems",
+      "Staggered neomorphic and high-impact visual components",
+      "Flawless performance with Next.js statically optimized files",
+      "Optimized framer motion animations designed for 60fps renders",
+    ],
+    designApproach:
+      "Brutalist-minimalist dark mode layout. The design features highly precise lines, interactive code popups, dynamic hover actions, and sleek micro-animations for developer engagement.",
+    shows:
+      "Vibekit highlights Kunal Builds' deep skill in developing interactive component ecosystems, advanced Framer Motion states, and premium design system interfaces.",
+    relevantServices: ["website-development", "ui-ux-design", "landing-page-development"],
+    seoTitle: "Vibekit Case Study | Developer Component Showcase by Kunal Builds",
+    seoDescription:
+      "Read about Vibekit, an interactive design system and premium Tailwind component kit developed by Kunal Builds for luxury developer workflows.",
+    keywords: [
+      "Vibekit",
+      "Vibekit UI kit",
+      " Tailwind CSS components",
+      "animated web components",
+      "brutalist design library",
+      "Kunal Builds design system",
+      "interactive component kit",
+    ],
+  },
+  {
+    slug: "earnstack",
+    name: "Earnstack",
+    path: "/projects/earnstack",
+    image: "/assets/earnstack.webp",
+    imageAlt: "Earnstack fintech platform and landing page preview by Kunal Builds",
+    type: "Fintech Platform Website",
+    tech: ["Next.js", "Tailwind CSS", "TypeScript", "ApexCharts", "Framer Motion"],
+    liveUrl: "https://earnstack-website.vercel.app/",
+    description:
+      "A premium fintech landing page and analytical dashboard interface focused on wealth tracking, secure investing, and clean financial data presentation.",
+    overview:
+      "Earnstack is a sleek web application interface and landing page concept designed to represent a modern retail wealth-management and investing platform. The interface presents data tracking, investment calculators, and performance charts in an extremely readable, clean, and high-trust neomorphic visual hierarchy.",
+    problem:
+      "Financial interfaces are often cold, overly complicated, and intimidating for new users. Designing a platform that feels highly secure, extremely precise, and simple to navigate is a difficult balance.",
+    solution:
+      "I built Earnstack with a modern dark theme and custom green accents representing wealth growth. By integrating clean analytical charts, smooth conversion tabs, and simple metric displays, the website makes financial tools feel accessible and premium.",
+    features: [
+      "Clean financial dashboard layout and portfolio metrics",
+      "Interactive data visualizations and mock analytical charts",
+      "Trust-focused customer storytelling flow",
+      "Next.js optimized asset and route loading",
+      "High-fidelity mobile responsive layout ensuring numerical legibility",
+    ],
+    designApproach:
+      "Sophisticated dark neomorphism. Features fine rounded containers, subtle emerald green highlights, sleek border borders, and high contrast typography to convey luxury and precision.",
+    shows:
+      "Earnstack demonstrates Kunal Builds' capacity to handle sophisticated fintech designs, complex data visualization layouts, and high-trust marketing web interfaces.",
+    relevantServices: ["dashboard-development", "website-development", "startup-mvp-development"],
+    seoTitle: "Earnstack Case Study | Fintech Dashboard Website by Kunal Builds",
+    seoDescription:
+      "Explore Earnstack, a premium wealth management and fintech dashboard platform built by Kunal Builds, combining clean data and beautiful neomorphic charts.",
+    keywords: [
+      "Earnstack",
+      "Earnstack fintech",
+      "wealth management dashboard",
+      "investment calculator UI",
+      "neomorphic dashboard",
+      "Kunal Builds Earnstack",
+      "financial analytics landing page",
+    ],
+  },
+  {
     slug: "profileos",
     name: "ProfileOS",
     path: "/projects/profileos",
@@ -760,6 +935,7 @@ export const sitemapPaths = [
   "/",
   "/about",
   "/who-is-kunal",
+  "/aldren-row",
   "/projects",
   ...projects.map((project) => project.path),
   "/services",

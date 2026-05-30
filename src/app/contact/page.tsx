@@ -9,7 +9,7 @@ import { breadcrumbSchema, createMetadata, webPageSchema } from "@/lib/seo";
 import { socialProfiles } from "@/lib/site-data";
 
 const description =
-  "Contact Kunal Builds for websites, landing pages, dashboards, mobile apps, UI/UX design, redesigns, and MVP development.";
+  "Contact Kunal Builds to discuss websites, landing pages, dashboards, mobile apps, UI/UX, and startup MVP development projects.";
 
 export const metadata: Metadata = createMetadata({
   title: "Contact Kunal Builds | Web & App Developer",

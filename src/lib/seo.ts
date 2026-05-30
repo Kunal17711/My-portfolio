@@ -4,7 +4,7 @@ export const SITE_URL = "https://heyitskunal.vercel.app";
 export const SITE_NAME = "Kunal Builds";
 export const SITE_TITLE = "Kunal Builds | Web & App Developer";
 export const SITE_DESCRIPTION =
-  "Kunal Builds is a web and app developer portfolio showcasing premium websites, landing pages, dashboards, mobile apps, UI/UX work, and real digital products built with React, Next.js, Tailwind CSS, React Native, Expo, Firebase, and Supabase.";
+  "Kunal Builds is Kunal's portfolio for web apps, dashboards, landing pages, mobile apps, and startup MVPs built with React and Next.js.";
 export const DEFAULT_OG_IMAGE = "/og-image.png";
 export const TWITTER_CREATOR = "@kunallbuilds";
 

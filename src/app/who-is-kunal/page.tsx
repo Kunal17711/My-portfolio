@@ -18,10 +18,10 @@ const pagePath = "/who-is-kunal";
 const pageUrl = `${SITE_URL}${pagePath}`;
 
 const description =
-  "Kunal Builds is the developer identity of Kunal, a young web and app developer from Haryana, India building websites, landing pages, dashboards, mobile apps, UI/UX interfaces, and digital products using React, Next.js, Tailwind CSS, React Native, Expo, Supabase, Firebase, and AI-assisted workflows.";
+  "Who is Kunal? Meet the developer behind Kunal Builds, creating websites, apps, dashboards, UI/UX interfaces, and startup MVPs.";
 
 const ogDescription =
-  "Kunal Builds is the developer identity of Kunal, a young web and app developer from Haryana, India building websites, apps, dashboards, landing pages, UI/UX interfaces, and digital products.";
+  "Who is Kunal? Meet the developer behind Kunal Builds, creating websites, apps, dashboards, UI/UX interfaces, and startup MVPs.";
 
 export const metadata: Metadata = createMetadata({
   title: "Who is Kunal? | Kunal Builds Web & App Developer",

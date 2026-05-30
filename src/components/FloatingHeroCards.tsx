@@ -6,7 +6,7 @@ import { useState } from "react";
 export const floatingHeroCards = [
   {
     src: "/assets/vidora.webp",
-    alt: "Vidora Project",
+    alt: "Vidora website landing page preview by Kunal Builds",
     ratio: "aspect-video",
     className: "w-[46vw] sm:w-[28vw] lg:w-[18vw]",
     desktopX: "-34vw",
@@ -17,7 +17,7 @@ export const floatingHeroCards = [
   },
   {
     src: "/assets/raksha-web.webp",
-    alt: "Raksha Web",
+    alt: "Raksha Web women safety product website preview by Kunal Builds",
     ratio: "aspect-[4/5]",
     className: "w-[28vw] sm:w-[15vw] lg:w-[10vw]",
     desktopX: "-29vw",
@@ -28,7 +28,7 @@ export const floatingHeroCards = [
   },
   {
     src: "/assets/hero-character.webp",
-    alt: "Kunal Character",
+    alt: "Kunal Builds developer portfolio character illustration",
     ratio: "aspect-square",
     className: "hidden sm:block sm:w-[12vw] lg:w-[8vw]",
     desktopX: "-3vw",
@@ -39,7 +39,7 @@ export const floatingHeroCards = [
   },
   {
     src: "/assets/raksha-app.webp",
-    alt: "Raksha App",
+    alt: "Raksha mobile app interface preview by Kunal Builds",
     ratio: "aspect-[3/4]",
     className: "w-[30vw] sm:w-[16vw] lg:w-[10vw]",
     desktopX: "34vw",
@@ -50,7 +50,7 @@ export const floatingHeroCards = [
   },
   {
     src: "/assets/edusync.webp",
-    alt: "EduSync",
+    alt: "EduSync education dashboard preview by Kunal Builds",
     ratio: "aspect-[16/10]",
     className: "hidden md:block md:w-[25vw] lg:w-[19vw]",
     desktopX: "25vw",
@@ -61,7 +61,7 @@ export const floatingHeroCards = [
   },
   {
     src: "/assets/solvare.webp",
-    alt: "Solvare",
+    alt: "Solvare web interface project preview by Kunal Builds",
     ratio: "aspect-[5/4]",
     className: "hidden md:block md:w-[16vw] lg:w-[11vw]",
     desktopX: "8vw",
@@ -72,7 +72,7 @@ export const floatingHeroCards = [
   },
   {
     src: "/assets/wishwrap.webp",
-    alt: "WishWrap",
+    alt: "WishWrap gifting product interface preview by Kunal Builds",
     ratio: "aspect-[9/16]",
     className: "hidden lg:block lg:w-[8vw]",
     desktopX: "43vw",
@@ -83,7 +83,7 @@ export const floatingHeroCards = [
   },
   {
     src: "/assets/beyond-reality.webp",
-    alt: "Beyond Reality",
+    alt: "Beyond Reality creative digital interface preview by Kunal Builds",
     ratio: "aspect-[21/9]",
     className: "hidden lg:block lg:w-[34vw]",
     desktopX: "0vw",
@@ -127,7 +127,7 @@ export default function FloatingHeroCards() {
             {!failedImages[card.src] && (
               <Image
                 src={card.src}
-                alt=""
+                alt={card.alt}
                 fill
                 sizes="(max-width: 640px) 46vw, (max-width: 1024px) 28vw, 34vw"
                 className="object-cover"

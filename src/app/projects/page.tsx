@@ -11,7 +11,7 @@ import { absoluteUrl, breadcrumbSchema, createMetadata, webPageSchema } from "@/
 import { projects } from "@/lib/site-data";
 
 const description =
-  "Explore projects by Kunal Builds including websites, landing pages, dashboards, mobile apps, UI/UX interfaces, and digital products built with React, Next.js, Tailwind CSS, React Native, Expo, Firebase, and Supabase.";
+  "Explore Kunal Builds projects, including websites, dashboards, mobile apps, UI/UX work, and startup MVPs built with modern web tech.";
 
 export const metadata: Metadata = createMetadata({
   title: "Projects by Kunal Builds | Websites, Apps & Dashboards",

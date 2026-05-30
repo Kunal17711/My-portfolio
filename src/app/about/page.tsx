@@ -12,7 +12,7 @@ import { personSchema, projects, services, socialProfiles } from "@/lib/site-dat
 export const metadata: Metadata = createMetadata({
   title: "About Kunal Builds | Web & App Developer from Haryana, India",
   description:
-    "Learn about Kunal Builds, the developer identity of Kunal, a web and app developer from Haryana, India building premium websites, landing pages, dashboards, mobile apps, UI/UX interfaces, and real digital products.",
+    "Learn about Kunal Builds, a developer building websites, apps, dashboards, landing pages, UI/UX interfaces, and startup MVPs.",
   path: "/about",
   type: "profile",
   keywords: [
@@ -50,7 +50,7 @@ export default function AboutPage() {
     url: `${SITE_URL}/about`,
     name: "About Kunal Builds",
     description:
-      "Learn about Kunal Builds, the developer identity of Kunal, a web and app developer from Haryana, India building premium websites, landing pages, dashboards, mobile apps, UI/UX interfaces, and real digital products.",
+      "Learn about Kunal Builds, a developer building websites, apps, dashboards, landing pages, UI/UX interfaces, and startup MVPs.",
     about: {
       "@id": `${SITE_URL}/#person`,
     },

@@ -10,7 +10,7 @@ import { absoluteUrl, breadcrumbSchema, createMetadata, webPageSchema } from "@/
 import { professionalServiceSchema, services } from "@/lib/site-data";
 
 const description =
-  "Web and app development services by Kunal Builds including websites, landing pages, dashboards, mobile apps, UI/UX design, startup MVPs, and website redesigns.";
+  "Kunal Builds offers websites, landing pages, dashboards, mobile apps, UI/UX, and startup MVP development for modern digital brands.";
 
 export const metadata: Metadata = createMetadata({
   title: "Services by Kunal Builds | Web & App Development",

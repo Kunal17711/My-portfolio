@@ -29,7 +29,7 @@ export default function About() {
       <div className="pointer-events-none absolute inset-0 z-0">
         <Image
           src="/assets/about-bg.webp"
-          alt=""
+          alt="Kunal Builds background"
           fill
           sizes="100vw"
           className="object-cover opacity-[0.07] grayscale"

@@ -1,169 +1,145 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
+import { Clock3, Code2, Coffee, Smile, Star } from "lucide-react";
 import { motion } from "framer-motion";
 
-const aboutRows = [
-  { label: "focus", value: "websites, apps, dashboards, landing pages" },
-  { label: "clothing brand", value: "founder & HOD of Aldren Row (premium streetwear)" },
-  { label: "stack", value: "next.js, react, react native, expo, tailwind, supabase" },
-  { label: "style", value: "clean ui, premium layouts, fast execution" },
-  { label: "available for", value: "freelance projects, startup mvps, business websites" },
+const tags = ["designer", "developer", "dreamer", "perfectionist"];
+
+const facts = [
+  { label: "projects completed", value: "50+", icon: Star },
+  { label: "happy clients", value: "30+", icon: Smile },
+  { label: "years of experience", value: "3+", icon: Clock3 },
+  { label: "cups of coffee", value: "∞", icon: Coffee },
+  { label: "lines of code", value: "100K+", icon: Code2 },
 ];
 
+const revealAnimation = {
+  initial: { opacity: 0, y: 26 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.28 },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  transition: { duration: 0.72, ease: [0.22, 1, 0.36, 1] as any },
+};
+
 export default function About() {
-  const revealAnimation = {
-    initial: { opacity: 0, y: 32 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as any },
-  };
-
-  const placeholderGradient = "bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.10),rgba(0,0,0,1)_55%)]";
-
   return (
-    <section id="about" className="relative w-full overflow-hidden border-t border-white/10 bg-black text-white">
-      {/* Background Ambient Depth */}
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <Image
-          src="/assets/about-bg.webp"
-          alt="Kunal Builds background"
-          fill
-          sizes="100vw"
-          className="object-cover opacity-[0.07] grayscale"
-          aria-hidden="true"
-        />
-      </div>
-      <div className="pointer-events-none absolute top-20 right-0 h-[500px] w-[500px] rounded-full bg-white/[0.03] blur-[120px]" />
-      <div className="pointer-events-none absolute bottom-0 left-0 h-[420px] w-[420px] rounded-full bg-white/[0.025] blur-[120px]" />
+    <section
+      id="about"
+      className="relative w-full overflow-hidden border-y border-white/10 bg-[#030509] text-[#F6F8FF]"
+    >
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(142,197,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(142,197,255,0.03)_1px,transparent_1px)] bg-[size:42px_42px]" />
+      <div className="pointer-events-none absolute left-1/2 top-0 h-px w-[min(1180px,88vw)] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#8EC5FF]/50 to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-1/2 h-px w-[min(1180px,88vw)] -translate-x-1/2 bg-gradient-to-r from-transparent via-white/25 to-transparent" />
+      <div className="pointer-events-none absolute -left-24 top-24 h-72 w-72 rounded-full bg-[#3B82F6]/10 blur-[110px]" />
+      <div className="pointer-events-none absolute right-0 bottom-10 h-80 w-80 rounded-full bg-[#8EC5FF]/8 blur-[120px]" />
 
-      <div className="max-w-[1440px] mx-auto px-6 md:px-10 py-24 md:py-32">
-
-        {/* Top Editorial Header */}
-        <motion.div {...revealAnimation}>
-          <p className="text-sm text-white/60 tracking-[0.28em] uppercase">
-            about
-          </p>
-          <h2 className="mt-8 text-4xl md:text-8xl font-medium tracking-[-0.07em] leading-[0.95] max-w-6xl text-white">
-            building with speed, taste, and real execution.
-          </h2>
-          <p className="mt-8 max-w-5xl text-xl md:text-3xl leading-[1.25] tracking-[-0.035em] text-white/70 break-words">
-            i’m kunal, the developer behind Kunal Builds. Kunal Builds is a web and app developer identity from Haryana, India, focused on clean websites, landing pages, dashboards, mobile apps, UI/UX interfaces, and real digital products.
-          </p>
-        </motion.div>
-
-        {/* Main About Split */}
-        <div className="mt-20 lg:mt-32 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-
-          {/* Left Column Image */}
+      <div className="relative mx-auto max-w-[1360px] px-5 py-20 sm:px-7 md:px-10 md:py-24 lg:px-12">
+        <div className="grid items-center gap-12 lg:grid-cols-[minmax(360px,1.18fr)_minmax(300px,0.88fr)_minmax(250px,0.72fr)] lg:gap-12 xl:gap-14">
           <motion.div
             {...revealAnimation}
-            className="lg:col-span-5 relative h-[520px] md:h-[720px] overflow-hidden rounded-[2rem] border border-white/10 bg-neutral-950"
+            className="about-card-wrap flex items-center justify-center lg:justify-start"
           >
-            <div className={`absolute inset-0 w-full h-full ${placeholderGradient}`} />
             <Image
-              src="/assets/about-character.webp"
-              alt="Kunal Builds web and app developer portrait"
-              fill
-              sizes="(max-width: 1024px) 100vw, 520px"
-              className="relative object-cover opacity-90 object-center transition-transform duration-1000 hover:scale-105"
+              src="/assets/card.webp"
+              alt="Kunal Builds profile card"
+              width={1024}
+              height={1536}
+              sizes="(max-width: 640px) 88vw, (max-width: 1024px) 470px, 520px"
+              className="about-card-image block h-auto w-[min(88vw,420px)] object-contain drop-shadow-[0_28px_64px_rgba(0,0,0,0.46)] md:w-[min(58vw,500px)] lg:w-[min(100%,535px)]"
+              priority={false}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
-            <div className="absolute bottom-6 left-6 text-xs uppercase tracking-[0.24em] text-white/70">
-              developer / builder / 2024
+          </motion.div>
+
+          <motion.div
+            {...revealAnimation}
+            transition={{ ...revealAnimation.transition, delay: 0.08 }}
+            className="min-w-0"
+          >
+            <p className="font-mono text-sm tracking-[0.18em] text-[#8EC5FF]">
+              // about me
+            </p>
+            <h2 className="mt-5 max-w-[500px] font-['Orbitron','Michroma','Audiowide','Rajdhani',sans-serif] leading-[1.02] tracking-[0.01em] text-[#F6F8FF]">
+              <motion.span
+                initial={{ opacity: 0, y: 22, filter: "blur(10px)" }}
+                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                viewport={{ once: true, amount: 0.7 }}
+                transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+                className="block text-[clamp(2rem,4.4vw,3.7rem)] font-black uppercase"
+              >
+                I&apos;m Kunal,
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, x: -18, filter: "blur(8px)" }}
+                whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                viewport={{ once: true, amount: 0.7 }}
+                transition={{ duration: 0.78, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+                className="mt-2 block whitespace-nowrap bg-gradient-to-b from-[#B9DCFF] via-[#6AA9FF] to-[#2E70D9] bg-clip-text text-[clamp(1.45rem,3.45vw,2.9rem)] font-semibold italic normal-case text-transparent drop-shadow-[0_0_24px_rgba(59,130,246,0.30)]"
+              >
+                a digital creator.
+              </motion.span>
+            </h2>
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.7 }}
+              transition={{ duration: 0.65, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="mt-6 max-w-[455px] font-['Rajdhani','Inter',system-ui,sans-serif] text-lg font-semibold leading-[1.48] tracking-[0.01em] text-[#D7DEE9] sm:text-xl"
+            >
+              I turn ideas into beautiful websites that don&apos;t just look good,
+              but feel right.
+            </motion.p>
+
+            <div className="mt-7 flex flex-wrap gap-2.5">
+              {tags.map((tag, index) => (
+                <motion.span
+                  key={tag}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.7 }}
+                  transition={{ duration: 0.45, delay: 0.26 + index * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                  className="rounded-full border border-[#B8C7D9]/25 bg-[#07111F]/75 px-3.5 py-2 font-['Rajdhani','Inter',system-ui,sans-serif] text-[13px] font-semibold tracking-[0.03em] text-[#F6F8FF] shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_0_0_1px_rgba(59,130,246,0.04)] transition duration-300 hover:border-[#8EC5FF]/60 hover:bg-[#0A182C] hover:shadow-[0_0_24px_rgba(59,130,246,0.18)]"
+                >
+                  {tag}
+                </motion.span>
+              ))}
             </div>
           </motion.div>
 
-          {/* Right Column Text Area */}
-          <div className="lg:col-span-7">
-            <motion.div {...revealAnimation} transition={{ ...revealAnimation.transition, delay: 0.1 }}>
-              <p className="text-sm text-white/60 tracking-[0.28em] uppercase">
-                what i care about
-              </p>
-              <h3 className="mt-6 text-2xl md:text-4xl leading-[1.18] tracking-[-0.05em] text-white">
-                i care about making digital products feel sharp, fast, and useful. a website should not just look nice, it should explain the offer clearly, load fast, work on every screen, and make people trust the business behind it.
-              </h3>
-              <p className="mt-8 max-w-2xl text-base md:text-lg leading-relaxed text-white/70">
-                my work usually sits between design and development: i think about layout, spacing, user flow, responsiveness, backend structure, and the final launch experience. the goal is always simple: build something that looks premium and actually works.
-              </p>
-              <p className="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-white/65">
-                based in Haryana, India — i use tools like next.js, react, react native, expo, tailwind css, supabase, and modern ai-assisted workflows to turn ideas into clean digital products faster for businesses, creators, and startups. i am also the founder & HOD of <Link href="/aldren-row" className="text-white underline decoration-white/20 underline-offset-4 hover:text-white/80">Aldren Row</Link>, a premium minimalist clothing brand.
-              </p>
-              <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="/about"
-                  className="inline-flex items-center justify-center rounded-full bg-white px-7 py-4 text-sm font-bold text-black transition-colors hover:bg-neutral-200"
-                >
-                  more about me
-                </Link>
-                <Link
-                  href="/services"
-                  className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/[0.03] px-7 py-4 text-sm font-medium text-white transition-colors hover:bg-white/[0.08]"
-                >
-                  view services
-                </Link>
-              </div>
-            </motion.div>
+          <motion.aside
+            {...revealAnimation}
+            transition={{ ...revealAnimation.transition, delay: 0.16 }}
+            className="min-w-0 border-t border-[#B8C7D9]/20 pt-8 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0"
+          >
+            <p className="font-mono text-sm tracking-[0.18em] text-[#8EC5FF]">
+              // a few facts
+            </p>
 
-            {/* Inline Detail Rows */}
-            <div className="mt-12 md:mt-16 border-t border-white/10">
-              {aboutRows.map((row, index) => (
+            <div className="mt-6 overflow-hidden rounded-[8px] border border-[#B8C7D9]/24 bg-[#06101D]/72 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_26px_70px_rgba(0,0,0,0.34)] backdrop-blur">
+              {facts.map(({ label, value, icon: Icon }, index) => (
                 <motion.div
-                  key={row.label}
-                  {...revealAnimation}
-                  transition={{ ...revealAnimation.transition, delay: 0.2 + (index * 0.05) }}
-                  className="grid grid-cols-1 sm:grid-cols-12 gap-3 border-b border-white/10 py-6 md:py-8"
+                  key={label}
+                  initial={{ opacity: 0, x: 18 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  whileHover={{ x: 4, backgroundColor: "rgba(142,197,255,0.055)" }}
+                  viewport={{ once: true, amount: 0.55 }}
+                  transition={{ duration: 0.45, delay: 0.12 + index * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                  className="grid grid-cols-[34px_1fr_auto] items-center gap-3 border-b border-[#B8C7D9]/12 px-4 py-4 last:border-b-0 sm:px-5"
                 >
-                  <div className="sm:col-span-4">
-                    <span className="text-xs uppercase tracking-[0.22em] text-white/60 font-medium">
-                      {row.label}
-                    </span>
-                  </div>
-                  <div className="sm:col-span-8">
-                    <span className="text-base md:text-lg text-white/70">
-                      {row.value}
-                    </span>
-                  </div>
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#B8C7D9]/18 bg-black/30 text-[#8EC5FF]">
+                    <Icon aria-hidden="true" className="h-4 w-4" strokeWidth={1.8} />
+                  </span>
+                  <span className="font-['Rajdhani','Inter',system-ui,sans-serif] text-base font-normal leading-tight text-[#AAB5C3]">
+                    {label}
+                  </span>
+                  <span className="font-['Share_Tech_Mono','JetBrains_Mono','IBM_Plex_Mono',monospace] text-sm font-semibold text-[#F6F8FF]">
+                    {value}
+                  </span>
                 </motion.div>
               ))}
             </div>
-          </div>
+          </motion.aside>
         </div>
-
-        {/* Second Editorial Image Row */}
-        <motion.div
-          {...revealAnimation}
-          className="mt-24 md:mt-40 relative h-[360px] md:h-[560px] overflow-hidden rounded-[2rem] border border-white/10 bg-neutral-950"
-        >
-          <div className={`absolute inset-0 w-full h-full ${placeholderGradient}`} />
-          <Image
-            src="/assets/about-workflow.webp"
-            alt="Kunal Builds web and app development workflow"
-            fill
-            sizes="(max-width: 1440px) 100vw, 1440px"
-            className="relative object-cover opacity-85 transition-transform duration-1000 hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-          <div className="absolute bottom-6 left-6 text-xs uppercase tracking-[0.24em] text-white/70">
-            workspace / design / development
-          </div>
-        </motion.div>
-
-        {/* Closing Belief Line */}
-        <motion.div
-          {...revealAnimation}
-          className="mt-24 md:mt-40 border-t border-white/10 pt-14"
-        >
-          <h2 className="max-w-5xl text-4xl md:text-7xl lg:text-8xl font-medium tracking-[-0.07em] leading-[0.9] text-white">
-            good design gets attention. <br className="hidden md:block" />
-            clean execution builds trust.
-          </h2>
-          <p className="mt-8 max-w-xl text-base md:text-xl text-white/70 leading-relaxed">
-            that’s the standard i try to bring into every project.
-          </p>
-        </motion.div>
       </div>
     </section>
   );

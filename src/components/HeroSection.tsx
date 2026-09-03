@@ -1,305 +1,137 @@
 "use client";
 
-import {
-  ArrowRight,
-  Music2,
-  Pause,
-  Play,
-  RotateCcw,
-  RotateCw,
-  Volume2,
-  X,
-} from "lucide-react";
 import Link from "next/link";
-import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
 
-function formatTime(value: number) {
-  if (!Number.isFinite(value)) {
-    return "0:00";
-  }
-
-  const minutes = Math.floor(value / 60);
-  const seconds = Math.floor(value % 60)
-    .toString()
-    .padStart(2, "0");
-
-  return `${minutes}:${seconds}`;
-}
+const stats = [
+  { glyph: "<>", target: 60, suffix: "+", decimals: 0, label: "Featured Projects" },
+  { glyph: "#", target: 20, suffix: "+", decimals: 0, label: "Creative Services" },
+  { glyph: "%", target: 100, suffix: "%", decimals: 0, label: "Responsive Builds" },
+  { glyph: "*", target: 24, suffix: "/7", decimals: 0, label: "Ideas in Motion" },
+];
 
 export default function HeroSection() {
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const didSetupAutoplayRef = useRef(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isMusicOpen, setIsMusicOpen] = useState(true);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [volume, setVolume] = useState(0.72);
-  const [audioReady, setAudioReady] = useState(true);
-  const progressPercent = duration ? (currentTime / duration) * 100 : 0;
-  const volumePercent = volume * 100;
+  const statsRef = useRef<HTMLDivElement>(null);
+  const [values, setValues] = useState(() => stats.map(() => 0));
 
   useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = volume;
-    }
-  }, [volume]);
+    const section = statsRef.current;
+    if (!section) return;
 
-  useEffect(() => {
-    const audio = audioRef.current;
+    let hasRun = false;
+    const timers: number[] = [];
+    const frames: number[] = [];
 
-    if (!audio || !audioReady || didSetupAutoplayRef.current) {
-      return;
-    }
+    const runCounters = () => {
+      if (hasRun) return;
+      hasRun = true;
 
-    didSetupAutoplayRef.current = true;
-
-    const startAudio = async () => {
-      try {
-        audio.volume = volume;
-        await audio.play();
-        setIsPlaying(true);
-        window.removeEventListener("pointerdown", startAudio);
-        window.removeEventListener("keydown", startAudio);
-      } catch {
-        setIsPlaying(false);
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        setValues(stats.map((stat) => stat.target));
+        return;
       }
+
+      stats.forEach((stat, index) => {
+        const timer = window.setTimeout(() => {
+          const start = performance.now();
+          const duration = 1500 + index * 80;
+
+          const tick = (now: number) => {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setValues((current) => {
+              const next = [...current];
+              next[index] = stat.target * eased;
+              return next;
+            });
+
+            if (progress < 1) frames.push(window.requestAnimationFrame(tick));
+          };
+
+          frames.push(window.requestAnimationFrame(tick));
+        }, 480 + index * 90);
+        timers.push(timer);
+      });
     };
 
-    startAudio();
-    window.addEventListener("pointerdown", startAudio, { once: true });
-    window.addEventListener("keydown", startAudio, { once: true });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          runCounters();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 },
+    );
+
+    observer.observe(section);
 
     return () => {
-      window.removeEventListener("pointerdown", startAudio);
-      window.removeEventListener("keydown", startAudio);
+      observer.disconnect();
+      timers.forEach(window.clearTimeout);
+      frames.forEach(window.cancelAnimationFrame);
     };
-  }, [audioReady, volume]);
-
-  const toggleAudio = async () => {
-    const audio = audioRef.current;
-
-    if (!audio || !audioReady) {
-      return;
-    }
-
-    if (audio.paused) {
-      await audio.play();
-      setIsPlaying(true);
-      return;
-    }
-
-    audio.pause();
-    setIsPlaying(false);
-  };
-
-  const skipAudio = (seconds: number) => {
-    const audio = audioRef.current;
-
-    if (!audio) {
-      return;
-    }
-
-    audio.currentTime = Math.min(
-      Math.max(audio.currentTime + seconds, 0),
-      audio.duration || 0,
-    );
-  };
-
-  const closeMusicCard = () => {
-    const audio = audioRef.current;
-
-    if (audio) {
-      audio.pause();
-    }
-
-    setIsPlaying(false);
-    setIsMusicOpen(false);
-  };
+  }, []);
 
   return (
-    <section id="home" className="hero-2000 relative min-h-[100svh] overflow-hidden bg-black text-white">
-      <audio
-        ref={audioRef}
-        src="/audio/music.mp3"
-        preload="metadata"
-        onLoadedMetadata={(event) => setDuration(event.currentTarget.duration)}
-        onTimeUpdate={(event) => setCurrentTime(event.currentTarget.currentTime)}
-        onEnded={() => {
-          setIsPlaying(false);
-          setCurrentTime(0);
-        }}
-        onError={() => {
-          setAudioReady(false);
-          setIsPlaying(false);
-        }}
-      />
-
-      <div className="hero-2000-bg" aria-hidden="true" />
-      <div className="hero-grid-overlay" aria-hidden="true" />
-      <div className="hero-vignette" aria-hidden="true" />
-      <img
-        src="/assets/star.webp"
-        alt=""
-        aria-hidden="true"
-        className="hero-star hero-star-one"
-      />
-      <img
-        src="/assets/star.webp"
-        alt=""
-        aria-hidden="true"
-        className="hero-star hero-star-two"
-      />
-      <img
-        src="/assets/star.webp"
-        alt=""
-        aria-hidden="true"
-        className="hero-star hero-star-three"
-      />
-
-      <div className="hero-side-rail" aria-hidden="true">
-        <span className="hero-rail-dot" />
-        <span className="hero-rail-dot is-small" />
-        <span className="hero-rail-text">WEB CREATOR</span>
-        <span className="hero-rail-line" />
-        <span className="hero-rail-text">DEVELOPER</span>
-        <span className="hero-rail-dot is-blue" />
+    <section id="home" className="evo-hero">
+      <div className="evo-bg" aria-hidden="true">
+        <video className="evo-bg-video" autoPlay muted loop playsInline>
+          <source
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260809_012548_ef22562c-c0ae-4816-ad9d-f8922af4e6a7.mp4"
+            type="video/mp4"
+          />
+        </video>
       </div>
 
-      <div className="relative z-10 flex min-h-[100svh] flex-col px-5 pb-8 pt-32 sm:px-8 md:px-12 lg:px-20 lg:pt-28">
-        <div className="grid flex-1 items-center gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(420px,1.05fr)]">
-          <div className="hero-copy max-w-3xl">
-            <p className="hero-kicker">welcome to my space_</p>
-            <h1 className="hero-chrome-title mt-5">
-              <span style={{ "--delay": "120ms" } as CSSProperties}>
-                I DON&apos;T JUST
+      <div className="evo-hero-inner">
+        <div className="evo-hero-main">
+          <div className="evo-trust anim" style={{ "--d": "0.05s" } as React.CSSProperties}>
+            <div className="evo-avatars" aria-hidden="true">
+              <span className="evo-avatar evo-avatar-one">
+                <span><i className="fa-brands fa-react" /></span>
               </span>
-              <span style={{ "--delay": "260ms" } as CSSProperties}>
-                BUILD
+              <span className="evo-avatar evo-avatar-two">
+                <span><i className="fa-brands fa-js" /></span>
               </span>
-              <span style={{ "--delay": "400ms" } as CSSProperties}>
-                WEBSITES.
+              <span className="evo-avatar evo-avatar-three">
+                <span><i className="fa-brands fa-node-js" /></span>
               </span>
-            </h1>
-            <p className="hero-subcopy mt-7 max-w-md text-xl leading-snug text-white/82 md:text-2xl">
-              I build the first impression{" "}
-              <span className="text-[#8ec5ff]">your brand</span> deserves.
-            </p>
-            <div className="hero-cta-row mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <Link href="/projects" className="hero-primary-btn">
-                <span>View my work</span>
-                <ArrowRight size={17} aria-hidden="true" />
-              </Link>
-              <Link href="/about" className="hero-secondary-btn">
-                <span>About me</span>
-                <span aria-hidden="true" className="hero-blue-square" />
-              </Link>
             </div>
+            <span className="evo-trust-pill">Available for Projects Worldwide</span>
           </div>
 
-          <div className="pointer-events-none hidden min-h-[520px] lg:block" aria-hidden="true" />
+          <h1 className="evo-headline">
+            <span>I Build Websites</span>
+            <span>Apps &amp; Products</span>
+          </h1>
+
+          <p className="evo-subhead anim" style={{ "--d": "0.28s" } as React.CSSProperties}>
+            From landing pages and dashboards to mobile apps and startup MVPs,
+            I design and build polished digital products with React and Next.js.
+          </p>
+
+          <Link className="evo-cta anim" href="/projects" style={{ "--d": "0.4s" } as React.CSSProperties}>
+            View My Work
+          </Link>
         </div>
 
-        <div className="hero-status-bar mt-10">
-          <span className="hero-blue-square" aria-hidden="true" />
-          <span>// system update</span>
-          <span className="hidden h-5 w-px bg-white/22 sm:block" aria-hidden="true" />
-          <span>I&apos;m currently available for new projects worldwide.</span>
-          <span className="ml-auto hidden text-white/55 md:inline">scroll to explore +</span>
+        <div className="evo-stats" ref={statsRef} aria-label="Platform statistics">
+          {stats.map((stat, index) => (
+            <div
+              className="evo-stat anim"
+              key={stat.label}
+              style={{ "--d": `${0.5 + index * 0.08}s` } as React.CSSProperties}
+            >
+              <span className="evo-stat-glyph" aria-hidden="true">{stat.glyph}</span>
+              <strong className="evo-stat-value">
+                {values[index].toFixed(stat.decimals)}{stat.suffix}
+              </strong>
+              <span className="evo-stat-label">{stat.label}</span>
+            </div>
+          ))}
         </div>
       </div>
-
-      {isMusicOpen ? (
-        <div className="hero-music-card">
-          <div className="hero-music-titlebar">
-            <span>// now playing</span>
-            <button type="button" aria-label="Close music card" onClick={closeMusicCard}>
-              <X size={14} aria-hidden="true" />
-            </button>
-          </div>
-          <div className="hero-music-body px-4 pb-4 pt-3">
-            <p className="hero-track-title text-lg leading-snug text-white/86">
-              late nights,
-              <br />
-              early builds
-              <br />
-              <span className="text-[#8ec5ff]">24/7</span>
-            </p>
-
-            <div className={`hero-eq mt-4 ${isPlaying ? "is-playing" : ""}`} aria-hidden="true">
-              {Array.from({ length: 14 }).map((_, index) => (
-                <span key={index} style={{ "--i": index } as CSSProperties} />
-              ))}
-            </div>
-
-            <label className="sr-only" htmlFor="hero-audio-progress">
-              Music progress
-            </label>
-            <input
-              id="hero-audio-progress"
-              className="hero-progress mt-4"
-              type="range"
-              min="0"
-              max={duration || 0}
-              step="0.1"
-              value={Math.min(currentTime, duration || 0)}
-              style={{ "--progress": `${progressPercent}%` } as CSSProperties}
-              onChange={(event) => {
-                const nextTime = Number(event.target.value);
-                if (audioRef.current) {
-                  audioRef.current.currentTime = nextTime;
-                }
-                setCurrentTime(nextTime);
-              }}
-              disabled={!audioReady}
-            />
-            <div className="mt-1 flex justify-between text-[10px] uppercase tracking-[0.16em] text-white/48">
-              <span>{formatTime(currentTime)}</span>
-              <span>{formatTime(duration)}</span>
-            </div>
-
-            <div className="hero-control-row mt-4 flex items-center justify-between gap-2">
-              <button type="button" className="hero-audio-btn" aria-label="Rewind 10 seconds" onClick={() => skipAudio(-10)}>
-                <RotateCcw size={15} aria-hidden="true" />
-              </button>
-              <button type="button" className="hero-audio-main" aria-label={isPlaying ? "Pause music" : "Play music"} onClick={toggleAudio} disabled={!audioReady}>
-                {isPlaying ? <Pause size={16} aria-hidden="true" /> : <Play size={16} aria-hidden="true" />}
-              </button>
-              <button type="button" className="hero-audio-btn" aria-label="Forward 10 seconds" onClick={() => skipAudio(10)}>
-                <RotateCw size={15} aria-hidden="true" />
-              </button>
-            </div>
-
-            <div className="mt-4 flex items-center gap-2">
-              <Volume2 size={14} className="text-white/58" aria-hidden="true" />
-              <label className="sr-only" htmlFor="hero-audio-volume">
-                Music volume
-              </label>
-              <input
-                id="hero-audio-volume"
-                className="hero-volume"
-                type="range"
-                min="0"
-                max="1"
-                step="0.01"
-                value={volume}
-                style={{ "--volume": `${volumePercent}%` } as CSSProperties}
-                onChange={(event) => setVolume(Number(event.target.value))}
-              />
-            </div>
-          </div>
-        </div>
-      ) : (
-        <button
-          type="button"
-          className="hero-music-reopen"
-          aria-label="Open music card"
-          onClick={() => setIsMusicOpen(true)}
-        >
-          <Music2 size={17} aria-hidden="true" />
-        </button>
-      )}
-
     </section>
   );
 }

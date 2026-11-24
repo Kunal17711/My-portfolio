@@ -1,0 +1,385 @@
+﻿
+:root {
+
+    --parrot: #c4ff36;
+    --parrot-hover: #d5ff68;
+    --control-ease: cubic-bezier(.16,1,.3,1);
+
+}
+
+/* PREMIUM PROJECT ACTION BUTTON */
+
+#detailLink {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 11px;
+
+    width: fit-content;
+
+    min-height: 45px;
+
+    padding: 13px 22px;
+
+    background: var(--parrot);
+
+    color: #101010;
+
+    border: none;
+
+    border-radius: 999px;
+
+    font-size: 13px;
+
+    font-weight: 500 !important;
+
+    letter-spacing: -.1px;
+
+    text-decoration: none;
+
+    box-shadow: none;
+
+    transform: none;
+
+    transition:
+        background .3s ease,
+        box-shadow .4s ease,
+        scale .3s var(--control-ease);
+
+}
+
+#detailLink[hidden] {
+
+    display: none !important;
+
+}
+
+#detailLink:hover {
+
+    background: var(--parrot-hover);
+
+    color: #101010;
+
+    box-shadow: 0 0 25px #c4ff3625;
+
+    transform: none;
+
+}
+
+#detailLink:active {
+
+    scale: .96;
+
+}
+
+/* CONSISTENT SVG ARROWS */
+
+.kb-arrow-icon {
+
+    display: inline-block;
+
+    width: 13px;
+
+    height: 13px;
+
+    flex-shrink: 0;
+
+    vertical-align: middle;
+
+    stroke-width: 2.7;
+
+    transform-origin: center;
+
+    transition:
+
+        transform .45s var(--control-ease),
+
+        color .3s ease;
+
+}
+
+/* Diagonal arrow becomes straight */
+
+#detailLink:hover .kb-arrow-icon,
+
+.kb-project-links a:hover .kb-arrow-icon,
+
+.kb-contact-link:hover .kb-arrow-icon {
+
+    transform: rotate(45deg);
+
+}
+
+/* ARCHIVE WEBSITE AND SOURCE LINKS */
+
+.kb-project-links a {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    color: var(--parrot);
+
+    font-size: 12px;
+
+    font-weight: 500 !important;
+
+    text-decoration: none;
+
+}
+
+.kb-project-links a:hover {
+
+    color: var(--parrot-hover);
+
+    text-decoration: none;
+
+}
+
+.kb-project-links .kb-arrow-icon {
+
+    width: 11px;
+
+    height: 11px;
+
+}
+
+/* CONTACT MENU ARROWS */
+
+#kbContactMenu .contact-arrow {
+
+    width: 13px;
+
+    height: 13px;
+
+    stroke-width: 2.2;
+
+    transform-origin: center;
+
+    transition:
+
+        transform .45s var(--control-ease),
+
+        color .3s ease;
+
+}
+
+#kbContactMenu .kb-contact-link:hover .contact-arrow {
+
+    transform: rotate(45deg);
+
+    color: var(--parrot);
+
+}
+
+/* MAIN CIRCULAR CONTACT BUTTON */
+
+#kbContactButton {
+
+    background: var(--parrot);
+
+}
+
+#kbContactDock.is-open #kbContactButton {
+
+    background: var(--parrot);
+
+}
+
+#kbContactButton svg {
+
+    stroke-width: 2.2;
+
+    transition: transform .5s var(--control-ease);
+
+}
+
+#kbContactDock.is-open #kbContactButton svg {
+
+    transform: rotate(45deg);
+
+}
+
+/* PREMIUM CLOSE BUTTONS */
+
+#close,
+
+#kbArchiveClose {
+
+    display: grid;
+
+    place-items: center;
+
+    flex-shrink: 0;
+
+    width: 36px;
+
+    height: 36px;
+
+    min-width: 36px;
+
+    min-height: 36px;
+
+    padding: 0;
+
+    background: #242424;
+
+    color: #ababab;
+
+    border: 1px solid #ffffff08;
+
+    border-radius: 50%;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transform: none !important;
+
+    transition:
+
+        background .3s ease,
+
+        color .3s ease,
+
+        scale .3s var(--control-ease);
+
+}
+
+/* Fixed placement in detail modal */
+
+#close {
+
+    position: absolute;
+
+    right: 16px;
+
+    top: 16px;
+
+    z-index: 10;
+
+}
+
+/* Keep archive close aligned */
+
+#kbArchiveClose {
+
+    align-self: flex-start;
+
+}
+
+/* SVG cross */
+
+.kb-close-icon {
+
+    display: block;
+
+    width: 15px;
+
+    height: 15px;
+
+    pointer-events: none;
+
+    transform-origin: 50% 50%;
+
+    transition:
+
+        transform .45s var(--control-ease);
+
+}
+
+/* Rotate only icon, never entire button */
+
+#close:hover,
+
+#kbArchiveClose:hover {
+
+    background: #353535;
+
+    color: #ffffff;
+
+    transform: none !important;
+
+}
+
+#close:hover .kb-close-icon,
+
+#kbArchiveClose:hover .kb-close-icon {
+
+    transform: rotate(90deg);
+
+}
+
+#close:active,
+
+#kbArchiveClose:active {
+
+    scale: .9;
+
+}
+
+/* KEYBOARD ACCESSIBILITY */
+
+#detailLink:focus-visible,
+
+#close:focus-visible,
+
+#kbArchiveClose:focus-visible {
+
+    outline: 2px solid var(--parrot);
+
+    outline-offset: 4px;
+
+}
+
+/* MOBILE */
+
+@media(max-width:700px) {
+
+    #close,
+
+    #kbArchiveClose {
+
+        width: 40px;
+
+        height: 40px;
+
+        min-width: 40px;
+
+        min-height: 40px;
+
+    }
+
+    #detailLink {
+
+        min-height: 44px;
+
+        padding: 13px 20px;
+
+    }
+
+}
+
+/* REDUCED MOTION */
+
+@media(prefers-reduced-motion:reduce) {
+
+    .kb-arrow-icon,
+
+    .kb-close-icon,
+
+    #kbContactButton svg,
+
+    .contact-arrow {
+
+        transition: none !important;
+
+    }
+
+}

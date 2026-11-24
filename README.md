@@ -1,64 +1,45 @@
-# Kunal Builds Portfolio
+# Kunal Builds
 
-Production portfolio website for Kunal Builds, the developer identity of Kunal, a web and app developer from Haryana, India.
+Portfolio and project archive for Kunal Builds, with a serverless AI assistant.
 
-Live URL: https://heyitskunal.vercel.app
+Live site: <https://heyitskunal.vercel.app>
 
-## Tech Stack
+## Build and run
 
-- Next.js
-- TypeScript
-- Tailwind CSS
-- React
-- Framer Motion
-- GSAP
-- Vercel
+Requires Node.js 20 or newer. The site uses built-in Node modules and has no runtime npm dependencies.
 
-## SEO Features
+```powershell
+$env:KB_PUBLIC_URL = 'https://your-verified-domain.example'
+npm run build
+npm run dev
+```
 
-- Central metadata helper in `src/lib/seo.ts`
-- Unique titles, descriptions, canonical URLs, Open Graph, and Twitter cards
-- Homepage entity signals for Kunal Builds
-- About entity page
-- Project index and project case-study pages
-- Services index and service detail pages
-- Contact page with safe public contact details
-- Internal linking between homepage, about, projects, services, and contact
-- Descriptive alt text for meaningful project imagery
+The production build creates an isolated `public/` directory. It includes the static site and SEO output; the assistant API and its knowledge base stay server-side. For a local assistant, create `.env.local` from `.env.example` and configure the server variables below. The dev server binds to `127.0.0.1:8000`.
 
-## Structured Data
+## Assistant configuration
 
-The site includes JSON-LD for:
+Set these only in the deployment platform's server environment or local `.env.local`:
 
-- Person
-- WebSite
-- ProfessionalService
-- Brand
-- SiteNavigationElement
-- WebPage
-- ProfilePage
-- CollectionPage
-- ItemList
-- CreativeWork
-- SoftwareApplication
-- Service
-- FAQPage
-- BreadcrumbList
-- ContactPage
+- `AI_ENABLED=true`
+- `GROQ_API_KEY` and optionally `GROQ_MODEL` (defaults to `openai/gpt-oss-20b`)
+- `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`
+- `RATE_LIMIT_SECRET` (at least 24 characters)
+- `KB_PUBLIC_URL` (the verified HTTPS site origin used for canonical URLs and sitemap generation)
 
-## Technical SEO Files
+The API fails closed if AI is disabled or shared Redis rate limiting is unavailable. Mock responses are only available through the local development server's explicit `AI_TEST_MOCK=1` setting; do not set this in deployment.
 
-- `public/sitemap.xml`
-- `public/robots.txt`
-- `public/llms.txt`
-- `public/humans.txt`
-- `public/google3d850b3790bc6e81.html`
-- `public/og-image.png`
+## Checks
 
-## Deployment Note
+```powershell
+npm run test:ai
+```
 
-The site is deployed on Vercel. After publishing SEO route updates, resubmit the sitemap in Google Search Console and inspect the main canonical URLs.
+The checks cover request validation, origin security, streaming, quota reservation/refunds, concurrency, cancellation, and Redis behavior. No credentials are needed for the test suite.
+
+## SEO and hosting
+
+The build generates canonical metadata, JSON-LD, `robots.txt`, and `sitemap.xml` from the static route inventory. It preserves the site's Google Search Console verification file. Vercel uses `npm run build`, serves `public/`, and runs `api/assistant.js` as a serverless function. Configure the environment variables above before enabling the assistant. Confirm hosting-plan eligibility and rights for all media before production deployment.
 
 ## Copyright
 
-Copyright Kunal Builds. This repository is publicly visible for showcase purposes only. Do not copy, clone, fork, reuse, or redistribute the design or source code without permission.
+Copyright (c) 2026 Kunal (Kunal17711). All rights reserved. See [LICENSE](LICENSE) for the source-use terms.

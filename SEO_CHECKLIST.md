@@ -2,7 +2,7 @@
 
 - [x] Site indexed
 - [x] Google Search Console verified
-- [ ] Sitemap submitted
+- [ ] Sitemap submitted after migration
 - [x] Google verification file added
 - [x] robots.txt added
 - [x] sitemap.xml added
@@ -21,16 +21,12 @@
 - [x] humans.txt added
 - [x] accessibility checked
 - [x] performance checked
-- [x] build passed
+- [x] Static build configured
 
 ## Recommended Next Steps
 
-1. Resubmit sitemap in Google Search Console.
-2. Inspect /about.
-3. Inspect /projects.
-4. Inspect /services.
-5. Inspect /contact.
-6. Test Rich Results.
-7. Test PageSpeed Insights.
-8. Publish one project post per week.
-9. Add a custom domain later.
+1. Build with the verified production origin in `KB_PUBLIC_URL`.
+2. Confirm the migration host has the Google verification file.
+3. Review redirects and compare the generated sitemap to the live route list.
+4. After an approved deployment, resubmit the sitemap in Google Search Console and inspect the primary routes.
+5. Confirm hosting eligibility and rights for all media before production deployment.

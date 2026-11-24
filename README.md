@@ -10,7 +10,7 @@ Requires Node.js 20 or newer. The site uses built-in Node modules and has no run
 
 ```powershell
 npm ci --include=dev
-$env:KB_PUBLIC_URL = 'https://your-verified-domain.example'
+$env:KB_PUBLIC_URL = 'https://heyitskunal.vercel.app'
 npm run build
 npm run dev
 ```

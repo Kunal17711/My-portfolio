@@ -100,9 +100,10 @@
     const video=document.getElementById('kbPortfolioVideo');if(videoWasPlaying&&video)video.play().catch(()=>{});
     orb.focus({preventScroll:true});
   }
+  const readableText=text=>String(text).replace(/\*\*([^*\n]+)\*\*/g,'$1').replace(/__([^_\n]+)__/g,'$1');
   function textBlock(container,text){
     container.replaceChildren();
-    const lines=String(text).split('\n');let list=null,paragraph=[];
+    const lines=readableText(text).split('\n');let list=null,paragraph=[];
     const flush=()=>{if(paragraph.length){const p=document.createElement('p');p.textContent=paragraph.join(' ');container.append(p);paragraph=[]}};
     for(const raw of lines){const line=raw.trim();
       if(!line){flush();list=null;continue}
@@ -173,7 +174,7 @@
           const type=frame.match(/^event:\s*([^\n]+)/m)?.[1];const data=frame.match(/^data:\s*(.*)$/m)?.[1];if(!type||!data)continue;
           let payload;try{payload=JSON.parse(data)}catch{continue}
           if(type==='links')renderLinks(payload.items);
-          if(type==='token'&&typeof payload.text==='string'){if(firstToken===null)firstToken=performance.now()-started;currentAnswer+=payload.text;currentTurn.answer.dataset.plain=currentAnswer;textBlock(currentTurn.answer,currentAnswer);setStatus('');renderer?.setState('responding');conversation.scrollTop=conversation.scrollHeight}
+          if(type==='token'&&typeof payload.text==='string'){if(firstToken===null)firstToken=performance.now()-started;currentAnswer+=payload.text;currentTurn.answer.dataset.plain=readableText(currentAnswer);textBlock(currentTurn.answer,currentAnswer);setStatus('');renderer?.setState('responding');conversation.scrollTop=conversation.scrollHeight}
           if(type==='error')throw new Error(payload.message||'The response was interrupted.');
           if(type==='done')completed=true;
         }

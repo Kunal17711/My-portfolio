@@ -5,12 +5,12 @@
   "outputDirectory": "public",
   "trailingSlash": true,
   "redirects": [
-    { "source": "/who-is-kunal-builds", "destination": "/who-is-kunal/", "permanent": true },
-    { "source": "/about-kunal", "destination": "/who-is-kunal/", "permanent": true },
-    { "source": "/kunal-builds", "destination": "/who-is-kunal/", "permanent": true },
-    { "source": "/kunal-dev", "destination": "/who-is-kunal/", "permanent": true },
-    { "source": "/kunal17711", "destination": "/who-is-kunal/", "permanent": true },
-    { "source": "/aldren-row", "destination": "/projects/aldren-row/", "permanent": true }
+    { "source": "/who-is-kunal-builds/", "destination": "/who-is-kunal/", "permanent": true },
+    { "source": "/about-kunal/", "destination": "/who-is-kunal/", "permanent": true },
+    { "source": "/kunal-builds/", "destination": "/who-is-kunal/", "permanent": true },
+    { "source": "/kunal-dev/", "destination": "/who-is-kunal/", "permanent": true },
+    { "source": "/kunal17711/", "destination": "/who-is-kunal/", "permanent": true },
+    { "source": "/aldren-row/", "destination": "/projects/aldren-row/", "permanent": true }
   ],
   "functions": {
     "api/assistant.js": {

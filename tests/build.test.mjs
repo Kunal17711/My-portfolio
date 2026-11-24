@@ -6,6 +6,13 @@ import path from 'node:path';
 import {prepareSeo} from '../scripts/prepare-seo.mjs';
 import {transform} from 'lightningcss';
 
+test('custom redirects match Vercel trailing-slash normalization',()=>{
+  const config=JSON.parse(fs.readFileSync(new URL('../vercel.json',import.meta.url),'utf8'));
+  assert.equal(config.trailingSlash,true);
+  for(const rule of config.redirects){assert.equal(rule.source.endsWith('/'),true);assert.equal(rule.destination.endsWith('/'),true);assert.equal(rule.permanent,true)}
+  assert.equal(config.redirects.find(x=>x.source==='/aldren-row/').destination,'/projects/aldren-row/');
+});
+
 test('all source stylesheets parse strictly without warnings',()=>{
   const root=path.resolve(import.meta.dirname,'..');
   const files=fs.readdirSync(root).filter(name=>name.endsWith('.css')).map(name=>path.join(root,name));

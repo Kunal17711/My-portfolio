@@ -36,15 +36,16 @@ export function createAssistantHandler({environment=process.env,fetchProvider=fe
     const timeout=setTimeout(()=>controller.abort('timeout'),45000);
     const cancel=()=>controller.abort('disconnect');
     request.signal?.addEventListener('abort',cancel,{once:true});
+    if(request.signal?.aborted)cancel();
     let provider;
     try{
       provider=await fetchProvider(GROQ_ENDPOINT,{method:'POST',headers:{Authorization:`Bearer ${key}`,'Content-Type':'application/json'},body:JSON.stringify({model:environment.GROQ_MODEL||'openai/gpt-oss-20b',messages,stream:true,stream_options:{include_usage:true},max_completion_tokens:512,reasoning_effort:'low',reasoning_format:'hidden',tool_choice:'none',temperature:0.45}),signal:controller.signal});
     }catch{
-      clearTimeout(timeout);request.signal?.removeEventListener('abort',cancel);await reservation.finish().catch(()=>{});
+      clearTimeout(timeout);request.signal?.removeEventListener('abort',cancel);await reservation.finish(undefined,controller.signal.aborted?'cancelled':'interrupted').catch(()=>{});
       return json(502,'provider_unavailable',failure(502));
     }
     if(!provider.ok||!provider.body){
-      clearTimeout(timeout);request.signal?.removeEventListener('abort',cancel);await reservation.finish(0).catch(()=>{});
+      clearTimeout(timeout);request.signal?.removeEventListener('abort',cancel);await reservation.finish(0,'rejected').catch(()=>{});
       const status=provider.status===429?429:502;
       return json(status,'provider_failure',failure(status),status===429?{'Retry-After':provider.headers.get('retry-after')||'60'}:{});
     }
@@ -54,7 +55,7 @@ export function createAssistantHandler({environment=process.env,fetchProvider=fe
         streamController=controllerRef;
         const send=(type,payload)=>controllerRef.enqueue(new TextEncoder().encode(sse(type,payload)));
         (async()=>{
-          let output='',usage=null,ended=false;
+          let output='',usage=null,completed=false;
           try{
             send('links',{items:suggestions(selected)});
             for await(const chunk of groqTextChunks(provider.body)){
@@ -62,12 +63,12 @@ export function createAssistantHandler({environment=process.env,fetchProvider=fe
               if(chunk.text){output+=chunk.text;send('token',{text:chunk.text})}
             }
             if(!output.trim())throw new Error('empty_answer');
-            send('done',{complete:true});ended=true;
+            send('done',{complete:true});completed=true;
           }catch{
             if(!controller.signal.aborted){try{send('error',{message:'The response was interrupted. Please try again.'})}catch{}}
           }finally{
             clearTimeout(timeout);request.signal?.removeEventListener('abort',cancel);
-            await reservation.finish(usage).catch(()=>{});
+            await reservation.finish(usage,controller.signal.aborted?'cancelled':completed?'complete':'interrupted').catch(()=>{});
             try{controllerRef.close()}catch{}
           }
         })();

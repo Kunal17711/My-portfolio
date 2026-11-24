@@ -4,8 +4,10 @@ import {execFileSync} from 'node:child_process';
 import {minify as minifyJavaScript} from 'terser';
 import {transform as transformCss} from 'lightningcss';
 import {prepareSeo} from './prepare-seo.mjs';
+import {buildOriginalAmbient} from './build-audio.mjs';
 
 const root=path.resolve(import.meta.dirname,'..');
+if(process.env.VERCEL==='1'&&(process.env.AI_TEST_MOCK==='1'||process.env.AI_TEST_LIVE==='1'||process.env.AI_LOCAL_DEV==='true'))throw new Error('Local assistant test flags are forbidden in Vercel builds.');
 const destination=path.resolve(root,'public');
 if(destination!==path.join(root,'public')||!destination.startsWith(root+path.sep))throw new Error('Invalid public output directory');
 execFileSync(process.execPath,[path.join(root,'scripts/build-knowledge.mjs')],{stdio:'inherit'});
@@ -29,7 +31,7 @@ function copyFolder(relative,filter){
 }
 for(const folder of staticFolders)copyFolder(folder,file=>file.endsWith(`${path.sep}index.html`));
 copyFolder('assets',file=>safeAsset.test(file)||file.endsWith(`${path.sep}ai-assistant.js`)||file.endsWith(`${path.sep}ai-orb.js`)||file.endsWith(`${path.sep}ai-assistant.css`));
-let skippedCss=0;
+buildOriginalAmbient(destination);
 async function optimizeAssets(directory){
   for(const item of fs.readdirSync(directory,{withFileTypes:true})){
     const full=path.join(directory,item.name);
@@ -40,15 +42,15 @@ async function optimizeAssets(directory){
       if(!result.code)throw new Error(`Could not minify ${path.relative(destination,full)}`);
       fs.writeFileSync(full,result.code);
     }else if(item.name.endsWith('.css')){
-      const result=transformCss({filename:full,code:fs.readFileSync(full),minify:true,errorRecovery:true});
-      if(result.warnings.length){skippedCss++;continue}
+      const result=transformCss({filename:full,code:fs.readFileSync(full),minify:true});
+      if(result.warnings.length)throw new Error(`CSS warning in ${path.relative(destination,full)}`);
       fs.writeFileSync(full,result.code);
     }
   }
 }
 await optimizeAssets(destination);
-if(skippedCss)console.warn(`Kept ${skippedCss} CSS file(s) unchanged because their existing selectors are invalid.`);
-const seo=prepareSeo(destination,process.env.KB_PUBLIC_URL);
+const preview=process.env.VERCEL_ENV==='preview';
+const seo=prepareSeo(destination,process.env.KB_PUBLIC_URL||(preview?'https://heyitskunal.vercel.app':undefined),{indexable:!preview});
 const files=[];
 function inventory(dir){for(const item of fs.readdirSync(dir,{withFileTypes:true})){const full=path.join(dir,item.name);if(item.isDirectory())inventory(full);else files.push(path.relative(destination,full).replaceAll('\\','/'))}}
 inventory(destination);

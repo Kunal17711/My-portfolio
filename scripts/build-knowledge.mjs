@@ -28,7 +28,7 @@ const services = Array.from(context.window.KB_SERVICES || [], service => ({
 const identity = [
   {type:'identity',id:'about',name:'About Kunal Builds',description:'Kunal is an independent web and app developer from Haryana, India. Kunal Builds is his developer identity. He is founder and HOD of Aldren Row. Alternate names include Kunal Dev, Kunal Developer and Kunal17711.',route:'/about/'},
   {type:'identity',id:'who-is-kunal',name:'Who is Kunal Builds?',description:'Kunal Builds is the portfolio and developer identity of Kunal, a web and app developer based in Haryana, India.',route:'/who-is-kunal/'},
-  {type:'contact',id:'contact',name:'Contact Kunal Builds',description:'For project inquiries, share goals, required pages or screens, timelines and references. Email: kkunaall10@gmail.com.',route:'/about/'}
+  {type:'contact',id:'contact',name:'Contact Kunal Builds',description:'For project inquiries, share goals, required pages or screens, timelines and references. Email: kkunaall10@gmail.com.',route:'/contact/'}
 ];
 const stats=context.window.KB_IDENTITY_DATA?.stats;
 if (!stats?.totalRepositories || !stats?.totalLinesOfCode) throw new Error('Reviewed portfolio statistics are required to build knowledge.');

@@ -3,7 +3,7 @@ import path from 'node:path';
 
 const escapeXml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const escaped=value=>String(value).replace(/[&<>"]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[char]));
-export function prepareSeo(publicRoot,rawOrigin){
+export function prepareSeo(publicRoot,rawOrigin,{indexable=true}={}){
   const origin=String(rawOrigin||'').trim().replace(/\/+$/,'');
   if(origin&&(!/^https:\/\/[^/?#]+$/i.test(origin)||/localhost|127\.0\.0\.1|example\./i.test(origin)))throw new Error('KB_PUBLIC_URL must be the verified production HTTPS origin.');
   const pages=[];
@@ -19,7 +19,8 @@ export function prepareSeo(publicRoot,rawOrigin){
     const relative=path.relative(publicRoot,file).split(path.sep).join('/');
     const route=relative==='index.html'?'/':'/'+relative.replace(/index\.html$/,'');
     let html=fs.readFileSync(file,'utf8');
-    html=html.replace(/<meta\s+name="robots"\s+content="[^"]*"\s*\/?>/i,`<meta name="robots" content="${origin?'index,follow,max-image-preview:large':'noindex,follow'}">`);
+    const robots=`<meta name="robots" content="${origin&&indexable?'index,follow,max-image-preview:large':'noindex,nofollow'}">`;
+    html=/<meta\s+name="robots"/i.test(html)?html.replace(/<meta\s+name="robots"\s+content="[^"]*"\s*\/?>/i,robots):html.replace(/<\/head>/i,robots+'</head>');
     html=html.replace(/<link\s+rel="canonical"[^>]*>\s*/gi,'').replace(/<meta\s+property="og:url"[^>]*>\s*/gi,'').replace(/<meta\s+property="og:image"[^>]*>\s*/gi,'').replace(/<meta\s+name="twitter:image"[^>]*>\s*/gi,'');
     if(origin){
       const absolute=origin+route;
@@ -50,7 +51,7 @@ export function prepareSeo(publicRoot,rawOrigin){
     });
     if(origin&&!html.includes('type="application/ld+json"')){
       const title=html.match(/<title>(.*?)<\/title>/i)?.[1]?.split('|')[0]?.trim()||'Kunal Builds';
-      const type=route==='/about/'?'AboutPage':'CollectionPage';
+      const type=route==='/about/'?'AboutPage':route==='/contact/'?'ContactPage':'CollectionPage';
       const schema={'@context':'https://schema.org','@graph':[{'@type':type,name:title,url:origin+route,about:{'@type':'Person','@id':origin+'/#person',name:'Kunal'}},{'@type':'BreadcrumbList',itemListElement:[{'@type':'ListItem',position:1,name:'Home',item:origin+'/'},{'@type':'ListItem',position:2,name:title,item:origin+route}]}]};
       html=html.replace(/<\/head>/i,`<script type="application/ld+json">${JSON.stringify(schema)}</script></head>`);
     }
@@ -58,6 +59,6 @@ export function prepareSeo(publicRoot,rawOrigin){
   }
   if(origin){fs.writeFileSync(path.join(publicRoot,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.map(file=>{const relative=path.relative(publicRoot,file).split(path.sep).join('/');const route=relative==='index.html'?'/':'/'+relative.replace(/index\.html$/,'');return `<url><loc>${escapeXml(origin+route)}</loc></url>`}).join('')}</urlset>`)}
   else if(fs.existsSync(path.join(publicRoot,'sitemap.xml')))fs.unlinkSync(path.join(publicRoot,'sitemap.xml'));
-  fs.writeFileSync(path.join(publicRoot,'robots.txt'),`User-agent: *\nAllow: /\n${origin?`Sitemap: ${origin}/sitemap.xml\n`:''}`);
+  fs.writeFileSync(path.join(publicRoot,'robots.txt'),`User-agent: *\n${indexable&&origin?'Allow: /':'Disallow: /'}\n${origin?`Sitemap: ${origin}/sitemap.xml\n`:''}`);
   return {origin:origin||null,pages:pages.length};
 }

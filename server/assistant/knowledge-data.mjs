@@ -1142,7 +1142,7 @@ export default {
       "id": "contact",
       "name": "Contact Kunal Builds",
       "description": "For project inquiries, share goals, required pages or screens, timelines and references. Email: kkunaall10@gmail.com.",
-      "route": "/about/"
+      "route": "/contact/"
     }
   ]
 };

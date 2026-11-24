@@ -80,7 +80,6 @@
     intro.addEventListener("pointerdown", enableAudio);
      intro.addEventListener("click", enableAudio);
      document.addEventListener("keydown", enableAudio);
-     enableAudio();
 
     function keySound() {
 

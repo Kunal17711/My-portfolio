@@ -1,6 +1,6 @@
 import data from './knowledge-data.mjs';
 const entries=data.entries;
-export const allowedRoutes=new Set(['/', '/about/', '/projects/', '/services/', '/who-is-kunal/', ...entries.map(item=>item.route)]);
+export const allowedRoutes=new Set(['/', '/about/', '/projects/', '/services/', '/who-is-kunal/', '/contact/', ...entries.map(item=>item.route)]);
 const tokenize=text=>String(text||'').toLowerCase().normalize('NFKD').replace(/[^a-z0-9\s-]/g,' ').split(/\s+/).filter(word=>word.length>1);
 const synonyms={app:['mobile','android','application'],mobile:['app','android','application'],website:['web','site','landing'],startup:['mvp','business'],design:['ui','ux','interface'],contact:['email','reach','hire'],developer:['kunal','builds'],project:['portfolio','work']};
 const docTokens=entries.map(entry=>tokenize([entry.name,entry.name,entry.category,entry.description,entry.stack?.join(' '),entry.language,entry.audience].join(' ')));

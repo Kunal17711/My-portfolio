@@ -485,7 +485,7 @@
     // Existing background music.
 
     function findAudio() {
-        return [...document.querySelectorAll("audio")]
+        return document.getElementById("audio") || [...document.querySelectorAll("audio")]
             .find(audio => {
 
                 const source =
@@ -494,7 +494,7 @@
                     audio.querySelector("source")?.src ||
                     "";
 
-                return /fav-song/i.test(source);
+                return /portfolio-ambient/i.test(source);
             });
     }
 
@@ -509,7 +509,7 @@
         if (!fallbackAudio) {
 
             fallbackAudio = new Audio(
-                "assets/audio/fav-song.mp3"
+                "assets/audio/portfolio-ambient.wav"
             );
 
             fallbackAudio.loop = true;

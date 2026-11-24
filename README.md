@@ -9,6 +9,7 @@ Live site: <https://heyitskunal.vercel.app>
 Requires Node.js 20 or newer. The site uses built-in Node modules and has no runtime npm dependencies.
 
 ```powershell
+npm ci --include=dev
 $env:KB_PUBLIC_URL = 'https://your-verified-domain.example'
 npm run build
 npm run dev
@@ -32,6 +33,7 @@ The API fails closed if AI is disabled or shared Redis rate limiting is unavaila
 
 ```powershell
 npm run test:ai
+npm run test:build
 ```
 
 The checks cover request validation, origin security, streaming, quota reservation/refunds, concurrency, cancellation, and Redis behavior. No credentials are needed for the test suite.
@@ -39,6 +41,8 @@ The checks cover request validation, origin security, streaming, quota reservati
 ## SEO and hosting
 
 The build generates canonical metadata, JSON-LD, `robots.txt`, and `sitemap.xml` from the static route inventory. It preserves the site's Google Search Console verification file. Vercel uses `npm run build`, serves `public/`, and runs `api/assistant.js` as a serverless function. Configure the environment variables above before enabling the assistant. Confirm hosting-plan eligibility and rights for all media before production deployment.
+
+Preview builds are nonindexable and keep canonical URLs on the production origin. See [production preparation](docs/PRODUCTION.md) for exact configuration, merge gates and rollback, and [media provenance](docs/MEDIA.md) for the original generated music loop.
 
 ## Copyright
 

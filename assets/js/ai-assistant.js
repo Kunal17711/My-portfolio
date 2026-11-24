@@ -163,7 +163,7 @@
     const started=performance.now();let firstToken=null,completed=false;
     try{
       const page=location.pathname.endsWith('/')?location.pathname:location.pathname+'/';
-      const response=await fetch('/api/assistant',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message,history:previous,page,sessionId}),signal:active.signal});
+      const response=await fetch('/api/assistant/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message,history:previous,page,sessionId}),signal:active.signal});
       if(!response.ok){let info={};try{info=await response.json()}catch{}throw new Error(typeof info.message==='string'?info.message:'The assistant is temporarily unavailable.')}
       if(!response.body)throw new Error('The response could not be streamed.');
       const reader=response.body.getReader(),decoder=new TextDecoder();let buffer='';

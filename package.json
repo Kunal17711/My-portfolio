@@ -5,7 +5,8 @@
   "scripts": {
     "build": "node scripts/build-public.mjs",
     "dev": "node scripts/dev-server.mjs",
-    "test:ai": "node --test tests/assistant.test.mjs"
+    "test:ai": "node --test tests/assistant.test.mjs",
+    "test:build": "node --test tests/build.test.mjs"
   },
   "engines": {
     "node": ">=20"

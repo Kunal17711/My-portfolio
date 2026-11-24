@@ -40,10 +40,10 @@ const csp="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inlin
 const security={'X-Content-Type-Options':'nosniff','Referrer-Policy':'strict-origin-when-cross-origin','Permissions-Policy':'camera=(), microphone=(), geolocation=(), payment=()','X-Frame-Options':'DENY','Content-Security-Policy':csp};
 const server=http.createServer(async(req,res)=>{
   try{
-    if(req.url?.split('?')[0]==='/api/assistant'){
+    if(['/api/assistant','/api/assistant/'].includes(req.url?.split('?')[0])){
       const abort=new AbortController();res.on('close',()=>{if(!res.writableEnded)abort.abort()});
       const headers=new Headers(req.headers);headers.set('x-kb-local-ip',req.socket.remoteAddress||'127.0.0.1');
-      const webRequest=new Request('http://localhost:8000/api/assistant',{method:req.method,headers,body:req.method==='GET'||req.method==='HEAD'?undefined:Readable.toWeb(req),duplex:'half',signal:abort.signal});
+      const webRequest=new Request(`http://localhost:${port}/api/assistant/`,{method:req.method,headers,body:req.method==='GET'||req.method==='HEAD'?undefined:Readable.toWeb(req),duplex:'half',signal:abort.signal});
       const reply=await handler(webRequest);
       res.writeHead(reply.status,Object.fromEntries([...reply.headers,...Object.entries(security)]));
       if(reply.body){for await(const chunk of reply.body){if(!res.write(chunk))await once(res,'drain')}}
@@ -63,8 +63,21 @@ const server=http.createServer(async(req,res)=>{
       res.writeHead(404,{...security,'Content-Type':'text/html; charset=utf-8'});
       if(req.method==='HEAD'){res.end();return}fs.createReadStream(notFound).pipe(res);return;
     }
-    res.writeHead(200,{...security,'Content-Type':mime[path.extname(target).toLowerCase()]||'application/octet-stream','Cache-Control':relative.startsWith('/assets/')?'public, max-age=3600':'no-store'});
-    if(req.method==='HEAD'){res.end();return}fs.createReadStream(target).pipe(res);
+    const size=fs.statSync(target).size;
+    const staticHeaders={...security,'Content-Type':mime[path.extname(target).toLowerCase()]||'application/octet-stream','Cache-Control':relative.startsWith('/assets/')?'public, max-age=3600':'no-store','Accept-Ranges':'bytes'};
+    let start=0,end=size-1,status=200;
+    if(req.headers.range){
+      const range=req.headers.range.match(/^bytes=(\d*)-(\d*)$/);
+      if(range&&(range[1]||range[2])){
+        start=range[1]?Number(range[1]):Math.max(0,size-Number(range[2]));
+        end=range[1]&&range[2]?Math.min(size-1,Number(range[2])):size-1;
+      }else start=NaN;
+      if(!Number.isSafeInteger(start)||!Number.isSafeInteger(end)||start<0||start>=size||end<start){res.writeHead(416,{...staticHeaders,'Content-Range':`bytes */${size}`});res.end();return}
+      status=206;staticHeaders['Content-Range']=`bytes ${start}-${end}/${size}`;
+    }
+    res.writeHead(status,{...staticHeaders,'Content-Length':String(Math.max(0,end-start+1))});
+    if(req.method==='HEAD'||size===0){res.end();return}
+    const file=fs.createReadStream(target,{start,end});res.on('close',()=>file.destroy());file.pipe(res);
   }catch{if(!res.headersSent)res.writeHead(500,security);res.end()}
 });
 server.listen(port,'127.0.0.1',()=>console.log(`Kunal Builds isolated dev server ready at http://localhost:${port}/ (mode=${mock?'mock':liveTest?'live-test':'configured'})`));

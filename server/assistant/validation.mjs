@@ -36,7 +36,13 @@ export function allowedOrigin(request,environment){
   const origin=request.headers.get('origin');
   if(!origin)return false;
   const allowed=new Set([environment.KB_PUBLIC_URL,...String(environment.AI_ALLOWED_ORIGINS||'').split(',')].filter(Boolean).map(value=>value.trim().replace(/\/+$/,'')));
-  if(environment.AI_LOCAL_DEV==='true')allowed.add('http://localhost:8000');
+  // These hostnames are supplied by Vercel, never by an untrusted request Host header.
+  if(environment.VERCEL==='1'&&environment.VERCEL_ENV==='preview'){
+    for(const host of [environment.VERCEL_URL,environment.VERCEL_BRANCH_URL]){
+      if(typeof host==='string'&&/^[a-z0-9-]+\.vercel\.app$/i.test(host))allowed.add(`https://${host}`);
+    }
+  }
+  if(environment.AI_LOCAL_DEV==='true'&&environment.VERCEL!=='1')allowed.add('http://localhost:8000');
   if(!allowed.has(origin))return false;
   if(request.headers.get('sec-fetch-site')==='cross-site')return false;
   return true;

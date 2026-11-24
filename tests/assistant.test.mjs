@@ -4,6 +4,7 @@ import {createAssistantHandler} from '../api/assistant.js';
 import {createMemoryLimiterForTests,createRedisLimiter} from '../server/assistant/rate-limit.mjs';
 import {knowledge,retrieve,suggestions} from '../server/assistant/knowledge.mjs';
 import {groqTextChunks} from '../server/assistant/stream.mjs';
+import {allowedOrigin} from '../server/assistant/validation.mjs';
 
 const origin='https://portfolio.example';
 const environment={AI_ENABLED:'true',GROQ_API_KEY:'test-only-placeholder-key',GROQ_MODEL:'openai/gpt-oss-20b',KB_PUBLIC_URL:origin};
@@ -90,7 +91,7 @@ test('distributed limiter sends atomic EVAL reservations with hashed visitor key
   const limiter=createRedisLimiter({UPSTASH_REDIS_REST_URL:'https://unit-test.upstash.io',UPSTASH_REDIS_REST_TOKEN:'test-token',RATE_LIMIT_SECRET:'a'.repeat(32),UPSTASH_REDIS_PREFIX:'isolated-audit'},fakeFetch);
   assert.ok(limiter);
   const reservation=await limiter.reserve('203.0.113.7',sessionId,1200);assert.equal(reservation.ok,true);await reservation.finish(500);
-  assert.equal(calls.length,2);assert.equal(calls[0][0],'EVAL');assert.equal(calls[0][2],'7');assert.equal(calls[1][0],'EVAL');assert.equal(calls[1].at(-1),'700');
+  assert.equal(calls.length,2);assert.equal(calls[0][0],'EVAL');assert.equal(calls[0][2],'10');assert.equal(calls[1][0],'EVAL');assert.equal(calls[1].at(-2),'700');assert.equal(calls[1].at(-1),'complete');
   assert.ok(calls[0].slice(3,10).every(key=>key.startsWith('isolated-audit:')));
   assert.ok(!JSON.stringify(calls).includes('203.0.113.7'));
 });
@@ -130,4 +131,47 @@ test('prompt injection remains a user message with no privileged tools',async()=
   assert.deepEqual(sent.messages.at(-1),{role:'user',content:attack});
   assert.equal(sent.tool_choice,'none');
   assert.ok(!JSON.stringify(sent.messages.slice(0,-1)).includes('test-only-placeholder-key'));
+});
+
+test('preview accepts only platform-supplied deployment and branch origins',()=>{
+  const preview={...environment,VERCEL:'1',VERCEL_ENV:'preview',VERCEL_URL:'portfolio-verified.vercel.app',VERCEL_BRANCH_URL:'portfolio-git-review.vercel.app'};
+  assert.equal(allowedOrigin(request(body,{origin:'https://portfolio-verified.vercel.app'}),preview),true);
+  assert.equal(allowedOrigin(request(body,{origin:'https://portfolio-git-review.vercel.app'}),preview),true);
+  assert.equal(allowedOrigin(request(body,{origin:'https://portfolio-attacker.vercel.app'}),preview),false);
+  assert.equal(allowedOrigin(request(body,{origin:'https://portfolio-verified.vercel.app',headers:{'sec-fetch-site':'cross-site'}}),preview),false);
+  assert.equal(allowedOrigin(request(body,{origin:'https://portfolio-verified.vercel.app'}),{...preview,VERCEL_ENV:'production'}),false);
+});
+
+test('Redis outage returns a generic 503 and never calls the provider',async()=>{
+  let calls=0;
+  const api=handler({limiter:{reserve:async()=>{throw new Error('private storage details')}},fetchProvider:async()=>{calls++;throw new Error('must not call')}});
+  const response=await api(request());
+  assert.equal(response.status,503);assert.equal(calls,0);
+  assert.doesNotMatch(await response.text(),/private storage details/);
+});
+
+test('cancelling a streamed response aborts the provider and settles its reservation once',async()=>{
+  let signal,finished=0;
+  const api=handler({limiter:{reserve:async()=>({ok:true,finish:async()=>{finished++}})},fetchProvider:async(_url,init)=>{
+    signal=init.signal;
+    return new Response(new ReadableStream({start(controller){
+      controller.enqueue(new TextEncoder().encode('data: {"choices":[{"delta":{"content":"first"}}]}\n\n'));
+      signal.addEventListener('abort',()=>controller.error(new Error('aborted')),{once:true});
+    }}));
+  }});
+  const response=await api(request()),reader=response.body.getReader();
+  await reader.read();await reader.cancel();
+  for(let i=0;i<20&&finished===0;i++)await new Promise(resolve=>setTimeout(resolve,10));
+  assert.equal(signal.aborted,true);assert.equal(finished,1);
+});
+
+test('finalizing a distributed reservation twice cannot refund twice',async()=>{
+  const calls=[];
+  const fakeFetch=async(_url,options)=>{calls.push(JSON.parse(options.body));return new Response(JSON.stringify({result:calls.length===1?[1,'ok',0]:1}))};
+  const limiter=createRedisLimiter({UPSTASH_REDIS_REST_URL:'https://test.upstash.io',UPSTASH_REDIS_REST_TOKEN:'placeholder',RATE_LIMIT_SECRET:'a'.repeat(32),VERCEL_ENV:'preview'},fakeFetch);
+  const reservation=await limiter.reserve('203.0.113.7',sessionId,1200);
+  await Promise.all([reservation.finish(500),reservation.finish(500)]);
+  assert.equal(calls.length,2);
+  assert.ok(calls[0][3].startsWith('kbai:preview:'));
+  assert.ok(calls[1][1].includes("~='reserved'"));
 });

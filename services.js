@@ -466,6 +466,7 @@
     // created contact menu and case study buttons.
 
     document.addEventListener("click",event => {
+        if (event.target.closest(".kb-ai-root")) return;
         const link = event.target.closest("a");
 
         if (!link ||

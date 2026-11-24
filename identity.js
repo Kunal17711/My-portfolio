@@ -207,6 +207,7 @@
         back.addEventListener("click",closeIdentity);
 
         document.addEventListener("click",event => {
+            if (event.target.closest(".kb-ai-root")) return;
 
             const a = event.target.closest("a");
 

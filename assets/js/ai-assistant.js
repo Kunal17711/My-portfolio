@@ -133,11 +133,12 @@
     if(!currentTurn||!Array.isArray(items))return;
     currentTurn.links.replaceChildren();
     for(const item of items.slice(0,window.innerWidth<380?2:4)){
-      if(typeof item?.route!=='string'||!/^\/(?:about|projects|services|who-is-kunal)(?:\/[a-z0-9-]+)?\/$/.test(item.route)||typeof item.label!=='string'||item.label.length>90)continue;
+      if(typeof item?.route!=='string'||!/^\/(?:about|projects|services|who-is-kunal|contact)(?:\/[a-z0-9-]+)?\/$/.test(item.route)||typeof item.label!=='string'||item.label.length>90)continue;
       const link=document.createElement('a');link.href=item.route;link.textContent=item.label;
       link.addEventListener('click',event=>{
         if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
         event.preventDefault();event.stopPropagation();closeAssistant();
+        if(item.route==='/contact/'){location.assign(item.route);return}
         const projectId=typeof item.projectId==='string'&&/^[a-z0-9-]{2,80}$/.test(item.projectId)?item.projectId:'';
         if(typeof window.KB_NAVIGATE==='function'){
           window.KB_NAVIGATE(item.route);

@@ -34,7 +34,7 @@ Redis reservations atomically enforce visitor and global minute/day quotas, shar
 
 ## Launch gates
 
-The hosting account is on Hobby. Review the current Vercel plan terms before production use: Hobby is for personal/noncommercial use; the site offers paid development services, so Pro/Enterprise or written eligibility confirmation is required. Do not buy a plan or change billing automatically.
+The hosting account is on Hobby. [Vercel's current Terms of Service](https://vercel.com/legal/terms) restrict Hobby to personal or noncommercial use. Since this site advertises paid development services, treat commercial eligibility as a launch gate: the owner should select an eligible paid plan or obtain written eligibility confirmation from Vercel. Do not buy a plan or change billing automatically.
 
 After hosting eligibility is resolved, the owner must approve merging the reviewed migration branch into `main`. That merge triggers production deployment through the existing Git integration. Confirm the deployed production SHA, run a short real streaming request, inspect primary routes and redirects, then resubmit the sitemap in Search Console. Keep preview protection enabled.
 

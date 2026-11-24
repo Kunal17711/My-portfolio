@@ -32,6 +32,8 @@ test('private knowledge contains only approved entry counts and reviewed statist
   assert.deepEqual(knowledge.stats,{repositories:71,sourceLines:401737,sourceFiles:3526,technologies:12});
   assert.equal(retrieve('HORYZON project')[0].name.toLowerCase().includes('horyzon'),true);
   assert.ok(suggestions(retrieve('website development service')).some(item=>item.route==='/services/website-development/'));
+  assert.equal(retrieve('What can I hire Kunal Builds to create?')[0].type,'service');
+  assert.equal(retrieve('How do I contact Kunal?')[0].route,'/contact/');
 });
 
 test('streams only answer content and server-approved links',async()=>{

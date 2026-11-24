@@ -12,7 +12,7 @@ export function retrieve(question,limit=4){
     return entries.filter(entry=>entry.type==='service').slice(0,limit);
   }
   if(/\b(how (can|do) i contact|contact you|email you|reach you)\b/.test(normalized)){
-    return entries.filter(entry=>entry.type==='contact'||entry.type==='identity').slice(0,limit);
+    return [...entries.filter(entry=>entry.type==='contact'),...entries.filter(entry=>entry.type==='identity')].slice(0,limit);
   }
   const query=[...new Set(tokenize(question).flatMap(word=>[word,...(synonyms[word]||[])]))];
   const average=docTokens.reduce((sum,tokens)=>sum+tokens.length,0)/docTokens.length;
@@ -28,7 +28,8 @@ export function retrieve(question,limit=4){
     const lower=question.toLowerCase();
     if(lower.includes(entry.name.toLowerCase()))score+=8;
     if(lower.includes(entry.id.replaceAll('-',' ')))score+=5;
-    if(/\b(service|services|hire|offer|development)\b/.test(lower)&&entry.type==='service')score+=3;
+    if(/\b(service|services|hire|offer|development)\b/.test(lower)&&entry.type==='service')score+=12;
+    if(/\b(contact|email|reach)\b/.test(lower)&&entry.type==='contact')score+=12;
     if(/\b(project|projects|built|portfolio)\b/.test(lower)&&entry.type==='project')score+=1.5;
     return {entry,score};
   }).filter(row=>row.score>0).sort((a,b)=>b.score-a.score);

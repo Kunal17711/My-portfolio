@@ -1,0 +1,330 @@
+﻿
+#kbMusicDock {
+
+    position: absolute;
+    top: 80px;
+    right: 5%;
+
+    z-index: 46;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(-10px);
+
+    transition:
+        opacity .6s ease,
+        transform .6s cubic-bezier(.16,1,.3,1),
+        visibility .6s;
+
+}
+
+#kbMusicDock.ready {
+
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+
+}
+
+/* Premium music invitation */
+
+#kbMusicInvite {
+
+    width: 285px;
+
+    padding: 22px;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff12,
+            #ffffff04
+        ),
+        #100b13d9;
+
+    border: 1px solid #ffffff20;
+
+    backdrop-filter: blur(28px);
+
+    box-shadow:
+        0 20px 60px #0005,
+        inset 0 1px 0 #ffffff10;
+
+    transform-origin: top right;
+
+    transition:
+        opacity .35s ease,
+        transform .5s cubic-bezier(.16,1,.3,1);
+
+}
+
+#kbMusicInvite.closing {
+
+    opacity: 0;
+    transform: translateY(-10px) scale(.94);
+    pointer-events: none;
+
+}
+
+#kbMusicInvite[hidden],
+#kbMusicIcon[hidden] {
+
+    display: none !important;
+
+}
+
+#kbMusicInvite,
+#kbMusicInvite * {
+
+    font-family: "Outfit", "Segoe UI", sans-serif !important;
+    font-weight: 400 !important;
+
+}
+
+.kb-music-symbol {
+
+    width: 24px;
+    height: 24px;
+
+    color: #c4ff36;
+
+}
+
+.kb-music-question {
+
+    color: #f1f1f1;
+
+    font-size: 15px;
+    line-height: 1.6;
+
+    margin: 14px 0 19px;
+
+}
+
+#kbMusicInvite .kb-invitation-actions {
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+}
+
+#kbMusicAccept {
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    background: #c4ff36;
+    color: #101010;
+
+    border: none;
+    border-radius: 999px;
+
+    padding: 11px 17px;
+
+    font-size: 12px;
+    width: max-content;
+    min-width: max-content;
+    height: auto;
+    min-height: 40px;
+    white-space: nowrap;
+    flex: none;
+
+    transition:
+        background .3s,
+        scale .3s,
+        box-shadow .3s;
+
+}
+
+#kbMusicAccept:hover {
+
+    background: #d5ff68;
+    box-shadow: 0 0 20px #c4ff3620;
+
+}
+
+#kbMusicAccept:active {
+
+    scale: .95;
+
+}
+
+#kbMusicDecline {
+
+    background: transparent;
+    border: none;
+
+    color: #a0a0a0;
+    font-size: 12px;
+
+    padding: 10px 0;
+    width: max-content;
+    min-width: max-content;
+    height: auto;
+    white-space: nowrap;
+    flex: none;
+    border-radius: 0;
+
+    transition: color .3s;
+
+}
+
+#kbMusicDecline:hover {
+
+    color: #fff;
+
+}
+
+/* Minimal circular music button */
+
+#kbMusicIcon {
+
+    width: 43px;
+    height: 43px;
+
+    padding: 0;
+
+    display: grid;
+    place-items: center;
+
+    background: #ffffff08;
+    border: 1px solid #ffffff20;
+
+    color: #aaa;
+
+    border-radius: 50%;
+
+    backdrop-filter: blur(15px);
+
+    transition:
+        background .3s,
+        color .3s,
+        border-color .3s,
+        transform .4s cubic-bezier(.16,1,.3,1);
+
+}
+
+#kbMusicIcon svg {
+
+    width: 19px;
+    height: 19px;
+
+}
+
+#kbMusicIcon:hover {
+
+    transform: scale(1.1);
+
+    color: #c4ff36;
+    border-color: #c4ff3660;
+
+}
+
+#kbMusicIcon.playing {
+
+    color: #c4ff36;
+
+    background: #c4ff3610;
+    border-color: #c4ff3640;
+
+}
+
+#kbMusicIcon.playing svg {
+
+    animation: kbMusicMotion 3s ease-in-out infinite;
+
+}
+
+@keyframes kbMusicMotion {
+
+    0%,100% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(-12deg);
+    }
+
+}
+
+#kbMusicMessage {
+
+    font-size: 11px;
+    color: #ffb6b6;
+    margin-top: 10px;
+
+}
+
+#kbMusicDock button:focus-visible {
+
+    outline: 2px solid #c4ff36;
+    outline-offset: 4px;
+
+}
+
+/* Never show during introduction */
+
+#screen.kb-intro-running #kbMusicDock,
+#screen.off #kbMusicDock {
+
+    display: none !important;
+
+}
+
+/* Mobile */
+
+@media(max-width:700px) {
+
+    #kbMusicDock {
+
+        top: 65px;
+        right: 6%;
+
+    }
+
+    #kbMusicInvite {
+
+        width: min(265px, 78vw);
+
+        padding: 18px;
+        border-radius: 19px;
+
+    }
+
+    .kb-music-question {
+
+        font-size: 14px;
+
+    }
+
+    #kbMusicIcon {
+
+        width: 39px;
+        height: 39px;
+
+    }
+
+}
+
+@media(prefers-reduced-motion:reduce) {
+
+    #kbMusicDock,
+    #kbMusicDock * {
+
+        transition: none !important;
+        animation: none !important;
+
+    }
+
+}

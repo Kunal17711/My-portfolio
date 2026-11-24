@@ -1,0 +1,791 @@
+﻿/* KUNAL BUILDS
+   PREMIUM ANIMATED CONTACT DOCK */
+
+#kbContactDock {
+    position: absolute;
+    right: 3.5%;
+    bottom: 5%;
+    z-index: 45;
+
+    width: max-content;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    isolation: isolate;
+}
+
+/* Circular button */
+
+#kbContactButton {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    width: 60px;
+    height: 60px;
+
+    padding: 0 18px;
+
+    overflow: hidden;
+    white-space: nowrap;
+
+    background: #efff36;
+    color: #080808;
+
+    border: none;
+    border-radius: 999px;
+
+    font-family: "VT323", monospace !important;
+    font-size: 21px;
+    font-weight: 400 !important;
+
+    cursor: pointer;
+
+    box-shadow: 0 10px 35px #0005;
+
+    transition:
+        width .55s cubic-bezier(.16,1,.3,1),
+        background .3s ease,
+        box-shadow .4s ease,
+        transform .4s cubic-bezier(.16,1,.3,1);
+}
+
+#kbContactButton .contact-text {
+    width: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateX(12px);
+
+    transition:
+        opacity .2s ease,
+        transform .4s cubic-bezier(.16,1,.3,1);
+}
+
+#kbContactButton svg {
+    width: 24px;
+    height: 24px;
+
+    flex-shrink: 0;
+
+    transition:
+        transform .5s cubic-bezier(.16,1,.3,1);
+}
+
+/* Right to left capsule expansion */
+
+#kbContactDock.is-open #kbContactButton {
+
+    width: 205px;
+
+    background: #efff36;
+
+    transform: none;
+
+    box-shadow: 0 15px 45px #efff3615;
+
+}
+
+#kbContactDock.is-open .contact-text {
+
+    width: auto;
+    opacity: 1;
+
+    transform: translateX(0);
+
+    transition-delay: .1s;
+
+}
+
+#kbContactDock.is-open #kbContactButton svg {
+    transform: rotate(-12deg);
+}
+
+#kbContactButton:active {
+    scale: .96;
+}
+
+/* Contact panel */
+
+#kbContactMenu {
+
+    position: absolute;
+
+    bottom: calc(100% + 12px);
+    right: 0;
+
+    width: 300px;
+
+    max-height: min(530px, 65dvh);
+
+    padding: 12px;
+
+    overflow-y: auto;
+
+    background: #141414f7;
+
+    border: 1px solid #ffffff14;
+    border-radius: 24px;
+
+    backdrop-filter: blur(28px);
+
+    box-shadow:
+        0 30px 90px #000a,
+        inset 0 1px 0 #ffffff08;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateY(16px) scale(.94);
+    transform-origin: bottom right;
+
+    pointer-events: none;
+
+    transition:
+        opacity .3s ease,
+        visibility .3s ease,
+        transform .5s cubic-bezier(.16,1,.3,1);
+
+    scrollbar-width: thin;
+    scrollbar-color: #333 transparent;
+
+}
+
+#kbContactDock.is-open #kbContactMenu {
+
+    opacity: 1;
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transform: translateY(0) scale(1);
+
+}
+
+/* Invisible hover bridge prevents flicker */
+
+#kbContactDock.is-open::before {
+
+    content: "";
+
+    position: absolute;
+
+    bottom: 100%;
+    right: 0;
+
+    width: 100%;
+    height: 16px;
+
+}
+
+/* Apple-inspired panel typography */
+
+#kbContactMenu,
+#kbContactMenu * {
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif !important;
+
+    -webkit-font-smoothing: antialiased;
+
+    text-shadow: none !important;
+
+}
+
+.kb-contact-heading {
+
+    padding: 12px 13px 8px;
+
+    color: #f5f5f7;
+
+    font-size: 18px;
+
+    letter-spacing: -.5px;
+
+    font-weight: 600 !important;
+
+}
+
+.kb-contact-subtitle {
+
+    padding: 0 13px 14px;
+
+    color: #888;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+}
+
+/* Social links */
+
+#kbContactMenu .kb-contact-link {
+
+    position: relative;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 11px 13px;
+
+    min-height: 44px;
+
+    gap: 12px;
+
+    border-radius: 11px;
+
+    background: transparent;
+
+    text-decoration: none;
+    color: #dedede;
+
+    font-size: 13px;
+    letter-spacing: 0;
+
+    opacity: 0;
+
+    transform: translateY(10px);
+
+    transition:
+        opacity .35s ease,
+        transform .4s cubic-bezier(.16,1,.3,1),
+        color .2s ease,
+        background .2s ease;
+
+}
+
+#kbContactDock.is-open .kb-contact-link {
+
+    opacity: 1;
+    transform: translateY(0);
+
+    transition-delay: calc(var(--i) * 30ms);
+
+}
+
+#kbContactMenu .kb-contact-link:hover {
+
+    color: #fff;
+
+    background: #ffffff0b;
+
+}
+
+.contact-link-left {
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+}
+
+.contact-link-left svg {
+
+    width: 17px;
+    height: 17px;
+
+    color: #a0a0a0;
+
+    flex-shrink: 0;
+
+}
+
+.contact-arrow {
+
+    width: 13px;
+    height: 13px;
+
+    color: #777;
+
+    transition: transform .3s ease;
+
+}
+
+.kb-contact-link:hover .contact-arrow {
+
+    color: #efff36;
+
+    transform: translate(2px,-2px);
+
+}
+
+.contact-divider {
+
+    height: 1px;
+
+    background: #ffffff0d;
+
+    margin: 9px 12px;
+
+}
+
+.contact-small-label {
+
+    font-size: 9px;
+
+    color: #666;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+
+    padding: 8px 13px;
+
+}
+
+.contact-location {
+
+    font-size: 10px;
+
+    color: #888;
+
+    padding: 12px 13px 5px;
+
+    line-height: 1.6;
+
+}
+
+.contact-guide {
+
+    background: #ffffff05;
+
+    border-radius: 12px;
+
+    padding: 12px;
+
+    margin: 8px;
+
+    color: #999;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+
+}
+
+.contact-guide summary {
+
+    color: #ddd;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+}
+
+.contact-guide p {
+    margin: 10px 0 0;
+}
+
+.contact-guide a {
+    color: #2997ff;
+    text-decoration: none;
+}
+
+/* Keep introduction and TV power state intact */
+
+#screen.kb-intro-running #kbContactDock,
+#screen.off #kbContactDock {
+
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+
+}
+
+/* Mobile */
+
+@media(max-width:700px) {
+
+    #kbContactDock {
+
+        right: 6%;
+        bottom: 5%;
+
+    }
+
+    #kbContactButton {
+
+        width: 49px;
+        height: 49px;
+
+        padding: 0 14px;
+
+        font-size: 18px;
+
+    }
+
+    #kbContactButton svg {
+
+        width: 21px;
+        height: 21px;
+
+    }
+
+    #kbContactDock.is-open #kbContactButton {
+
+        width: 175px;
+
+    }
+
+    #kbContactMenu {
+
+        width: min(280px,76vw);
+
+        max-height: 65dvh;
+
+        border-radius: 19px;
+
+    }
+
+}
+
+/* Accessibility */
+
+#kbContactButton:focus-visible,
+.kb-contact-link:focus-visible {
+
+    outline: 2px solid #efff36;
+    outline-offset: 4px;
+
+}
+
+@media(prefers-reduced-motion:reduce) {
+
+    #kbContactDock *,
+    #kbContactButton {
+
+        transition-duration: .01ms !important;
+
+    }
+
+}
+
+/* =====================================
+   PREMIUM CONTACT PANEL REFINEMENT
+===================================== */
+
+/* Completely invisible scrollbar */
+
+#kbContactMenu,
+#kbArchive,
+#detail,
+.kb-intro-content {
+
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+
+}
+
+#kbContactMenu::-webkit-scrollbar,
+#kbArchive::-webkit-scrollbar,
+#detail::-webkit-scrollbar,
+.kb-intro-content::-webkit-scrollbar {
+
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+
+}
+
+#kbContactMenu {
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    overscroll-behavior: contain;
+
+    -webkit-overflow-scrolling: touch;
+
+}
+
+/* Premium accordion container */
+
+.contact-guide {
+
+    padding: 0;
+    margin: 8px;
+
+    border: none;
+    border-radius: 13px;
+
+    background: #ffffff05;
+
+    overflow: hidden;
+
+    transition:
+        background .3s ease;
+
+}
+
+.contact-guide:hover {
+
+    background: #ffffff08;
+
+}
+
+/* Remove browser triangle */
+
+.contact-guide summary {
+
+    list-style: none;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    min-height: 46px;
+
+    padding: 14px 45px 14px 14px;
+
+    color: #dedede;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
+
+}
+
+.contact-guide summary::-webkit-details-marker {
+
+    display: none !important;
+
+}
+
+.contact-guide summary::marker {
+
+    content: "";
+
+}
+
+/* Custom plus icon */
+
+.contact-guide summary::before,
+.contact-guide summary::after {
+
+    content: "";
+
+    position: absolute;
+
+    right: 16px;
+    top: 50%;
+
+    width: 12px;
+    height: 1.5px;
+
+    background: #b5b5b5;
+
+    border-radius: 5px;
+
+    transform-origin: center;
+
+    transition:
+        transform .4s cubic-bezier(.16,1,.3,1),
+        opacity .3s ease,
+        background .3s ease;
+
+}
+
+/* Horizontal line */
+
+.contact-guide summary::before {
+
+    transform: translateY(-50%);
+
+}
+
+/* Vertical line */
+
+.contact-guide summary::after {
+
+    transform: translateY(-50%) rotate(90deg);
+
+}
+
+/* Plus becomes minus */
+
+.contact-guide[open] summary::after {
+
+    transform: translateY(-50%) rotate(0deg);
+
+    opacity: 0;
+
+}
+
+.contact-guide[open] summary::before {
+
+    background: #eeeeee;
+
+}
+
+/* Smooth native accordion animation */
+
+@supports (interpolate-size: allow-keywords) {
+
+    .contact-guide {
+
+        interpolate-size: allow-keywords;
+
+    }
+
+    .contact-guide::details-content {
+
+        height: 0;
+
+        opacity: 0;
+
+        overflow: hidden;
+
+        transition:
+            height .45s cubic-bezier(.16,1,.3,1),
+            opacity .3s ease,
+            content-visibility .45s allow-discrete;
+
+    }
+
+    .contact-guide[open]::details-content {
+
+        height: auto;
+
+        opacity: 1;
+
+    }
+
+}
+
+/* Expanded content typography */
+
+.contact-guide p {
+
+    color: #999;
+
+    font-size: 11px;
+
+    line-height: 1.75;
+
+    padding: 0 14px;
+
+    margin: 0 0 14px;
+
+}
+
+.contact-guide p:first-of-type {
+
+    padding-top: 5px;
+
+}
+
+.contact-guide p:last-of-type {
+
+    margin-bottom: 16px;
+
+}
+
+/* Fallback animation */
+
+.contact-guide[open] p {
+
+    animation: contactContentReveal .4s
+        cubic-bezier(.16,1,.3,1) both;
+
+}
+
+@keyframes contactContentReveal {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(-6px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+/* Email link */
+
+.contact-guide a {
+
+    color: #2997ff;
+
+    text-decoration: none;
+
+    overflow-wrap: anywhere;
+
+}
+
+.contact-guide a:hover {
+
+    color: #8acaff;
+
+}
+
+/* Reduced motion accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .contact-guide,
+    .contact-guide *,
+    .contact-guide::details-content,
+    .contact-guide summary::before,
+    .contact-guide summary::after {
+
+        animation: none !important;
+
+        transition: none !important;
+
+    }
+
+}
+
+/* END PREMIUM CONTACT REFINEMENT */
+
+
+/* SMOOTH CONTACT RESET */
+
+#kbContactButton {
+
+    transition:
+        width .6s cubic-bezier(.16,1,.3,1),
+        background .3s ease,
+        box-shadow .4s ease,
+        transform .4s ease;
+
+}
+
+#kbContactMenu {
+
+    transition:
+        opacity .25s ease,
+        visibility .35s ease,
+        transform .45s cubic-bezier(.16,1,.3,1);
+
+}
+
+#kbContactDock:not(.is-open) .kb-contact-link {
+
+    transition-delay: 0ms;
+
+}

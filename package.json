@@ -1,29 +1,18 @@
 {
-  "name": "portfolio",
-  "version": "0.1.0",
+  "name": "kunal-builds-portfolio",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "build": "node scripts/build-public.mjs",
+    "dev": "node scripts/dev-server.mjs",
+    "test:ai": "node --test tests/assistant.test.mjs",
+    "test:build": "node --test tests/build.test.mjs"
   },
-  "dependencies": {
-    "framer-motion": "^12.38.0",
-    "gsap": "^3.15.0",
-    "lucide-react": "^1.14.0",
-    "next": "16.2.4",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
+  "engines": {
+    "node": ">=20"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.4",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "lightningcss": "^1.33.0",
+    "terser": "^5.51.4"
   }
 }

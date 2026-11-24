@@ -1,0 +1,1213 @@
+
+@font-face {
+
+    font-family: "Outfit";
+
+    src: url("assets/fonts/Outfit.ttf") format("truetype");
+
+    font-style: normal;
+
+    font-weight: 100 900;
+
+    font-display: swap;
+
+}
+
+:root {
+
+    --glass-font: "Outfit", "Segoe UI", sans-serif;
+
+    --glass-ease: cubic-bezier(.16,1,.3,1);
+
+    --glass-white: #f3f5ff;
+
+    --glass-muted: #b0bad5;
+
+    --glass-accent: #c4ff36;
+
+}
+
+/* =====================================
+   GLOBAL MODAL TYPOGRAPHY
+===================================== */
+
+#detail,
+#detail *,
+#kbArchive,
+#kbArchive *,
+#kbContactMenu,
+#kbContactMenu * {
+
+    font-family: var(--glass-font) !important;
+
+    font-weight: 400 !important;
+
+    text-shadow: none !important;
+
+    -webkit-font-smoothing: antialiased;
+
+}
+
+/* =====================================
+   MIDNIGHT BLUE BACKDROP
+===================================== */
+
+#detail::backdrop,
+#kbArchive::backdrop {
+
+    background:
+
+        radial-gradient(
+            ellipse at 50% 100%,
+            rgba(23,43,131,.85),
+            transparent 75%
+        ),
+
+        rgba(3,6,18,.75);
+
+    backdrop-filter: blur(28px) saturate(130%);
+
+}
+
+/* =====================================
+   GLASS PROJECT DETAIL MODAL
+===================================== */
+
+#detail {
+
+    position: fixed;
+
+    isolation: isolate;
+
+    padding: 32px;
+
+    border: 1px solid rgba(255,255,255,.17);
+
+    border-radius: 30px;
+
+    color: var(--glass-white);
+
+    background:
+
+        linear-gradient(
+            140deg,
+            rgba(255,255,255,.10),
+            rgba(255,255,255,.025) 65%
+        ),
+
+        radial-gradient(
+            ellipse at 50% 115%,
+            rgba(23,43,131,.80) 0%,
+            rgba(12,22,69,.48) 48%,
+            rgba(6,9,20,.68) 100%
+        );
+
+    backdrop-filter:
+
+        blur(40px)
+        saturate(140%);
+
+    box-shadow:
+
+        0 40px 120px rgba(0,0,0,.45),
+
+        inset 0 1px 0 rgba(255,255,255,.14),
+
+        inset 0 -1px 0 rgba(255,255,255,.04);
+
+    scrollbar-width: none;
+
+    overflow-y: auto;
+
+}
+
+#detail[open] {
+
+    gap: 38px;
+
+    animation:
+
+        glassModalReveal .55s
+        var(--glass-ease) both;
+
+}
+
+@keyframes glassModalReveal {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(18px) scale(.97);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0) scale(1);
+
+    }
+
+}
+
+/* =====================================
+   PROJECT ARTWORK
+===================================== */
+
+#detailImage {
+
+    border-radius: 22px;
+
+    border: 1px solid rgba(255,255,255,.10);
+
+    box-shadow:
+
+        0 20px 50px rgba(0,0,0,.25),
+
+        inset 0 1px 0 rgba(255,255,255,.06);
+
+}
+
+/* =====================================
+   PROJECT TITLE
+===================================== */
+
+#detailTitle {
+
+    color: var(--glass-white);
+
+    font-size: clamp(32px,4vw,56px);
+
+    font-weight: 300 !important;
+
+    letter-spacing: -1.8px;
+
+    line-height: 1.08;
+
+    margin: 20px 0;
+
+}
+
+#detailCategory {
+
+    font-size: 11px;
+
+    font-weight: 400 !important;
+
+    letter-spacing: 2px;
+
+    color: #9faed1;
+
+    text-transform: uppercase;
+
+}
+
+#detailDescription {
+
+    font-size: 15px;
+
+    font-weight: 300 !important;
+
+    letter-spacing: .15px;
+
+    line-height: 1.85;
+
+    color: var(--glass-muted);
+
+}
+
+/* =====================================
+   TRANSPARENT GLASS TAGS
+===================================== */
+
+#detailTags {
+
+    margin: 24px 0;
+
+    gap: 8px;
+
+}
+
+#detailTags span {
+
+    padding: 9px 15px;
+
+    background: rgba(255,255,255,.055);
+
+    border: 1px solid rgba(255,255,255,.10);
+
+    border-radius: 999px;
+
+    color: #c2cce5;
+
+    font-size: 11px;
+
+    font-weight: 400 !important;
+
+    backdrop-filter: blur(12px);
+
+}
+
+/* =====================================
+   PARROT GREEN ACTION BUTTON
+===================================== */
+
+#detailLink {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    padding: 14px 23px;
+
+    min-height: 46px;
+
+    border-radius: 999px;
+
+    background: var(--glass-accent);
+
+    color: #101010;
+
+    border: none;
+
+    font-size: 13px;
+
+    font-weight: 400 !important;
+
+    letter-spacing: .1px;
+
+    box-shadow: none;
+
+    transition:
+
+        background .3s ease,
+
+        box-shadow .4s ease,
+
+        scale .35s var(--glass-ease);
+
+}
+
+#detailLink[hidden] {
+
+    display: none !important;
+
+}
+
+#detailLink:hover {
+
+    background: #d3ff70;
+
+    box-shadow: 0 0 28px rgba(196,255,54,.15);
+
+    transform: none;
+
+}
+
+#kbDetailCaseLink {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 12px;
+    padding: 12px 4px;
+    color: #c4ff36;
+    font: 14px Outfit, sans-serif;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+#kbDetailCaseLink[hidden] { display: none; }
+#kbDetailCaseLink:focus-visible { outline: 2px solid #c4ff36; outline-offset: 3px; }
+
+#detailLink .kb-arrow-icon {
+
+    width: 12px;
+
+    height: 12px;
+
+    stroke-width: 2.7;
+
+}
+
+/* =====================================
+   GLASS CLOSE BUTTON
+===================================== */
+
+#close,
+#kbArchiveClose {
+
+    width: 37px;
+
+    height: 37px;
+
+    padding: 0;
+
+    display: grid;
+
+    place-items: center;
+
+    background: rgba(255,255,255,.06);
+
+    border: 1px solid rgba(255,255,255,.12);
+
+    border-radius: 50%;
+
+    color: #cbd3ea;
+
+    transform: none !important;
+
+    backdrop-filter: blur(15px);
+
+    transition:
+
+        color .3s ease,
+
+        background .3s ease,
+
+        border-color .3s ease;
+
+}
+
+#close:hover,
+#kbArchiveClose:hover {
+
+    color: #ffffff;
+
+    background: rgba(255,255,255,.15);
+
+    border-color: rgba(255,255,255,.25);
+
+    transform: none !important;
+
+}
+
+#close .kb-close-icon,
+#kbArchiveClose .kb-close-icon {
+
+    width: 13px;
+
+    height: 13px;
+
+}
+
+#close:hover .kb-close-icon,
+#kbArchiveClose:hover .kb-close-icon {
+
+    transform: rotate(90deg);
+
+}
+
+/* =====================================
+   PROJECT ARCHIVE GLASS BACKGROUND
+===================================== */
+
+#kbArchive {
+
+    background:
+
+        linear-gradient(
+            140deg,
+            rgba(255,255,255,.07),
+            rgba(255,255,255,.015)
+        ),
+
+        radial-gradient(
+            ellipse at 50% 100%,
+            #172b83,
+            #0c1645 48%,
+            #060914 100%
+        );
+
+    border: 1px solid rgba(255,255,255,.13);
+
+    border-radius: 30px;
+
+    backdrop-filter: blur(35px);
+
+    box-shadow:
+
+        0 40px 120px #0005,
+
+        inset 0 1px 0 #ffffff15;
+
+}
+
+.kb-archive-header h2 {
+
+    font-size: clamp(32px,4vw,56px);
+
+    font-weight: 300 !important;
+
+    letter-spacing: -1.8px;
+
+    color: var(--glass-white);
+
+}
+
+.kb-archive-header p {
+
+    font-size: 14px;
+
+    font-weight: 300 !important;
+
+    color: #abb7d6;
+
+}
+
+.kb-archive-kicker {
+
+    color: #9eafd6;
+
+    letter-spacing: 2px;
+
+}
+
+/* =====================================
+   GLASS SEARCH FIELD
+===================================== */
+
+#kbSearch {
+
+    padding: 16px 20px;
+
+    background: rgba(255,255,255,.06);
+
+    border: 1px solid rgba(255,255,255,.10);
+
+    border-radius: 15px;
+
+    backdrop-filter: blur(14px);
+
+    color: #f3f5ff;
+
+    font-size: 14px;
+
+}
+
+#kbSearch::placeholder {
+
+    color: #8290b5;
+
+}
+
+#kbSearch:focus {
+
+    background: rgba(255,255,255,.09);
+
+    border-color: rgba(196,255,54,.5);
+
+}
+
+/* =====================================
+   GLASS CATEGORY FILTERS
+===================================== */
+
+.kb-filter {
+
+    background: rgba(255,255,255,.045);
+
+    border: 1px solid rgba(255,255,255,.10);
+
+    color: #b8c4e3;
+
+    font-size: 12px;
+
+    font-weight: 400 !important;
+
+    border-radius: 999px;
+
+}
+
+.kb-filter:hover {
+
+    background: rgba(255,255,255,.12);
+
+    color: #fff;
+
+}
+
+.kb-filter.active {
+
+    background: #e8edff;
+
+    border-color: transparent;
+
+    color: #0c1645;
+
+}
+
+#kbResults {
+
+    color: #a2afd0;
+
+}
+
+/* =====================================
+   INDIVIDUAL ARCHIVE GLASS CARDS
+===================================== */
+
+.kb-project {
+
+    position: relative;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.085),
+            rgba(255,255,255,.025)
+        );
+
+    border: 1px solid rgba(255,255,255,.11);
+
+    border-radius: 22px;
+
+    box-shadow:
+
+        0 12px 35px rgba(0,0,0,.12),
+
+        inset 0 1px 0 rgba(255,255,255,.06);
+
+    overflow: hidden;
+
+    transition:
+
+        transform .55s var(--glass-ease),
+
+        background .4s ease,
+
+        border-color .4s ease,
+
+        box-shadow .5s ease;
+
+}
+
+.kb-project:hover {
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.13),
+            rgba(255,255,255,.045)
+        );
+
+    border-color: rgba(255,255,255,.25);
+
+    box-shadow:
+
+        0 20px 50px rgba(0,0,0,.22);
+
+    transform: translateY(-5px);
+
+}
+
+.kb-project-preview {
+
+    background: rgba(3,6,18,.4);
+
+    border-bottom: 1px solid rgba(255,255,255,.07);
+
+}
+
+.kb-project-body {
+
+    padding: 23px;
+
+}
+
+.kb-project-body h3 {
+
+    color: var(--glass-white);
+
+    font-size: 23px;
+
+    font-weight: 400 !important;
+
+    line-height: 1.2;
+
+    letter-spacing: -.5px;
+
+}
+
+.kb-project-body p {
+
+    color: #b0bbd6;
+
+    font-size: 13px;
+
+    font-weight: 300 !important;
+
+    line-height: 1.75;
+
+}
+
+.kb-project-meta {
+
+    color: #8fa0c7;
+
+    font-size: 10px;
+
+    font-weight: 400 !important;
+
+    letter-spacing: 1px;
+
+}
+
+.kb-project-links a {
+
+    color: var(--glass-accent);
+
+    font-size: 12px;
+
+    font-weight: 400 !important;
+
+}
+
+/* =====================================
+   CONTACT GLASS PANEL
+===================================== */
+
+#kbContactMenu {
+
+    background:
+
+        linear-gradient(
+            140deg,
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.02)
+        ),
+
+        radial-gradient(
+            ellipse at 50% 110%,
+            rgba(23,43,131,.75),
+            rgba(6,9,20,.92)
+        );
+
+    border: 1px solid rgba(255,255,255,.15);
+
+    backdrop-filter: blur(35px);
+
+    box-shadow:
+
+        0 25px 80px #0006,
+
+        inset 0 1px 0 #ffffff15;
+
+}
+
+.kb-contact-heading {
+
+    color: #f3f5ff;
+
+    font-weight: 400 !important;
+
+    font-size: 20px;
+
+}
+
+.kb-contact-subtitle {
+
+    color: #a4b0d1;
+
+}
+
+#kbContactMenu .kb-contact-link {
+
+    color: #dbe2f5;
+
+    font-size: 14px;
+
+}
+
+#kbContactMenu .kb-contact-link:hover {
+
+    background: rgba(255,255,255,.075);
+
+    color: #ffffff;
+
+}
+
+.contact-guide {
+
+    background: rgba(255,255,255,.045);
+
+    border: 1px solid rgba(255,255,255,.06);
+
+}
+
+.contact-guide summary {
+
+    color: #dce3f6;
+
+    font-size: 13px;
+
+}
+
+.contact-guide p {
+
+    color: #aab8d8;
+
+}
+
+.contact-guide a {
+
+    color: #bdcfff;
+
+}
+
+/* =====================================
+   INVISIBLE SCROLLBARS
+===================================== */
+
+#detail,
+#kbArchive,
+#kbContactMenu {
+
+    scrollbar-width: none !important;
+
+    -ms-overflow-style: none !important;
+
+}
+
+#detail::-webkit-scrollbar,
+#kbArchive::-webkit-scrollbar,
+#kbContactMenu::-webkit-scrollbar {
+
+    display: none !important;
+
+    width: 0 !important;
+
+    height: 0 !important;
+
+}
+
+/* =====================================
+   MOBILE REFINEMENT
+===================================== */
+
+@media(max-width:700px) {
+
+    #detail {
+
+        padding: 20px;
+
+        border-radius: 23px;
+
+    }
+
+    #detail[open] {
+
+        gap: 18px;
+
+    }
+
+    #detailTitle {
+
+        font-size: 35px;
+
+        letter-spacing: -1px;
+
+    }
+
+    #detailDescription {
+
+        font-size: 14px;
+
+        line-height: 1.7;
+
+    }
+
+    #detailImage {
+
+        border-radius: 17px;
+
+    }
+
+    #kbArchive {
+
+        padding: 20px;
+
+        border-radius: 22px;
+
+    }
+
+    .kb-archive-header h2 {
+
+        font-size: 35px;
+
+    }
+
+    .kb-project-body h3 {
+
+        font-size: 22px;
+
+    }
+
+    .kb-project-body {
+
+        padding: 19px;
+
+    }
+
+    #kbContactMenu {
+
+        border-radius: 20px;
+
+    }
+
+}
+
+/* =====================================
+   ACCESSIBILITY
+===================================== */
+
+@media(prefers-reduced-motion:reduce) {
+
+    #detail[open],
+
+    .kb-project,
+
+    #detailLink {
+
+        animation: none !important;
+
+        transition: none !important;
+
+    }
+
+}
+
+/* END MIDNIGHT GLASS UI */
+
+
+/* =====================================
+   MIDNIGHT CRIMSON CRT BACKGROUND
+===================================== */
+
+#television {
+    background: #020202;
+}
+
+#screen {
+
+    background: radial-gradient(
+        ellipse at 50% 110%,
+        #601322 0%,
+        #380d18 30%,
+        #190910 60%,
+        #070509 100%
+    );
+
+    box-shadow:
+        0 0 35px rgba(130, 15, 35, .08),
+        inset 0 0 90px rgba(0, 0, 0, .65);
+
+}
+
+/* Subtle retro dot grid */
+
+.grid {
+
+    background-image: radial-gradient(
+        rgba(255, 210, 210, .12) .75px,
+        transparent .8px
+    );
+
+    background-size: 21px 21px;
+
+    opacity: .55;
+
+}
+
+/* Crimson glass reflections */
+
+.crt-glass {
+
+    background: radial-gradient(
+        ellipse at 50% 0%,
+        rgba(255, 255, 255, .025),
+        transparent 65%
+    );
+
+    box-shadow:
+        inset 4px 0 20px rgba(150, 0, 30, .07),
+        inset -4px 0 20px rgba(150, 0, 30, .07);
+
+}
+
+/* Cinematic dark edges */
+
+.vignette {
+
+    background: radial-gradient(
+        ellipse at center,
+        transparent 40%,
+        rgba(0, 0, 0, .20) 75%,
+        rgba(0, 0, 0, .78) 100%
+    );
+
+    box-shadow: inset 0 0 65px #0006;
+
+}
+
+/* Preserve clean CRT texture */
+
+.scanlines {
+    opacity: .12;
+}
+
+/* END MIDNIGHT CRIMSON */
+
+
+/* =====================================
+   INTRO SCREEN - MIDNIGHT EMERALD
+   Same design, new color
+===================================== */
+
+#screen.kb-intro-running {
+
+    background: radial-gradient(
+        ellipse at 50% 110%,
+        #12382f 0%,
+        #0c241f 32%,
+        #081412 62%,
+        #030506 100%
+    ) !important;
+
+    box-shadow:
+        0 0 35px rgba(20, 120, 90, .08),
+        inset 0 0 90px rgba(0, 0, 0, .68) !important;
+
+}
+
+/* Subtle dot grid */
+#screen.kb-intro-running .grid {
+
+    background-image: radial-gradient(
+        rgba(210, 255, 235, .11) .75px,
+        transparent .8px
+    ) !important;
+
+    background-size: 21px 21px !important;
+
+    opacity: .52 !important;
+
+}
+
+/* Glass tint */
+#screen.kb-intro-running .crt-glass {
+
+    background: radial-gradient(
+        ellipse at 50% 0%,
+        rgba(255,255,255,.022),
+        transparent 65%
+    ) !important;
+
+    box-shadow:
+        inset 4px 0 20px rgba(0, 150, 110, .06),
+        inset -4px 0 20px rgba(0, 150, 110, .06) !important;
+
+}
+
+/* Dark cinematic edges */
+#screen.kb-intro-running .vignette {
+
+    background: radial-gradient(
+        ellipse at center,
+        transparent 40%,
+        rgba(0, 0, 0, .22) 76%,
+        rgba(0, 0, 0, .80) 100%
+    ) !important;
+
+    box-shadow: inset 0 0 65px #0007 !important;
+
+}
+
+/* Keep scanlines subtle */
+#screen.kb-intro-running .scanlines {
+    opacity: .12 !important;
+}
+
+/* Typing text thoda premium soft-green white */
+#screen.kb-intro-running .kb-intro-text,
+#screen.kb-intro-running .intro-text,
+#screen.kb-intro-running .typewriter,
+#screen.kb-intro-running .typing-text,
+#screen.kb-intro-running .kb-intro-content {
+
+    color: #eefbf5 !important;
+    text-shadow: 0 0 8px rgba(180, 255, 220, .05);
+
+}
+
+
+/* =====================================
+   INTRO SCREEN - DARK PARROT GLOW
+===================================== */
+
+#screen.kb-intro-running {
+
+    background: radial-gradient(
+        ellipse at 50% 110%,
+        #3d4a12 0%,
+        #242b0c 28%,
+        #121607 58%,
+        #040504 100%
+    ) !important;
+
+    box-shadow:
+        0 0 35px rgba(196, 255, 54, .07),
+        inset 0 0 90px rgba(0, 0, 0, .70) !important;
+
+}
+
+/* Subtle CRT dot grid */
+#screen.kb-intro-running .grid {
+
+    background-image: radial-gradient(
+        rgba(230, 255, 190, .12) .75px,
+        transparent .8px
+    ) !important;
+
+    background-size: 21px 21px !important;
+
+    opacity: .52 !important;
+
+}
+
+/* Glass tint */
+#screen.kb-intro-running .crt-glass {
+
+    background: radial-gradient(
+        ellipse at 50% 0%,
+        rgba(255,255,255,.022),
+        transparent 65%
+    ) !important;
+
+    box-shadow:
+        inset 4px 0 20px rgba(196, 255, 54, .04),
+        inset -4px 0 20px rgba(196, 255, 54, .04) !important;
+
+}
+
+/* Dark edges */
+#screen.kb-intro-running .vignette {
+
+    background: radial-gradient(
+        ellipse at center,
+        transparent 40%,
+        rgba(0, 0, 0, .22) 76%,
+        rgba(0, 0, 0, .82) 100%
+    ) !important;
+
+    box-shadow: inset 0 0 65px #0008 !important;
+
+}
+
+/* Scanlines */
+#screen.kb-intro-running .scanlines {
+    opacity: .12 !important;
+}
+
+/* Intro typing text */
+#screen.kb-intro-running .kb-intro-text,
+#screen.kb-intro-running .intro-text,
+#screen.kb-intro-running .typewriter,
+#screen.kb-intro-running .typing-text,
+#screen.kb-intro-running .kb-intro-content {
+
+    color: #f5fbe8 !important;
+    text-shadow: 0 0 8px rgba(196, 255, 54, .04);
+
+}
+
+/* Cursor block */
+#screen.kb-intro-running .cursor,
+#screen.kb-intro-running .kb-cursor,
+#screen.kb-intro-running .typing-cursor {
+
+    background: #eaffb6 !important;
+    box-shadow: 0 0 10px rgba(196,255,54,.18);
+
+}
+
+
+/* =====================================
+   FINAL PARROT GRADIENT INTRO
+===================================== */
+
+#screen.kb-intro-running #kbIntroScreen {
+
+    background: radial-gradient(
+        ellipse at 50% 95%,
+        #92bd16 0%,
+        #587b0b 30%,
+        #1b2905 65%,
+        #050802 100%
+    ) !important;
+
+}
+
+/* Prevent excessive darkness */
+
+#kbIntroScreen::after {
+
+    background: radial-gradient(
+        ellipse at center,
+        transparent 55%,
+        rgba(0,0,0,.18) 100%
+    ) !important;
+
+    opacity: 1 !important;
+
+}
+
+/* Subtle CRT texture */
+
+#kbIntroScreen::before {
+
+    opacity: .20 !important;
+
+}
+
+/* Premium white typing text */
+
+#kbIntroText {
+
+    color: #f5f7ed !important;
+
+    text-shadow:
+        0 0 8px rgba(255,255,255,.12) !important;
+
+}
+
+/* Parrot typing cursor */
+
+#kbIntroText::after {
+
+    background: #eaffb6 !important;
+
+    box-shadow:
+        0 0 8px rgba(196,255,54,.25) !important;
+
+}
+
+
+/* RICH PARROT INTRO REFINEMENT */
+
+#screen.kb-intro-running #kbIntroScreen {
+
+    background: radial-gradient(
+        ellipse at 50% 95%,
+        #b0e623 0%,
+        #719e10 30%,
+        #253706 65%,
+        #050802 100%
+    ) !important;
+
+}

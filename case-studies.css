@@ -1,0 +1,217 @@
+
+@font-face {
+    font-family: Outfit;
+    src: url("assets/fonts/Outfit.ttf") format("truetype");
+    font-weight: 100 900;
+    font-display: swap;
+}
+
+.ip-stat-grid {
+    grid-template-columns: repeat(3,minmax(0,1fr)) !important;
+}
+
+.ip-stat-grid strong {
+    font-size: clamp(24px,3vw,42px) !important;
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+}
+
+.ip-project-image {
+    position: relative;
+}
+
+.ip-project-image img {
+    object-fit: contain !important;
+}
+
+.kb-case-document {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-bottom: 80px;
+    color: #f4f5ff;
+    font-family: Outfit,"Segoe UI",sans-serif;
+}
+
+.kb-case-document *,
+.kb-case-button {
+    font-family: Outfit,"Segoe UI",sans-serif !important;
+}
+
+.kb-case-document h1 {
+    font-size: clamp(40px,6vw,76px);
+    font-weight: 300 !important;
+    letter-spacing: -2px;
+}
+
+.kb-case-document h2 {
+    font-size: clamp(26px,3vw,36px);
+    font-weight: 300 !important;
+    letter-spacing: -.8px;
+}
+
+.kb-case-document p {
+    color: #bdc7e1;
+    font-size: 16px;
+    line-height: 1.85;
+}
+
+.kb-case-document .kb-case-lead {
+    font-size: 20px;
+    max-width: 800px;
+}
+
+.kb-case-hero {
+    display: block;
+    width: 100%;
+    max-height: 650px;
+    object-fit: contain;
+    border-radius: 24px;
+    background: #080d20;
+    border: 1px solid #ffffff18;
+    margin: 35px 0;
+}
+
+.kb-case-section {
+    margin: 30px 0;
+    padding: 30px;
+    border: 1px solid #ffffff15;
+    border-radius: 24px;
+    background: linear-gradient(
+        140deg,#ffffff0c,#ffffff03
+    );
+}
+
+.kb-case-section h2 {
+    margin-top: 0;
+}
+
+.kb-case-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: #c4ff36;
+    color: #101010;
+    padding: 14px 22px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.kb-case-button svg {
+    width: 13px;
+    height: 13px;
+    transition: transform .45s cubic-bezier(.16,1,.3,1);
+}
+
+.kb-case-button:hover svg {
+    transform: rotate(45deg);
+}
+
+#ipCasePage:not([hidden]) {
+    animation: kbCaseEnter .65s cubic-bezier(.16,1,.3,1);
+}
+
+@keyframes kbCaseEnter {
+    from {
+        opacity: 0;
+        transform: scale(.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#kbCaseBack {
+    position: absolute;
+    right: 3.8%;
+    bottom: 5%;
+    z-index: 125;
+    width: 62px;
+    height: 62px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    border: none;
+    border-radius: 50%;
+    background: #c4ff36;
+    color: #101010;
+    cursor: pointer;
+}
+
+#kbCaseBack svg {
+    width: 24px;
+    height: 24px;
+    transition: transform .4s ease;
+}
+
+#kbCaseBack:hover svg {
+    transform: translateX(-3px);
+}
+
+#kbCaseBack[hidden],
+#kbPageBackCircle[hidden],
+#ipCasePage[hidden] {
+    display: none !important;
+}
+
+.kb-standalone {
+    margin: 0;
+    background: #020202;
+    min-height: 100dvh;
+}
+
+.kb-static-screen {
+    position: fixed;
+    inset: 2%;
+    padding: 6%;
+    overflow: auto;
+    scrollbar-width: none;
+    border-radius: 5vw / 8vh;
+    background: radial-gradient(
+        ellipse at 50% 100%,
+        #172b83,#0c1645 45%,#060914
+    );
+}
+
+.kb-static-back {
+    position: fixed;
+    bottom: 7%;
+    right: 6%;
+    width: 60px;
+    height: 60px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: #111;
+    background: #c4ff36;
+    font-size: 26px;
+    text-decoration: none;
+}
+
+@media(max-width:700px) {
+    .ip-stat-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr)) !important;
+    }
+
+    .kb-case-section {
+        padding: 20px;
+    }
+
+    #kbCaseBack {
+        width: 49px;
+        height: 49px;
+        right: 6%;
+        bottom: 4%;
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+    #ipCasePage,
+    .kb-case-button svg,
+    #kbCaseBack svg {
+        animation: none !important;
+        transition: none !important;
+    }
+}

@@ -4,7 +4,6 @@ import {execFileSync} from 'node:child_process';
 import {minify as minifyJavaScript} from 'terser';
 import {transform as transformCss} from 'lightningcss';
 import {prepareSeo} from './prepare-seo.mjs';
-import {buildOriginalAmbient} from './build-audio.mjs';
 
 const root=path.resolve(import.meta.dirname,'..');
 if(process.env.VERCEL==='1'&&(process.env.AI_TEST_MOCK==='1'||process.env.AI_TEST_LIVE==='1'||process.env.AI_LOCAL_DEV==='true'))throw new Error('Local assistant test flags are forbidden in Vercel builds.');
@@ -31,7 +30,6 @@ function copyFolder(relative,filter){
 }
 for(const folder of staticFolders)copyFolder(folder,file=>file.endsWith(`${path.sep}index.html`));
 copyFolder('assets',file=>safeAsset.test(file)||file.endsWith(`${path.sep}ai-assistant.js`)||file.endsWith(`${path.sep}ai-orb.js`)||file.endsWith(`${path.sep}ai-assistant.css`));
-buildOriginalAmbient(destination);
 async function optimizeAssets(directory){
   for(const item of fs.readdirSync(directory,{withFileTypes:true})){
     const full=path.join(directory,item.name);

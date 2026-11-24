@@ -1,7 +1,7 @@
 # Deployed audio
 
-The supplied `fav-song.mp3` and unused `typing.mp3` had no license or ownership documentation. They have been removed from the migration branch and are excluded from the deployable build. Their earlier presence in repository history does not establish publication rights.
+On 2026-11-25, the website owner explicitly confirmed the necessary rights to publish and stream the original favourite song on this website and authorized its restoration to production.
 
-The music player's layout, controls, playback, pause, looping and volume behavior are preserved. Its default source is now `assets/audio/portfolio-ambient.wav`, generated during the build by `scripts/build-audio.mjs`. This is an original arrangement created from mathematical sine waves, with no recordings, samples or third-party track included. The generator is covered by this repository's existing ownership terms. The introduction's keyboard sounds are also synthesized by the existing Web Audio code.
+The deployed source is `assets/audio/fav-song.mp3`, restored from the original-media archive. It contains the original 220.19-second, 44.1 kHz stereo MP3 recording at 256 kbps. Embedded cover artwork and metadata were removed with stream copy, reducing the file from 8,654,859 to 7,048,462 bytes without re-encoding the audio. The decoded PCM SHA-256 of both the archived original and deployed file is `bc5574d69be27894adec334a4b78acef43a78e43f55c8ed48f927248ca99f317`.
 
-To use a recorded track later, the owner must first document permission for web distribution and public playback, then replace the approved audio source and record its attribution/license here. Do not restore either supplied MP3 to the deployment without that evidence.
+The existing invitation starts playback after the visitor accepts. Playback, pause, looping, volume controls and continuous audio during internal portfolio navigation use the existing player. The temporary ambient loop and its build generator have been removed.

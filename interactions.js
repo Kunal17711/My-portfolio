@@ -494,7 +494,7 @@
                     audio.querySelector("source")?.src ||
                     "";
 
-                return /portfolio-ambient/i.test(source);
+                return /fav-song/i.test(source);
             });
     }
 
@@ -509,7 +509,7 @@
         if (!fallbackAudio) {
 
             fallbackAudio = new Audio(
-                "assets/audio/portfolio-ambient.wav"
+                "assets/audio/fav-song.mp3"
             );
 
             fallbackAudio.loop = true;

@@ -38,7 +38,7 @@ The hosting account is on Hobby. [Vercel's current Terms of Service](https://ver
 
 After hosting eligibility is resolved, the owner must approve merging the reviewed migration branch into `main`. That merge triggers production deployment through the existing Git integration. Confirm the deployed production SHA, run a short real streaming request, inspect primary routes and redirects, then resubmit the sitemap in Search Console. Keep preview protection enabled.
 
-The original supplied MP3s are excluded; the generated original ambient loop preserves the music player. No third-party recording rights are assumed. See `MEDIA.md`.
+The original favourite song is restored as `assets/audio/fav-song.mp3` following the owner's confirmation of publication and streaming rights. The existing music invitation, controls and volume behavior are preserved. See `MEDIA.md`.
 
 ## Rollback
 

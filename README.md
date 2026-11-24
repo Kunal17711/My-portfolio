@@ -42,7 +42,7 @@ The checks cover request validation, origin security, streaming, quota reservati
 
 The build generates canonical metadata, JSON-LD, `robots.txt`, and `sitemap.xml` from the static route inventory. It preserves the site's Google Search Console verification file. Vercel uses `npm run build`, serves `public/`, and runs `api/assistant.js` as a serverless function. Configure the environment variables above before enabling the assistant. Confirm hosting-plan eligibility and rights for all media before production deployment.
 
-Preview builds are nonindexable and keep canonical URLs on the production origin. See [production preparation](docs/PRODUCTION.md) for exact configuration, merge gates and rollback, and [media provenance](docs/MEDIA.md) for the original generated music loop.
+Preview builds are nonindexable and keep canonical URLs on the production origin. See [production preparation](docs/PRODUCTION.md) for exact configuration, merge gates and rollback, and [media provenance](docs/MEDIA.md) for the licensed background music.
 
 ## Copyright
 

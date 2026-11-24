@@ -36,7 +36,7 @@
     root.style.setProperty('--ai-radius',getComputedStyle(host).borderRadius||'5vw');
     const size=clamp(52,width<500?54:58,64);
     geometry={width,height,closed:{x:width<500?18:30,y:height-size-(width<500?92:92),size}};
-    const target=open?position(responding?'answer':'center'):geometry.closed;
+    const target=open?position(responding||root.classList.contains('has-answer')?'answer':'center'):geometry.closed;
     positionOrb(target,false);
     tip.style.left=`${geometry.closed.x}px`;tip.style.top=`${Math.max(5,geometry.closed.y-38)}px`;
     if(open&&!root.classList.contains('help-dismissed'))positionHelp(position(responding?'answer':'center'));
@@ -85,15 +85,18 @@
   }
   function openAssistant(){
     if(open||!ready)return;open=true;previousFocus=document.activeElement;
+    root.classList.toggle('has-answer',conversation.childElementCount>0);
     root.classList.remove('show-tip');if(!root.classList.contains('has-answer')&&!input.value)root.classList.remove('help-dismissed');root.classList.add('is-open');stage.inert=false;document.documentElement.classList.add('kb-ai-active');
     hostWasInert=host.inert;host.inert=true;host.dataset.kbAiInert='1';
     const video=document.getElementById('kbPortfolioVideo');videoWasPlaying=Boolean(video&&!video.paused);if(videoWasPlaying)video.pause();
-    positionOrb(position('center'));positionHelp(position('center'));renderer?.setState('opening');
+    const target=position(root.classList.contains('has-answer')?'answer':'center');
+    positionOrb(target);positionHelp(target);renderer?.setState('opening');
     setTimeout(()=>renderer?.setState('idle'),560);
     setTimeout(()=>input.focus({preventScroll:true}),reduced?0:400);
   }
   function closeAssistant(){
-    if(!open)return;controller?.abort();controller=null;open=false;responding=false;
+    if(!open)return;if(controller)setStatus('Generation stopped.');controller?.abort();controller=null;open=false;resetGenerationControls();
+    if(currentTurn)currentTurn.stop.disabled=true;
     root.classList.remove('is-open','has-answer');stage.inert=true;document.documentElement.classList.remove('kb-ai-active');
     positionOrb(geometry.closed);renderer?.setState('idle');
     host.inert=hostWasInert;delete host.dataset.kbAiInert;window.KB_SCHEDULE_RENDER?.();
@@ -116,6 +119,7 @@
     if(!currentTurn)return;currentTurn.status.textContent=message;currentTurn.status.style.color=error?'#fff3a0':'';
     renderer?.setState(error?'error':responding?'thinking':'idle');
   }
+  function resetGenerationControls(){responding=false;send.disabled=false;send.setAttribute('aria-label','Send question');form.removeAttribute('aria-busy');root.classList.remove('is-busy')}
   function addTurn(question){
     const section=document.createElement('section');section.className='kb-ai-turn';
     const q=document.createElement('p');q.className='kb-ai-question';q.textContent=question;
@@ -166,10 +170,11 @@
     try{
       const page=location.pathname.endsWith('/')?location.pathname:location.pathname+'/';
       const response=await fetch('/api/assistant/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message,history:previous,page,sessionId}),signal:active.signal});
+      if(controller!==active){await response.body?.cancel().catch(()=>{});return}
       if(!response.ok){let info={};try{info=await response.json()}catch{}throw new Error(typeof info.message==='string'?info.message:'The assistant is temporarily unavailable.')}
       if(!response.body)throw new Error('The response could not be streamed.');
       const reader=response.body.getReader(),decoder=new TextDecoder();let buffer='';
-      while(true){const {value,done}=await reader.read();if(done)break;buffer+=decoder.decode(value,{stream:true});if(buffer.length>65536)throw new Error('Response interrupted.');
+      while(true){const {value,done}=await reader.read();if(controller!==active){await reader.cancel().catch(()=>{});return}if(done)break;buffer+=decoder.decode(value,{stream:true});if(buffer.length>65536)throw new Error('Response interrupted.');
         while(true){const end=buffer.indexOf('\n\n');if(end<0)break;const frame=buffer.slice(0,end);buffer=buffer.slice(end+2);
           const type=frame.match(/^event:\s*([^\n]+)/m)?.[1];const data=frame.match(/^data:\s*(.*)$/m)?.[1];if(!type||!data)continue;
           let payload;try{payload=JSON.parse(data)}catch{continue}
@@ -185,12 +190,13 @@
       conversation.scrollTop=currentTurn.answer.parentElement.offsetTop;
       root.dataset.kbAiFirstTokenMs=String(Math.round(firstToken||0));
     }catch(error){
+      if(controller!==active)return;
       if(active.signal.aborted)setStatus('Generation stopped.');
       else setStatus(error.message||'The assistant is temporarily unavailable.',true);
       if(currentTurn)conversation.scrollTop=currentTurn.answer.parentElement.offsetTop;
-    }finally{if(currentTurn)currentTurn.stop.disabled=true;send.disabled=false;send.setAttribute('aria-label','Send question');form.removeAttribute('aria-busy');root.classList.remove('is-busy');if(controller===active)controller=null;if(open)input.focus({preventScroll:true})}
+    }finally{if(controller===active){if(currentTurn)currentTurn.stop.disabled=true;controller=null;resetGenerationControls();if(open)input.focus({preventScroll:true})}}
   }
-  function clearConversation(){controller?.abort();controller=null;history=[];currentAnswer='';currentTurn=null;conversation.replaceChildren();root.classList.remove('has-answer','help-dismissed');responding=false;positionOrb(position('center'));renderer?.setState('idle');input.focus({preventScroll:true})}
+  function clearConversation(){controller?.abort();controller=null;resetGenerationControls();history=[];currentAnswer='';currentTurn=null;conversation.replaceChildren();root.classList.remove('has-answer','help-dismissed');positionOrb(position('center'));renderer?.setState('idle');input.focus({preventScroll:true})}
   orb.addEventListener('click',()=>open?input.focus({preventScroll:true}):openAssistant());
   orb.addEventListener('pointerenter',()=>{if(!open)renderer?.setState('hover')});orb.addEventListener('pointerleave',()=>{if(!open)renderer?.setState('idle')});
   closeButton.addEventListener('click',closeAssistant);form.addEventListener('submit',submit);input.addEventListener('input',()=>{if(input.value)root.classList.add('help-dismissed')});

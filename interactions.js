@@ -809,9 +809,11 @@
     // Keep home controls isolated from internal pages.
 
     function synchronize() {
-
-        controls.hidden = !isHome();
-        glow.hidden = !isHome();
+        const hidden = !isHome();
+        // Setting an already-present hidden attribute still notifies this
+        // observer. Write only on a real mode change to avoid a frame loop.
+        if (controls.hidden !== hidden) controls.hidden = hidden;
+        if (glow.hidden !== hidden) glow.hidden = hidden;
 
         refineProjects();
     }

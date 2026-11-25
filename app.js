@@ -214,6 +214,10 @@ function createProjects() {
 let renderFrame = 0;
 
 function scheduleRender() {
+    if (screen.classList.contains('kb-intro-running')) {
+        Object.assign(camera, target);
+        return;
+    }
     if (!renderFrame && !document.hidden && powered && !document.documentElement.classList.contains('kb-ai-active')) {
         renderFrame = requestAnimationFrame(render);
     }
@@ -222,7 +226,7 @@ window.KB_SCHEDULE_RENDER = scheduleRender;
 
 function render() {
     renderFrame = 0;
-    if (document.hidden || !powered || document.documentElement.classList.contains('kb-ai-active')) return;
+    if (document.hidden || !powered || screen.classList.contains('kb-intro-running') || document.documentElement.classList.contains('kb-ai-active')) return;
 
     const easing = reducedMotion || drag ? 1 : 0.085;
 

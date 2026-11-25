@@ -29,11 +29,11 @@
   let geometry={width:innerWidth,height:innerHeight,closed:{x:20,y:innerHeight-145,size:58}};
 
   function layout(){
-    const rect=host.getBoundingClientRect(),visual=viewport();
+    const rect=host.getBoundingClientRect(),visual=viewport(),radius=getComputedStyle(host).borderRadius||'5vw';
     const top=Math.max(rect.top,visual.offsetTop||0),bottom=Math.min(rect.bottom,(visual.offsetTop||0)+visual.height);
     const height=Math.max(230,bottom-top),width=rect.width;
     root.style.setProperty('--ai-screen-x',`${rect.left}px`);root.style.setProperty('--ai-screen-y',`${top}px`);root.style.setProperty('--ai-screen-w',`${width}px`);root.style.setProperty('--ai-screen-h',`${height}px`);
-    root.style.setProperty('--ai-radius',getComputedStyle(host).borderRadius||'5vw');
+    root.style.setProperty('--ai-radius',radius);
     const size=clamp(52,width<500?54:58,64);
     geometry={width,height,closed:{x:width<500?18:30,y:height-size-(width<500?92:92),size}};
     const target=open?position(responding||root.classList.contains('has-answer')?'answer':'center'):geometry.closed;
@@ -61,7 +61,7 @@
     needHelp.style.left=`${x}px`;needHelp.style.top=`${y}px`;
   }
   function positionOrb(target,animate=true){
-    const before=orb.getBoundingClientRect();
+    const before=animate&&!reduced?orb.getBoundingClientRect():null;
     orb.getAnimations().forEach(animation=>animation.cancel());
     orb.style.left=`${target.x}px`;orb.style.top=`${target.y}px`;orb.style.width=`${target.size}px`;orb.style.height=`${target.size}px`;
     if(animate&&!reduced&&before.width){

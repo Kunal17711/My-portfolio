@@ -158,19 +158,21 @@
 
     // Apply to existing and newly generated projects.
 
-    const observer = new MutationObserver(
-
-        scheduleUpdate
-
-    );
+    const observer = new MutationObserver(records => {
+        // Text typed into the introduction or clock does not create controls.
+        // Newly inserted links/buttons and rewritten detail links do.
+        if (records.some(record =>
+            record.target instanceof Element && record.target.matches('#detailLink,.kb-project-links a') ||
+            [...record.addedNodes].some(node => node instanceof Element &&
+                (node.matches('a,button,dialog') || node.querySelector('a,button,dialog')))
+        )) scheduleUpdate();
+    });
 
     observer.observe(document.body, {
 
         subtree: true,
 
-        childList: true,
-
-        characterData: true
+        childList: true
 
     });
 

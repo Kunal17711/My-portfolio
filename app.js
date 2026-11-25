@@ -154,7 +154,6 @@ function createProjects() {
                     aria-label="Open ${project.name}">
 
                     <img
-                        src="assets/images/${project.image}"
                         alt="${project.name} product showcase"
                         draggable="false"
                         decoding="async"
@@ -174,6 +173,7 @@ function createProjects() {
         `;
 
         const image = tile.querySelector("img");
+        window.KB_PREVIEW(image, project.image, tile);
 
         image.addEventListener("error", () => {
 
@@ -224,7 +224,7 @@ function render() {
     renderFrame = 0;
     if (document.hidden || !powered || document.documentElement.classList.contains('kb-ai-active')) return;
 
-    const easing = reducedMotion ? 1 : 0.085;
+    const easing = reducedMotion || drag ? 1 : 0.085;
 
     camera.x += (target.x - camera.x) * easing;
     camera.y += (target.y - camera.y) * easing;
@@ -242,6 +242,7 @@ function render() {
         Math.abs(target.zoom - camera.zoom) > .0001;
 
     if (moving) scheduleRender();
+    else window.KB_UPDATE_CANVAS_IMAGES?.(camera.zoom);
 
 }
 
@@ -322,7 +323,8 @@ function showDetail(project) {
 
     if (project.image) {
 
-        image.src = "assets/images/" + project.image;
+        const source = project.image.startsWith('/') ? project.image : '/assets/images/' + project.image;
+        image.src = window.KB_ASSET(source);
         image.alt = project.name;
 
     } else {
@@ -437,70 +439,86 @@ detail.addEventListener("click", event => {
 
 });
 
-viewport.addEventListener("pointerdown", event => {
-
-    if (!powered || event.button !== 0) return;
-
-    suppressClick = false;
-
-    drag = {
-        id: event.pointerId,
-        startX: event.clientX,
-        startY: event.clientY,
-        cameraX: target.x,
-        cameraY: target.y,
-        moved: false
-    };
-
-});
-
-viewport.addEventListener("pointermove", event => {
-
-    if (!drag || event.pointerId !== drag.id) return;
-
-    const dx = event.clientX - drag.startX;
-    const dy = event.clientY - drag.startY;
-
-    if (!drag.moved && Math.hypot(dx, dy) < 6) return;
-
-    if (!drag.moved) {
-
-        drag.moved = true;
-
-        viewport.setPointerCapture(event.pointerId);
-
-    }
-
-    suppressClick = true;
-
-    viewport.classList.add("dragging");
-
-    target.x = Math.max(-6500, Math.min(6500, drag.cameraX + dx));
-    target.y = Math.max(-6500, Math.min(6500, drag.cameraY + dy));
-    scheduleRender();
-
-});
-
-function stopDrag() {
-
-    if (!drag) return;
-
-    drag = null;
-
-    viewport.classList.remove("dragging");
-
-    setTimeout(() => {
-        suppressClick = false;
-    }, 50);
-
+// One pointer map owns the canvas gesture. Layout is read only at gesture start.
+const pointers = new Map();
+let clickTimer = 0;
+const clampZoom = value => Math.max(.18, Math.min(1.8, value));
+function gestureAllowed() {
+    return powered && !screen.classList.contains('kb-intro-running') &&
+        !screen.classList.contains('kb-page-open') &&
+        !screen.inert && !viewport.inert &&
+        !document.documentElement.classList.contains('kb-ai-active') && !detail.open;
 }
-
-window.addEventListener("pointerup", stopDrag);
-window.addEventListener("pointercancel", stopDrag);
+function rebaseGesture() {
+    if (!pointers.size) { drag = null; return; }
+    const points = [...pointers.values()].slice(0,2);
+    const a = points[0], b = points[1] || a;
+    drag = {...drag, x:(a.x+b.x)/2, y:(a.y+b.y)/2,
+        distance:points.length===2 ? Math.max(1,Math.hypot(b.x-a.x,b.y-a.y)) : 0,
+        cameraX:target.x,cameraY:target.y,zoom:target.zoom};
+}
+function boundCamera() {
+    const b = drag.bounds, z = target.zoom;
+    target.x = Math.max(-b.maxX*z-drag.width*.35,Math.min(-b.minX*z+drag.width*.35,target.x));
+    target.y = Math.max(-b.maxY*z-drag.height*.35,Math.min(-b.minY*z+drag.height*.35,target.y));
+}
+viewport.addEventListener('pointerdown', event => {
+    if (!gestureAllowed() || event.button!==0) return;
+    if (!pointers.size) {
+        clearTimeout(clickTimer);suppressClick=false;
+        Object.assign(target,camera);
+        const rect=viewport.getBoundingClientRect();
+        const tiles=[...world.querySelectorAll('.tile')];
+        const xs=tiles.map(tile=>parseFloat(tile.style.left)||0),ys=tiles.map(tile=>parseFloat(tile.style.top)||0);
+        drag={originX:rect.left+rect.width/2,originY:rect.top+rect.height/2,width:rect.width,height:rect.height,
+            bounds:{minX:Math.min(0,...xs)-140,maxX:Math.max(0,...xs)+140,minY:Math.min(0,...ys)-180,maxY:Math.max(0,...ys)+180},moved:false};
+    }
+    pointers.set(event.pointerId,{x:event.clientX,y:event.clientY});
+    if (pointers.size>1) {
+        suppressClick=true;drag.moved=true;
+        for (const id of pointers.keys()) try {viewport.setPointerCapture(id)} catch {}
+    }
+    rebaseGesture();
+});
+viewport.addEventListener('pointermove', event => {
+    if (!drag || !pointers.has(event.pointerId)) return;
+    pointers.set(event.pointerId,{x:event.clientX,y:event.clientY});
+    const [a,b]=[...pointers.values()].slice(0,2);
+    const x=b?(a.x+b.x)/2:a.x,y=b?(a.y+b.y)/2:a.y;
+    if (!drag.moved && Math.hypot(x-drag.x,y-drag.y)<6) return;
+    drag.moved=true;suppressClick=true;
+    try {viewport.setPointerCapture(event.pointerId)} catch {}
+    viewport.classList.add('dragging');
+    target.zoom=b?clampZoom(drag.zoom*Math.hypot(b.x-a.x,b.y-a.y)/drag.distance):drag.zoom;
+    const ratio=target.zoom/drag.zoom;
+    target.x=x-drag.originX-(drag.x-drag.originX-drag.cameraX)*ratio;
+    target.y=y-drag.originY-(drag.y-drag.originY-drag.cameraY)*ratio;
+    boundCamera();scheduleRender();
+});
+function endPointer(event) {
+    if (!pointers.has(event.pointerId)) return;
+    pointers.delete(event.pointerId);
+    if (pointers.size) rebaseGesture();
+    else {
+        drag=null;viewport.classList.remove('dragging');scheduleRender();
+        clickTimer=setTimeout(()=>{suppressClick=false},650);
+    }
+}
+window.addEventListener('pointerup',endPointer);
+window.addEventListener('pointercancel',endPointer);
+viewport.addEventListener('lostpointercapture',event=>{
+    // Transferring implicit touch capture from a child button to the viewport
+    // also bubbles a loss event. Only a loss by the owner ends the gesture.
+    if (event.target===viewport && !viewport.hasPointerCapture(event.pointerId)) endPointer(event);
+});
+viewport.addEventListener('click',event=>{if(suppressClick){event.preventDefault();event.stopImmediatePropagation()}},true);
+viewport.addEventListener('dragstart',event=>event.preventDefault());
+window.addEventListener('blur',()=>{pointers.clear();drag=null;viewport.classList.remove('dragging')});
+document.addEventListener('visibilitychange',()=>document.documentElement.classList.toggle('kb-tab-hidden',document.hidden));
 
 viewport.addEventListener("wheel", event => {
 
-    if (!powered) return;
+    if (!gestureAllowed()) return;
 
     event.preventDefault();
 

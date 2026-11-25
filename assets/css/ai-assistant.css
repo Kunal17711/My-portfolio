@@ -1,4 +1,4 @@
-@font-face{font-family:Outfit;src:url('/assets/fonts/Outfit.ttf') format('truetype');font-display:swap}
+@font-face{font-family:Outfit;src:url('/assets/fonts/Outfit.woff2') format('woff2');font-display:swap}
 .kb-ai-root,.kb-ai-root *{font-family:Outfit,Arial,sans-serif!important;text-shadow:none!important}
 .kb-ai-root{position:fixed;left:var(--ai-screen-x,0px);top:var(--ai-screen-y,0px);width:var(--ai-screen-w,100vw);height:var(--ai-screen-h,100dvh);z-index:180;overflow:hidden;border-radius:var(--ai-radius,5vw);pointer-events:none;font-family:Outfit,Arial,sans-serif;color:#fff;isolation:isolate}
 .kb-ai-root *{box-sizing:border-box}

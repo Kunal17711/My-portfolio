@@ -29,6 +29,7 @@
 <link rel="stylesheet" href="interactions.css">
 <link rel="stylesheet" href="/identity.css" media="print" data-kb-deferred-style>
 <link rel="stylesheet" href="/assets/css/ai-assistant.css">
+<link rel="stylesheet" href="performance.css">
 </head>
 
 <body>
@@ -36,6 +37,10 @@
 <div id="television">
 
     <main id="screen" class="kb-intro-running">
+        <div id="kbIntroScreen" role="region" aria-label="Introduction. Press Escape to skip.">
+            <div class="kb-intro-content"><p id="kbIntroText">H</p></div>
+        </div>
+        <div id="kbTransition"></div>
 
         <div class="grid"></div>
 
@@ -194,6 +199,7 @@
     <source src="assets/audio/fav-song.mp3" type="audio/mpeg">
 </audio>
 
+<script src="media.js" defer></script>
 <script src="projects-data.js" defer></script>
 <script src="project-model.js" defer></script>
 <script src="app.js" defer></script>

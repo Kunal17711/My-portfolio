@@ -2,8 +2,8 @@
 
     font-family: "VT323";
 
-    src: url("assets/fonts/VT323-Regular.ttf")
-         format("truetype");
+    src: url("assets/fonts/VT323-Regular.woff2")
+         format("woff2");
 
     font-style: normal;
     font-weight: 400;
@@ -506,3 +506,10 @@
 }
 
 /* V6 LUXURY END */
+
+/* Reserve the paragraph before its very first paint. JavaScript refines this
+   once using the loaded font; the tested layouts already occupy these lines. */
+#kbIntroText { min-height: 7lh; }
+@media (max-width: 570px) {
+    #kbIntroText { min-height: 8lh; }
+}

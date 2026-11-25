@@ -72,7 +72,7 @@ export function createOrb(button){
   const draw=now=>{
     if(!gl||lost)return;
     if(!last)last=now;
-    const elapsed=Math.min(.05,(now-last)/1000);last=now;
+    const elapsed=Math.min(.15,(now-last)/1000);last=now;
     if(!reduced)time+=elapsed;
     gl.useProgram(program);
     gl.uniform1f(gl.getUniformLocation(program,'u_time'),time);
@@ -86,7 +86,7 @@ export function createOrb(button){
     if(!active||document.hidden||lost||reduced)return;
     draw(now);
     if(button.closest('.kb-ai-root')?.classList.contains('is-open'))frame=requestAnimationFrame(tick);
-    else timer=setTimeout(()=>{timer=0;frame=requestAnimationFrame(tick)},16);
+    else timer=setTimeout(()=>{timer=0;frame=requestAnimationFrame(tick)},66);
   };
   const resume=()=>{if(active&&!document.hidden&&!lost&&!reduced&&!frame&&!timer)frame=requestAnimationFrame(tick)};
   const visibility=()=>{if(document.hidden){cancelAnimationFrame(frame);clearTimeout(timer);frame=0;timer=0;last=0}else resume()};

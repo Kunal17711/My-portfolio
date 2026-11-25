@@ -98,44 +98,6 @@
     centerUniverse();
 
     // =====================================
-    // SCREENSHOT LAZY LOADING
-    // =====================================
-
-    const observer = new IntersectionObserver(
-
-        entries => {
-
-            for (const entry of entries) {
-
-                if (!entry.isIntersecting) continue;
-
-                const img = entry.target;
-
-                if (img.dataset.src) {
-
-                    img.src = img.dataset.src;
-
-                    delete img.dataset.src;
-
-                }
-
-                observer.unobserve(img);
-
-            }
-
-        },
-
-        {
-
-            root: viewport,
-
-            rootMargin: "250px"
-
-        }
-
-    );
-
-    // =====================================
     // WEBSITE URL VALIDATION
     // =====================================
 
@@ -179,8 +141,8 @@
 
     function screenshotFor(project) {
         return {
-            image: (project.image || "").replace(/^\/assets\/images\//,""),
-            thumbnail: (project.thumbnail || project.image || "").replace(/^\/assets\/images\//,""),
+            image: project.image || "",
+            thumbnail: project.thumbnail || project.image || "",
             url: safeURL(project.website)
         };
 
@@ -406,9 +368,7 @@
 
             const img = document.createElement("img");
 
-            img.dataset.src =
-
-                "/assets/images/" + preview.thumbnail;
+            window.KB_PREVIEW(img, preview.thumbnail, tile);
 
             img.alt = cleanTitle(project);
 
@@ -438,7 +398,6 @@
 
             artwork.appendChild(img);
 
-            observer.observe(img);
 
         }
 

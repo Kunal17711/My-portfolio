@@ -64,7 +64,8 @@ const server=http.createServer(async(req,res)=>{
       if(req.method==='HEAD'){res.end();return}fs.createReadStream(notFound).pipe(res);return;
     }
     const size=fs.statSync(target).size;
-    const staticHeaders={...security,'Content-Type':mime[path.extname(target).toLowerCase()]||'application/octet-stream','Cache-Control':relative.startsWith('/assets/')?'public, max-age=3600':'no-store','Accept-Ranges':'bytes'};
+    const cache=relative.startsWith('/assets/build/')?'public, max-age=31536000, immutable':relative.startsWith('/assets/')?'public, max-age=3600':/\.(xml|txt)$/.test(relative)?'public, max-age=0, must-revalidate':'public, max-age=0, must-revalidate';
+    const staticHeaders={...security,'Content-Type':mime[path.extname(target).toLowerCase()]||'application/octet-stream','Cache-Control':cache,'Accept-Ranges':'bytes'};
     let start=0,end=size-1,status=200;
     if(req.headers.range){
       const range=req.headers.range.match(/^bytes=(\d*)-(\d*)$/);

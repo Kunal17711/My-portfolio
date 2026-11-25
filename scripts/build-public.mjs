@@ -4,6 +4,7 @@ import {execFileSync} from 'node:child_process';
 import {minify as minifyJavaScript} from 'terser';
 import {transform as transformCss} from 'lightningcss';
 import {prepareSeo} from './prepare-seo.mjs';
+import {versionAssets} from './version-assets.mjs';
 
 const root=path.resolve(import.meta.dirname,'..');
 if(process.env.VERCEL==='1'&&(process.env.AI_TEST_MOCK==='1'||process.env.AI_TEST_LIVE==='1'||process.env.AI_LOCAL_DEV==='true'))throw new Error('Local assistant test flags are forbidden in Vercel builds.');
@@ -49,9 +50,10 @@ async function optimizeAssets(directory){
 await optimizeAssets(destination);
 const preview=process.env.VERCEL_ENV==='preview';
 const seo=prepareSeo(destination,process.env.KB_PUBLIC_URL||(preview?'https://heyitskunal.vercel.app':undefined),{indexable:!preview});
+const assets=await versionAssets(destination);
 const files=[];
 function inventory(dir){for(const item of fs.readdirSync(dir,{withFileTypes:true})){const full=path.join(dir,item.name);if(item.isDirectory())inventory(full);else files.push(path.relative(destination,full).replaceAll('\\','/'))}}
 inventory(destination);
 if(files.some(file=>file.startsWith('.')||file.includes('/.')||/\.env|\.map$|knowledge\.json|server\/|api\/|reports\//i.test(file)))throw new Error('Private file in public output');
 fs.writeFileSync(path.join(root,'server/assistant/public-manifest.json'),JSON.stringify({files:files.length,generatedAt:new Date().toISOString()},null,2));
-console.log(`Built isolated public output: ${files.length} files, ${seo.pages} routes, origin ${seo.origin||'unconfigured'}.`);
+console.log(`Built isolated public output: ${files.length} files, ${seo.pages} routes, ${assets.versioned} versioned assets, ${assets.criticalBytes} critical CSS bytes, origin ${seo.origin||'unconfigured'}.`);

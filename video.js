@@ -75,7 +75,7 @@
                 muted
                 loop
                 playsinline
-                preload="metadata"
+                preload="none"
                 disablepictureinpicture
                 disableremoteplayback
                 draggable="false"
@@ -178,12 +178,8 @@
 
     updateSoundIcon();
 
-    // Prevent sound button from dragging canvas.
-
-    button.addEventListener(
-        "pointerdown",
-        event => event.stopPropagation()
-    );
+    // Button taps still toggle sound; the canvas owns pointer tracking so a
+    // second finger landing on this control cannot break a pinch gesture.
 
     button.addEventListener(
         "dblclick",
@@ -303,7 +299,10 @@
 
             screen.classList.contains("off") ||
 
-            document.hidden || !videoVisible;
+            document.hidden || !videoVisible ||
+            screen.classList.contains('kb-page-open') ||
+            screen.classList.contains('kb-content-inactive') ||
+            document.documentElement.classList.contains('kb-ai-active');
 
         if (hidden) {
 

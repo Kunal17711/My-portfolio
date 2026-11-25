@@ -1,0 +1,12 @@
+/* The introduction is an isolated screen. Keep hidden UI out of layout and
+   font/image selection until the same cinematic reveal makes it usable. */
+#screen.kb-intro-running > :not(#kbIntroScreen):not(#kbTransition):not(.grid):not(.crt-glass):not(.scanlines):not(.scan-beam):not(.vignette) { display:none !important; }
+.tile[data-kb-visible="false"] .tile-inner { visibility:hidden; animation-play-state:paused; }
+html.kb-ai-active .tile-inner,
+#screen.kb-page-open .tile-inner,
+#screen.kb-content-inactive .tile-inner,
+#screen.off .tile-inner,
+html.kb-tab-hidden .tile-inner { animation-play-state:paused; }
+/* Internal documents use native scrolling and browser accessibility pinch zoom. */
+#ipScroller, .kbs-scroller, .kbi-scroller { touch-action:pan-x pan-y pinch-zoom; }
+html.kb-tab-hidden #kbIntroText::after { animation-play-state:paused; }

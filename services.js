@@ -400,6 +400,7 @@
 
             active = true;
             panel.hidden = false;
+            screen.classList.add('kb-content-inactive');
 
             panel.classList.add("kbs-opening");
         }
@@ -433,6 +434,7 @@
 
         return new Promise(resolve => setTimeout(() => {
             panel.hidden = true;
+            screen.classList.remove('kb-content-inactive');
             panel.classList.remove("kbs-closing");
 
             active = false;
@@ -628,43 +630,7 @@
         }
     },true);
 
-    // Mobile pinch zoom.
-
-    let pinch = 0;
-
-    const distance = touches => Math.hypot(
-        touches[0].clientX - touches[1].clientX,
-        touches[0].clientY - touches[1].clientY
-    );
-
-    scroller.addEventListener("touchstart",event => {
-        if (event.touches.length === 2) {
-            pinch = distance(event.touches);
-        }
-    },{passive:true});
-
-    scroller.addEventListener("touchmove",event => {
-        if (event.touches.length !== 2 || !pinch) return;
-
-        event.preventDefault();
-        event.stopPropagation();
-
-        const now = distance(event.touches);
-
-        if (Math.abs(now - pinch) > 20) {
-            changeZoom(now > pinch ? .05 : -.05);
-            pinch = now;
-        }
-
-    },{passive:false});
-
-    scroller.addEventListener("touchend",() => {
-        pinch = 0;
-    });
-
-    scroller.addEventListener("touchcancel",() => {
-        pinch = 0;
-    });
+    // Native browser pinch zoom and vertical scrolling.
 
     // Isolate service keyboard controls from canvas.
 

@@ -61,7 +61,7 @@
     overflow: auto;
     scrollbar-width: none;
     overscroll-behavior: contain;
-    touch-action: pan-x pan-y;
+    touch-action: pan-x pan-y pinch-zoom;
     cursor: grab;
     user-select: none;
 }
@@ -553,7 +553,7 @@
 
 @font-face {
     font-family: Outfit;
-    src: url("assets/fonts/Outfit.ttf") format("truetype");
+    src: url("assets/fonts/Outfit.woff2") format("woff2");
     font-weight: 100 900;
     font-display: swap;
 }

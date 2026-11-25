@@ -894,7 +894,7 @@ body,
 
 @font-face {
     font-family: "VT323";
-    src: url("assets/fonts/VT323-Regular.ttf") format("truetype");
+    src: url("assets/fonts/VT323-Regular.woff2") format("woff2");
     font-weight: 400;
     font-style: normal;
     font-display: swap;

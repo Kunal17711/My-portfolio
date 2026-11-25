@@ -168,6 +168,8 @@
             zoom = 1;
 
             panel.hidden = false;
+            screen.classList.add('kb-content-inactive');
+            document.getElementById('kbPortfolioVideo')?.pause();
 
             panel.classList.add("kbi-enter");
 
@@ -189,6 +191,7 @@
             active = false;
 
             panel.hidden = true;
+            screen.classList.remove('kb-content-inactive');
 
             panel.classList.remove("kbi-enter");
 

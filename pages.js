@@ -481,6 +481,7 @@
                 fallback.hidden = true;
 
                 image.hidden = false;
+                image.style.opacity = "1";
 
             });
 
@@ -502,7 +503,8 @@
 
             });
 
-            image.hidden = true;
+            // A display:none lazy image never intersects and never loads.
+            image.style.opacity = "0";
 
             image.src = project.images[0];
 
@@ -891,7 +893,7 @@
 
         // Load the content inside the existing CRT.
 
-        const response = await fetch("pages-content.html");
+        const response = await fetch("/pages-content.html");
 
         if (!response.ok) {
 

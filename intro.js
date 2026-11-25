@@ -23,26 +23,12 @@
         "Welcome to my portfolio."
     ].join("\n");
 
-    const intro = document.createElement("div");
-    intro.id = "kbIntroScreen";
-    intro.setAttribute("role", "region");
-    intro.setAttribute("aria-label", "Introduction. Press Escape to skip.");
-
-    const content = document.createElement("div");
-    content.className = "kb-intro-content";
-
-    const text = document.createElement("p");
-    text.id = "kbIntroText";
-
-    content.appendChild(text);
-    intro.appendChild(content);
-    screen.appendChild(intro);
-
-    const transition = document.createElement("div");
-    transition.id = "kbTransition";
-    screen.appendChild(transition);
-
-    let index = 0;
+    const intro = document.getElementById('kbIntroScreen');
+    const content = intro.querySelector('.kb-intro-content');
+    const text = document.getElementById('kbIntroText');
+    const textNode = text.firstChild;
+    const transition = document.getElementById('kbTransition');
+    let index = textNode.length;
     let timer;
     let finished = false;
     let audioContext = null;
@@ -140,7 +126,7 @@
 
     // Smooth cinematic transition
 
-    function finishIntroduction() {
+    async function finishIntroduction() {
 
         if (finished) return;
 
@@ -158,6 +144,10 @@
 
         }
 
+        // A fast Escape must not reveal an unstyled or uninitialized canvas.
+        try { await window.KB_SITE_READY; }
+        catch { textNode.data='Portfolio resources could not load. Please refresh to try again.'; return; }
+        document.removeEventListener('keydown', enableAudio);
         intro.classList.add("kb-intro-exit");
 
         if (!reducedMotion) {
@@ -228,7 +218,7 @@
 
         const character = message[index];
 
-        text.textContent += character;
+        textNode.appendData(character);
 
         index++;
 
@@ -292,10 +282,16 @@
         } catch {}
 
         if (finished) return;
+        const measure = text.cloneNode(false);
+        measure.removeAttribute('id');
+        measure.style.cssText = getComputedStyle(text).cssText;
+        for (const key of ['font','lineHeight','letterSpacing','whiteSpace','overflowWrap']) measure.style[key]=getComputedStyle(text)[key];
+        measure.style.margin='0';measure.textContent=message;content.appendChild(measure);
+        text.style.minHeight=measure.getBoundingClientRect().height+'px';measure.remove();
 
         if (reducedMotion) {
 
-            text.textContent = message;
+            textNode.data = message;
 
             timer = setTimeout(
                 finishIntroduction,
@@ -306,7 +302,7 @@
 
             timer = setTimeout(
                 typeCharacter,
-                600
+                45
             );
 
         }

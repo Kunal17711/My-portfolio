@@ -79,10 +79,17 @@
     if(!sessionStorage.getItem('kbAiTipSeen')){sessionStorage.setItem('kbAiTipSeen','1');setTimeout(showTooltip,900)}
     setTimeout(loadOrb,400);
   }
+  let loadingOrb=false,orbVisible=true;
   async function loadOrb(){
-    if(renderer)return;
-    try{const module=await import('/assets/js/ai-orb.js');renderer=module.createOrb(orb);renderer.setState('idle')}catch{/* CSS liquid fallback remains */}
+    if(renderer||loadingOrb||!ready||!orbVisible||document.hidden)return;
+    loadingOrb=true;
+    try{const module=await import('/assets/js/ai-orb.js');renderer=module.createOrb(orb);renderer.setState('idle');if(!orbVisible)renderer.pause()}catch{/* CSS liquid fallback remains */}finally{loadingOrb=false}
   }
+  const orbVisibility=new IntersectionObserver(entries=>{
+    orbVisible=entries[0]?.isIntersecting??false;
+    if(orbVisible){if(renderer)renderer.resume();else loadOrb()}else renderer?.pause();
+  });orbVisibility.observe(orb);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)loadOrb()});
   function openAssistant(){
     if(open||!ready)return;open=true;previousFocus=document.activeElement;
     root.classList.toggle('has-answer',conversation.childElementCount>0);

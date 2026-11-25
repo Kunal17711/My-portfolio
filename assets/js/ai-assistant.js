@@ -8,6 +8,7 @@
   }
   const host=document.querySelector('#screen,.kbs-static-screen,.kb-static-screen,.kbi-static-screen,.static-page');
   if(!host)return;
+  function initialize(){
   const root=document.createElement('div');root.className='kb-ai-root';
   root.innerHTML=`<div class="kb-ai-warm" aria-hidden="true"></div>
     <button type="button" class="kb-ai-orb" aria-label="Open Kunal Builds AI assistant"></button>
@@ -224,9 +225,13 @@
     const card=[...document.querySelectorAll('.static-card')].find(item=>item.querySelector('h2')?.textContent.toLowerCase()===name);
     if(card){card.style.outline='2px solid #c4ff36';card.style.outlineOffset='4px';setTimeout(()=>card.scrollIntoView({block:'center'}),180)}
   }
-  if(host.id==='screen'&&host.classList.contains('kb-intro-running')){
-    const observer=new MutationObserver(()=>{if(!host.classList.contains('kb-intro-running')){observer.disconnect();enable()}});
-    observer.observe(host,{attributes:true,attributeFilter:['class']});
-  }else enable();
+  enable();
   window.addEventListener('pagehide',()=>renderer?.dispose(),{once:true});
+  }
+  // The intro owns the screen. Build the hidden assistant only when its
+  // launcher can appear; standalone pages initialize immediately as before.
+  if(host.id==='screen'&&host.classList.contains('kb-intro-running')){
+    const observer=new MutationObserver(()=>{if(!host.classList.contains('kb-intro-running')){observer.disconnect();initialize()}});
+    observer.observe(host,{attributes:true,attributeFilter:['class']});
+  }else initialize();
 })();
